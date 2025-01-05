@@ -82,7 +82,7 @@ const GetTestimonials = () => {
     }
 
     const columns = [
-        // { field: 'title', headerName: 'Title', sortable: true, filter: true },
+         // { field: 'title', headerName: 'Title', sortable: true, filter: true },
         { field: 'description', headerName: 'Description', sortable: true, filter: true },
         {
             field: 'image',
