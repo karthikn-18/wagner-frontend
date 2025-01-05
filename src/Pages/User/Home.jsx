@@ -37,6 +37,7 @@ import TechDriven from '../../assets/Resources/tech-driven.jpg'
 import TechSupport from '../../assets/Resources/tech-support.jpg'
 import LabSupport from '../../assets/Resources/lab-support.jpg'
 import CtaWagner from '../../assets/Resources/cta-wagner.png'
+import GoogleTranslate from './GoogleTranslate';
 
 const Home = () => {
 
