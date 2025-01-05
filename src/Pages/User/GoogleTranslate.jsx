@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 const GoogleTranslate = () => {
   useEffect(() => {
-    // Function to load the Google Translate script
+    
     const loadGoogleTranslateScript = () => {
       const script = document.createElement('script');
       script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
@@ -10,15 +10,15 @@ const GoogleTranslate = () => {
       document.body.appendChild(script);
     };
 
-    // Initialize Google Translate when the script is loaded
+    
     window.googleTranslateElementInit = function () {
       new window.google.translate.TranslateElement(
         {
-          pageLanguage: 'en', // Default language of your website
-          includedLanguages: 'en,es,fr,de,it', // List of languages you want to support
-          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE, // Choose the layout
+          pageLanguage: 'en',
+          includedLanguages: 'en,es,fr,de,it',
+          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE, 
         },
-        'google_translate_element' // Container for the Google Translate widget
+        'google_translate_element'
       );
     };
 
