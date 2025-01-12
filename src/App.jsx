@@ -6,6 +6,7 @@ import 'lenis/dist/lenis.css'
 import { useEffect } from 'react'
 import AOS from "aos";
 import "aos/dist/aos.css";
+import GoogleTranslate from './Pages/User/GoogleTranslate'
 
 function App() {
 
@@ -38,6 +39,8 @@ function App() {
 
   return (
     <>
+    
+      <GoogleTranslate />
       <Routes />
     </>
   )
