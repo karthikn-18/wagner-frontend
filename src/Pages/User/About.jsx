@@ -37,7 +37,7 @@ const About = () => {
             <div className="breadcrumb about-breadcrumb">
                 <div className="container">
                     <div className="breadcrumb-content">
-                        <h1>About <span>Us</span></h1>
+                        <h1>Abouts <span>Us</span></h1>
                         <p>Wagner German Oil: Excellence in Lubrication,
                             Delivering premium oils and lubricants that set the industry standard worldwide
                         </p>
