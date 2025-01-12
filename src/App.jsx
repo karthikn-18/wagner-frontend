@@ -6,6 +6,7 @@ import GoogleTranslate from './Pages/User/GoogleTranslate'
 function App() {
   return (
     <>
+    
       <GoogleTranslate />
       <Routes />
     </>
