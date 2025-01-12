@@ -178,7 +178,7 @@ const GetBlogs = () => {
             </button>
             <button
                 className="bg-[#FF0169] mb-3 text-sm font-medium text-white px-4 py-2 rounded hover:bg-blue-600 transition"
-                onClick={() =>{ setOpenModal(true),setSelectedBlog(null)}}
+                onClick={() => { setOpenModal(true), setSelectedBlog(null) }}
             >
                 Create Blog
             </button>
@@ -197,6 +197,10 @@ const GetBlogs = () => {
                         rowData={filteredData}
                         columnDefs={columns}
                         defaultColDef={defaultColDef}
+                        animateRows={true}
+                        enableCellTextSelection={true}
+                        pagination={true}
+                        paginationPageSize={10}
                     />
                 )}
             </div>

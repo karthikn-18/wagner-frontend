@@ -41,17 +41,17 @@ const handleError = (error) => {
 const senderRequest = async (
   method,
   apiUrl,
-  token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3N2E3Y2QwOGI3OThjZDM0YmZmYWQ2MCIsImlhdCI6MTczNjA4MTIzMywiZXhwIjoxNzM2MTY3NjMzfQ.A733qm6iVx0QEU6mZmFqJBst3mo0dhsDFPf4F0V7Ph0",
+  token ,
   body = {}
 ) => {
   try {
     let response;
-    console.log(apiUrl, "apiUrl");
+    console.log(apiUrl, "apiUrl",token);
     switch (method.toLowerCase()) {
       case "get":
         response = await axios.get(apiUrl, {
           headers: {
-            // Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
           next: { revalidate: 60 },

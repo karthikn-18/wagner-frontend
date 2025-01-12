@@ -1,15 +1,17 @@
-import { useRouter } from 'next/navigation'
+
 // import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { loginStore } from '../../store';
 import { AdminLogin } from '../../api/AdminLogin';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const router = useRouter()
+    
     const [formData, setFormData] = useState({ email: '', password: '' })
 
 
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -29,20 +31,22 @@ const Login = () => {
 
         try {
             const response = await AdminLogin({ email, password })
+            console.log(response,"123333")
             if (response.status === 200) {
-                loginStore(response?.data?.token);
-                router.push('/repco-leads')
+                loginStore(response?.data?.data?.token);
+                navigate('/admin/dashboard')
                 toast.success(response?.data?.message)
             } else {
-                toast.error(response.error)
+                toast.error(response.data.message)
             }
         } catch (error) {
+            console.log(error,"error")
             toast.error(error.message)
         }
     }
 
     return (
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0  max-w-[500px] m-auto h-screen">
             <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                 <h1 className="text-[#ff0169]">Admin Login</h1>
             </a>
@@ -80,7 +84,7 @@ const Login = () => {
                         </div>
                         <button
                             type="submit"
-                            className="w-full !bg-[#ff0169] text-white focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                            className="w-full bg-blue-500  text-white focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                         >
                             Sign in
                         </button>

@@ -29,6 +29,7 @@ import Dashboard from "../Pages/Admin/Dashboard";
 import GetBlogs from "../Pages/Admin/Blogs/GetBlogs";
 import GetTestimonials from "../Pages/Admin/Testimonials/GetTestimonials";
 import GetContact from "../Pages/Admin/Contact/Contact";
+import Login from "../Pages/Admin/Login";
 
 
 
@@ -154,6 +155,10 @@ const Routes = () => {
                 },
 
             ]
+        },
+        {
+            path: "admin-login",
+            element: <Login />,
         }
     ]);
 
