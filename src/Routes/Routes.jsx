@@ -24,12 +24,6 @@ import CombineHeat from '../Pages/User/Industries/CombinedHeat'
 import Shipping from '../Pages/User/Industries/Shipping'
 import WindTurbines from '../Pages/User/Industries/WindTurbines'
 import CableCars from "../Pages/User/Industries/CableCars";
-import AdminLayout from '../Pages/Admin/Admin'
-import Dashboard from "../Pages/Admin/Dashboard";
-import GetBlogs from "../Pages/Admin/Blogs/GetBlogs";
-import GetTestimonials from "../Pages/Admin/Testimonials/GetTestimonials";
-import GetContact from "../Pages/Admin/Contact/Contact";
-
 
 
 const Routes = () => {
@@ -133,28 +127,6 @@ const Routes = () => {
 
             ],
         },
-        {
-            element: <AdminLayout />,
-            children: [
-                {
-                    path: "/admin/dashboard",
-                    element: <Dashboard />
-                },
-                {
-                    path: "/admin/blogs",
-                    element: <GetBlogs />
-                },
-                {
-                    path: "/admin/testimonials",
-                    element: <GetTestimonials />
-                },
-                {
-                    path: "/admin/contact",
-                    element: <GetContact />
-                },
-
-            ]
-        }
     ]);
 
     return routes;

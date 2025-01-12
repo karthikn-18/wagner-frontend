@@ -1,89 +1,75 @@
-import { useRouter } from 'next/navigation'
-// import { useRouter } from 'next/router'
 import React, { useState } from 'react'
-import toast from 'react-hot-toast'
-import { loginStore } from '../../store';
-import { AdminLogin } from '../../api/AdminLogin';
+import '../../Assets/styles/Login.css'
+import { useLoginUserMutation } from '../../redux/features/auth/authApi';
+import { MdAlternateEmail } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from "../../redux/features/auth/authSlice";
+import LoginLogo from '../../Assets/Resources/footer_prophecy-new.svg'
+
 
 const Login = () => {
-    const router = useRouter()
-    const [formData, setFormData] = useState({ email: '', password: '' })
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+    const [loginUser, { isLoading: loginLoading }] = useLoginUserMutation()
 
+    const dispatch = useDispatch()
 
-    const handleChange = (e) => {
-        const { name, value } = e.target
-        // console.log(name, value)
-        setFormData((prev) => ({ ...prev, [name]: value }))
-    }
+    // login sucess and redirect t page
+    const navigate = useNavigate()
 
     const handleLogin = async (e) => {
-        e.preventDefault()
-
-        const { email, password } = formData
-
-        if (!email || !password) {
-            toast.error("Please fill in both fields.")
-            return
+        e.preventDefault();
+        const data = {
+            email,
+            password
         }
-
         try {
-            const response = await AdminLogin({ email, password })
-            if (response.status === 200) {
-                loginStore(response?.data?.token);
-                router.push('/repco-leads')
-                toast.success(response?.data?.message)
-            } else {
-                toast.error(response.error)
-            }
+            const response = await loginUser(data).unwrap();
+            console.log(response);
+            const { token, user } = response;
+            dispatch(setUser({ user }))
+            alert("Login Sucessfully")
+            navigate('/dashboard/manage-post')
         } catch (error) {
-            toast.error(error.message)
+            setMessage("Please Provide a Valid Email and Password")
         }
-    }
+    };
+
 
     return (
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
-            <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                <h1 className="text-[#ff0169]">Admin Login</h1>
-            </a>
-            <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        Sign in to your account
-                    </h1>
-                    <form className="space-y-4 md:space-y-6" onSubmit={handleLogin}>
-                        <div>
-                            <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="name@company.com"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                placeholder="••••••••"
-                                className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                value={formData.password}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+        <div className="login-page-main">
+            <div className='login-page'>
+                <div className="container">
+                    <div className="logo">
+                        <img src={LoginLogo} alt="" />
+                    </div>
+                    <div className="heading">Hello Again! Log In to Continue</div>
+                    <form onSubmit={handleLogin}>
+                        <input
+                            required
+                            className="input"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="E-mail"
+                        />
+                        <input
+                            required
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}
+                            className="input"
+                            type="password"
+                            placeholder="Password"
+                        />
+                        {
+                            message && <p>{message}</p>
+                        }
                         <button
-                            type="submit"
-                            className="w-full !bg-[#ff0169] text-white focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                        >
-                            Sign in
-                        </button>
+                            disabled={loginLoading}
+                        >Login</button>
                     </form>
                 </div>
             </div>

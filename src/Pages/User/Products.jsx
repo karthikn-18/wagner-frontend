@@ -57,8 +57,8 @@ const Products = () => {
             <div className="breadcrumb product-breadcrumb">
                 <div className="container">
                     <div className="breadcrumb-content">
-                        <h1>Our <span>Products</span></h1>
-                        <p>Engineered to deliver superior performance and reliability for all your automotive and industrial needs.</p>
+                        <h1 data-aos="fade-right">Our <span>Products</span></h1>
+                        <p data-aos="fade-left">Engineered to deliver superior performance and reliability for all your automotive and industrial needs.</p>
                     </div>
                 </div>
             </div>
@@ -66,140 +66,130 @@ const Products = () => {
             <div className="product-page space">
                 <div className="container">
                     <div className="product-cat-slider">
-                        <div className="item all-item">
-                            <h6>All</h6>
-                        </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
+                        <div data-aos="fade-down">
+                            <div className="item all-item">
+                                <h6>All</h6>
                             </div>
-                            <h6>Automotive Oils</h6>
                         </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
+                        <div data-aos="fade-down">
+                            <div className="item">
+                                <div className="image">
+                                    <img src={ProductSlider1} alt="" />
+                                </div>
+                                <h6>Automotive Oils</h6>
                             </div>
-                            <h6>Automotive Oils</h6>
                         </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
+                        <div data-aos="fade-down">
+                            <div className="item">
+                                <div className="image">
+                                    <img src={ProductSlider1} alt="" />
+                                </div>
+                                <h6>Automotive Oils</h6>
                             </div>
-                            <h6>Automotive Oils</h6>
                         </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
+                        <div data-aos="fade-down">
+                            <div className="item">
+                                <div className="image">
+                                    <img src={ProductSlider1} alt="" />
+                                </div>
+                                <h6>Automotive Oils</h6>
                             </div>
-                            <h6>Automotive Oils</h6>
                         </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
+                        <div data-aos="fade-down">
+                            <div className="item">
+                                <div className="image">
+                                    <img src={ProductSlider1} alt="" />
+                                </div>
+                                <h6>Automotive Oils</h6>
                             </div>
-                            <h6>Automotive Oils</h6>
                         </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
+                        <div data-aos="fade-down">
+                            <div className="item">
+                                <div className="image">
+                                    <img src={ProductSlider1} alt="" />
+                                </div>
+                                <h6>Automotive Oils</h6>
                             </div>
-                            <h6>Automotive Oils</h6>
                         </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
+                        <div data-aos="fade-down">
+                            <div className="item">
+                                <div className="image">
+                                    <img src={ProductSlider1} alt="" />
+                                </div>
+                                <h6>Automotive Oils</h6>
                             </div>
-                            <h6>Automotive Oils</h6>
                         </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
+                        <div data-aos="fade-down">
+                            <div className="item">
+                                <div className="image">
+                                    <img src={ProductSlider1} alt="" />
+                                </div>
+                                <h6>Automotive Oils</h6>
                             </div>
-                            <h6>Automotive Oils</h6>
                         </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
+                        <div data-aos="fade-down">
+                            <div className="item">
+                                <div className="image">
+                                    <img src={ProductSlider1} alt="" />
+                                </div>
+                                <h6>Automotive Oils</h6>
                             </div>
-                            <h6>Automotive Oils</h6>
                         </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
+                        <div data-aos="fade-down">
+                            <div className="item">
+                                <div className="image">
+                                    <img src={ProductSlider1} alt="" />
+                                </div>
+                                <h6>Automotive Oils</h6>
                             </div>
-                            <h6>Automotive Oils</h6>
                         </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
+                        <div data-aos="fade-down">
+                            <div className="item">
+                                <div className="image">
+                                    <img src={ProductSlider1} alt="" />
+                                </div>
+                                <h6>Automotive Oils</h6>
                             </div>
-                            <h6>Automotive Oils</h6>
                         </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
+                        <div data-aos="fade-down">
+                            <div className="item">
+                                <div className="image">
+                                    <img src={ProductSlider1} alt="" />
+                                </div>
+                                <h6>Automotive Oils</h6>
                             </div>
-                            <h6>Automotive Oils</h6>
                         </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
+                        <div data-aos="fade-down">
+                            <div className="item">
+                                <div className="image">
+                                    <img src={ProductSlider1} alt="" />
+                                </div>
+                                <h6>Automotive Oils</h6>
                             </div>
-                            <h6>Automotive Oils</h6>
                         </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
+                        <div data-aos="fade-down">
+                            <div className="item">
+                                <div className="image">
+                                    <img src={ProductSlider1} alt="" />
+                                </div>
+                                <h6>Automotive Oils</h6>
                             </div>
-                            <h6>Automotive Oils</h6>
                         </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
+                        <div data-aos="fade-down">
+                            <div className="item">
+                                <div className="image">
+                                    <img src={ProductSlider1} alt="" />
+                                </div>
+                                <h6>Automotive Oils</h6>
                             </div>
-                            <h6>Automotive Oils</h6>
                         </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
+                        <div data-aos="fade-down">
+                            <div className="item">
+                                <div className="image">
+                                    <img src={ProductSlider1} alt="" />
+                                </div>
+                                <h6>Automotive Oils</h6>
                             </div>
-                            <h6>Automotive Oils</h6>
-                        </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
-                            </div>
-                            <h6>Automotive Oils</h6>
-                        </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
-                            </div>
-                            <h6>Automotive Oils</h6>
-                        </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
-                            </div>
-                            <h6>Automotive Oils</h6>
-                        </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
-                            </div>
-                            <h6>Automotive Oils</h6>
-                        </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
-                            </div>
-                            <h6>Automotive Oils</h6>
-                        </div>
-                        <div className="item">
-                            <div className="image">
-                                <img src={ProductSlider1} alt="" />
-                            </div>
-                            <h6>Automotive Oils</h6>
                         </div>
                     </div>
 
@@ -209,7 +199,7 @@ const Products = () => {
                             <div className="product-showcase">
                                 <div className="row">
                                     <div className="col-lg-3">
-                                        <div className="product-menu">
+                                        <div className="product-menu" data-aos="fade-right">
                                             <ul>
                                                 {/* Applications Section */}
                                                 <li>
@@ -395,7 +385,7 @@ const Products = () => {
                                     </div>
                                     <div className="col-lg-9">
                                         <div className="products">
-                                            <div className="header">
+                                            <div className="header" data-aos="fade-left">
                                                 <div className="result">
                                                     <h6>Showing <span>320</span> Results</h6>
                                                 </div>
@@ -406,229 +396,253 @@ const Products = () => {
                                             </div>
                                             <div className="row">
                                                 <div className="col-lg-3">
-                                                    <div className="box">
-                                                        <div className="product-image">
-                                                            <img src={ProductImage} alt="" />
-                                                        </div>
-                                                        <div className="product-detail">
-                                                            <h5>Wagner VG 150 Industrial Oil</h5>
-                                                            <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                        </div>
-                                                        <div className="product-btns">
-                                                            <div className="common-border-btn">
-                                                                <button>View Details</button>
+                                                    <div data-aos="fade-up">
+                                                        <div className="box">
+                                                            <div className="product-image">
+                                                                <img src={ProductImage} alt="" />
                                                             </div>
-                                                            <div className="common-btn">
-                                                                <button>Buy Now</button>
+                                                            <div className="product-detail">
+                                                                <h5>Wagner VG 150 Industrial Oil</h5>
+                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <div className="box">
-                                                        <div className="product-image">
-                                                            <img src={ProductImage} alt="" />
-                                                        </div>
-                                                        <div className="product-detail">
-                                                            <h5>Wagner VG 150 Industrial Oil</h5>
-                                                            <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                        </div>
-                                                        <div className="product-btns">
-                                                            <div className="common-border-btn">
-                                                                <button>View Details</button>
-                                                            </div>
-                                                            <div className="common-btn">
-                                                                <button>Buy Now</button>
+                                                            <div className="product-btns">
+                                                                <div className="common-border-btn">
+                                                                    <button>View Details</button>
+                                                                </div>
+                                                                <div className="common-btn">
+                                                                    <button>Buy Now</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-3">
-                                                    <div className="box">
-                                                        <div className="product-image">
-                                                            <img src={ProductImage} alt="" />
-                                                        </div>
-                                                        <div className="product-detail">
-                                                            <h5>Wagner VG 150 Industrial Oil</h5>
-                                                            <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                        </div>
-                                                        <div className="product-btns">
-                                                            <div className="common-border-btn">
-                                                                <button>View Details</button>
+                                                    <div data-aos="fade-up" data-aos-delay="200">
+                                                        <div className="box">
+                                                            <div className="product-image">
+                                                                <img src={ProductImage} alt="" />
                                                             </div>
-                                                            <div className="common-btn">
-                                                                <button>Buy Now</button>
+                                                            <div className="product-detail">
+                                                                <h5>Wagner VG 150 Industrial Oil</h5>
+                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <div className="box">
-                                                        <div className="product-image">
-                                                            <img src={ProductImage} alt="" />
-                                                        </div>
-                                                        <div className="product-detail">
-                                                            <h5>Wagner VG 150 Industrial Oil</h5>
-                                                            <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                        </div>
-                                                        <div className="product-btns">
-                                                            <div className="common-border-btn">
-                                                                <button>View Details</button>
-                                                            </div>
-                                                            <div className="common-btn">
-                                                                <button>Buy Now</button>
+                                                            <div className="product-btns">
+                                                                <div className="common-border-btn">
+                                                                    <button>View Details</button>
+                                                                </div>
+                                                                <div className="common-btn">
+                                                                    <button>Buy Now</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-3">
-                                                    <div className="box">
-                                                        <div className="product-image">
-                                                            <img src={ProductImage} alt="" />
-                                                        </div>
-                                                        <div className="product-detail">
-                                                            <h5>Wagner VG 150 Industrial Oil</h5>
-                                                            <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                        </div>
-                                                        <div className="product-btns">
-                                                            <div className="common-border-btn">
-                                                                <button>View Details</button>
+                                                    <div data-aos="fade-up" data-aos-delay="400">
+                                                        <div className="box">
+                                                            <div className="product-image">
+                                                                <img src={ProductImage} alt="" />
                                                             </div>
-                                                            <div className="common-btn">
-                                                                <button>Buy Now</button>
+                                                            <div className="product-detail">
+                                                                <h5>Wagner VG 150 Industrial Oil</h5>
+                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <div className="box">
-                                                        <div className="product-image">
-                                                            <img src={ProductImage} alt="" />
-                                                        </div>
-                                                        <div className="product-detail">
-                                                            <h5>Wagner VG 150 Industrial Oil</h5>
-                                                            <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                        </div>
-                                                        <div className="product-btns">
-                                                            <div className="common-border-btn">
-                                                                <button>View Details</button>
-                                                            </div>
-                                                            <div className="common-btn">
-                                                                <button>Buy Now</button>
+                                                            <div className="product-btns">
+                                                                <div className="common-border-btn">
+                                                                    <button>View Details</button>
+                                                                </div>
+                                                                <div className="common-btn">
+                                                                    <button>Buy Now</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-3">
-                                                    <div className="box">
-                                                        <div className="product-image">
-                                                            <img src={ProductImage} alt="" />
-                                                        </div>
-                                                        <div className="product-detail">
-                                                            <h5>Wagner VG 150 Industrial Oil</h5>
-                                                            <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                        </div>
-                                                        <div className="product-btns">
-                                                            <div className="common-border-btn">
-                                                                <button>View Details</button>
+                                                    <div data-aos="fade-up" data-aos-delay="600">
+                                                        <div className="box">
+                                                            <div className="product-image">
+                                                                <img src={ProductImage} alt="" />
                                                             </div>
-                                                            <div className="common-btn">
-                                                                <button>Buy Now</button>
+                                                            <div className="product-detail">
+                                                                <h5>Wagner VG 150 Industrial Oil</h5>
+                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <div className="box">
-                                                        <div className="product-image">
-                                                            <img src={ProductImage} alt="" />
-                                                        </div>
-                                                        <div className="product-detail">
-                                                            <h5>Wagner VG 150 Industrial Oil</h5>
-                                                            <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                        </div>
-                                                        <div className="product-btns">
-                                                            <div className="common-border-btn">
-                                                                <button>View Details</button>
-                                                            </div>
-                                                            <div className="common-btn">
-                                                                <button>Buy Now</button>
+                                                            <div className="product-btns">
+                                                                <div className="common-border-btn">
+                                                                    <button>View Details</button>
+                                                                </div>
+                                                                <div className="common-btn">
+                                                                    <button>Buy Now</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-3">
-                                                    <div className="box">
-                                                        <div className="product-image">
-                                                            <img src={ProductImage} alt="" />
-                                                        </div>
-                                                        <div className="product-detail">
-                                                            <h5>Wagner VG 150 Industrial Oil</h5>
-                                                            <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                        </div>
-                                                        <div className="product-btns">
-                                                            <div className="common-border-btn">
-                                                                <button>View Details</button>
+                                                    <div data-aos="fade-up">
+                                                        <div className="box">
+                                                            <div className="product-image">
+                                                                <img src={ProductImage} alt="" />
                                                             </div>
-                                                            <div className="common-btn">
-                                                                <button>Buy Now</button>
+                                                            <div className="product-detail">
+                                                                <h5>Wagner VG 150 Industrial Oil</h5>
+                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <div className="box">
-                                                        <div className="product-image">
-                                                            <img src={ProductImage} alt="" />
-                                                        </div>
-                                                        <div className="product-detail">
-                                                            <h5>Wagner VG 150 Industrial Oil</h5>
-                                                            <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                        </div>
-                                                        <div className="product-btns">
-                                                            <div className="common-border-btn">
-                                                                <button>View Details</button>
-                                                            </div>
-                                                            <div className="common-btn">
-                                                                <button>Buy Now</button>
+                                                            <div className="product-btns">
+                                                                <div className="common-border-btn">
+                                                                    <button>View Details</button>
+                                                                </div>
+                                                                <div className="common-btn">
+                                                                    <button>Buy Now</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-3">
-                                                    <div className="box">
-                                                        <div className="product-image">
-                                                            <img src={ProductImage} alt="" />
-                                                        </div>
-                                                        <div className="product-detail">
-                                                            <h5>Wagner VG 150 Industrial Oil</h5>
-                                                            <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                        </div>
-                                                        <div className="product-btns">
-                                                            <div className="common-border-btn">
-                                                                <button>View Details</button>
+                                                    <div data-aos="fade-up" data-aos-delay="200">
+                                                        <div className="box">
+                                                            <div className="product-image">
+                                                                <img src={ProductImage} alt="" />
                                                             </div>
-                                                            <div className="common-btn">
-                                                                <button>Buy Now</button>
+                                                            <div className="product-detail">
+                                                                <h5>Wagner VG 150 Industrial Oil</h5>
+                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
+                                                            </div>
+                                                            <div className="product-btns">
+                                                                <div className="common-border-btn">
+                                                                    <button>View Details</button>
+                                                                </div>
+                                                                <div className="common-btn">
+                                                                    <button>Buy Now</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-3">
-                                                    <div className="box">
-                                                        <div className="product-image">
-                                                            <img src={ProductImage} alt="" />
-                                                        </div>
-                                                        <div className="product-detail">
-                                                            <h5>Wagner VG 150 Industrial Oil</h5>
-                                                            <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                        </div>
-                                                        <div className="product-btns">
-                                                            <div className="common-border-btn">
-                                                                <button>View Details</button>
+                                                    <div data-aos="fade-up" data-aos-delay="400">
+                                                        <div className="box">
+                                                            <div className="product-image">
+                                                                <img src={ProductImage} alt="" />
                                                             </div>
-                                                            <div className="common-btn">
-                                                                <button>Buy Now</button>
+                                                            <div className="product-detail">
+                                                                <h5>Wagner VG 150 Industrial Oil</h5>
+                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
+                                                            </div>
+                                                            <div className="product-btns">
+                                                                <div className="common-border-btn">
+                                                                    <button>View Details</button>
+                                                                </div>
+                                                                <div className="common-btn">
+                                                                    <button>Buy Now</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="col-lg-3">
+                                                    <div data-aos="fade-up" data-aos-delay="600">
+                                                        <div className="box">
+                                                            <div className="product-image">
+                                                                <img src={ProductImage} alt="" />
+                                                            </div>
+                                                            <div className="product-detail">
+                                                                <h5>Wagner VG 150 Industrial Oil</h5>
+                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
+                                                            </div>
+                                                            <div className="product-btns">
+                                                                <div className="common-border-btn">
+                                                                    <button>View Details</button>
+                                                                </div>
+                                                                <div className="common-btn">
+                                                                    <button>Buy Now</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="col-lg-3">
+                                                    <div data-aos="fade-up">
+                                                        <div className="box">
+                                                            <div className="product-image">
+                                                                <img src={ProductImage} alt="" />
+                                                            </div>
+                                                            <div className="product-detail">
+                                                                <h5>Wagner VG 150 Industrial Oil</h5>
+                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
+                                                            </div>
+                                                            <div className="product-btns">
+                                                                <div className="common-border-btn">
+                                                                    <button>View Details</button>
+                                                                </div>
+                                                                <div className="common-btn">
+                                                                    <button>Buy Now</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="col-lg-3">
+                                                    <div data-aos="fade-up" data-aos-delay="200">
+                                                        <div className="box">
+                                                            <div className="product-image">
+                                                                <img src={ProductImage} alt="" />
+                                                            </div>
+                                                            <div className="product-detail">
+                                                                <h5>Wagner VG 150 Industrial Oil</h5>
+                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
+                                                            </div>
+                                                            <div className="product-btns">
+                                                                <div className="common-border-btn">
+                                                                    <button>View Details</button>
+                                                                </div>
+                                                                <div className="common-btn">
+                                                                    <button>Buy Now</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="col-lg-3">
+                                                    <div data-aos="fade-up" data-aos-delay="400">
+                                                        <div className="box">
+                                                            <div className="product-image">
+                                                                <img src={ProductImage} alt="" />
+                                                            </div>
+                                                            <div className="product-detail">
+                                                                <h5>Wagner VG 150 Industrial Oil</h5>
+                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
+                                                            </div>
+                                                            <div className="product-btns">
+                                                                <div className="common-border-btn">
+                                                                    <button>View Details</button>
+                                                                </div>
+                                                                <div className="common-btn">
+                                                                    <button>Buy Now</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="col-lg-3">
+                                                    <div data-aos="fade-up" data-aos-delay="600">
+                                                        <div className="box">
+                                                            <div className="product-image">
+                                                                <img src={ProductImage} alt="" />
+                                                            </div>
+                                                            <div className="product-detail">
+                                                                <h5>Wagner VG 150 Industrial Oil</h5>
+                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
+                                                            </div>
+                                                            <div className="product-btns">
+                                                                <div className="common-border-btn">
+                                                                    <button>View Details</button>
+                                                                </div>
+                                                                <div className="common-btn">
+                                                                    <button>Buy Now</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
