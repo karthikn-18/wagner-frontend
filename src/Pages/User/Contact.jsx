@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
-import Ellipse1 from '../../assets/Resources/ellipse-1.png'
-import Ellipse2 from '../../assets/Resources/ellipse-2.png'
+import React, { useState } from 'react';
+import Ellipse1 from '../../assets/Resources/ellipse-1.png';
+import Ellipse2 from '../../assets/Resources/ellipse-2.png';
 import { useAddContact } from '../../query/useMutation';
+import ReCAPTCHA from 'react-google-recaptcha';
+import toast from 'react-hot-toast';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -14,8 +16,9 @@ const Contact = () => {
         typeOfConsultant: "",
         message: ""
     });
+    const [captchaValue, setCaptchaValue] = useState(null);
 
-    const { mutate } = useAddContact()
+    const { mutate } = useAddContact();
 
     const handleCloseFunction = () => {
         setFormData({
@@ -28,6 +31,7 @@ const Contact = () => {
             typeOfConsultant: "",
             message: ""
         });
+        setCaptchaValue(null);
     }
 
     const handleChange = (e) => {
@@ -38,10 +42,18 @@ const Contact = () => {
         }));
     };
 
+    const handleCaptchaChange = (value) => {
+        setCaptchaValue(value);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!captchaValue) {
+            toast.error('Please verify CAPTCHA');
+            return;
+        }
         try {
-            mutate({ data: formData, handleCloseFunction })
+            mutate({ data: formData, handleCloseFunction });
             console.log('Form submitted:', formData);
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -147,6 +159,13 @@ const Contact = () => {
                                     />
                                 </div>
                             </div>
+                            <div className="col-lg-12">
+                                <ReCAPTCHA
+                                    sitekey="6LeZXLUqAAAAAHbA6t-VaWQVNJf6QKx2FVIbtJF_"
+                                    size='normal'
+                                    onChange={handleCaptchaChange}
+                                />
+                            </div>
                             <div className="common-btn ">
                                 <button type="submit">Submit</button>
                             </div>
@@ -163,7 +182,7 @@ const Contact = () => {
                 </div>
             </div>
         </>
-    )
+    );
 }
 
-export default Contact
+export default Contact;

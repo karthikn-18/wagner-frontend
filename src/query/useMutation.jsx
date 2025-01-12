@@ -4,8 +4,10 @@ import { addBlogsApi, deleteBlogsApi, editBlogsApi } from "../api/BlogsApi"
 import toast from "react-hot-toast"
 import { addTestimonialsApi, deleteTestimonialsApi, editTestimonialsApi } from "../api/TestimonialsApi"
 import { sendContactApi } from "../api/ContactApi"
+import { Userlogin } from "../store"
 
 
+const token = Userlogin.getState().login
 
 export const useLoginMutation = () => {
     return useMutation({
@@ -33,6 +35,7 @@ export const useEditBlogs = () => {
             return editBlogsApi(data, id)
         },
         mutationKey: ['Edit Blogs'],
+        enabled: token.length > 0,
 
         onSuccess: (data, { handleCloseFunction }) => {
             console.log(data)
@@ -58,6 +61,7 @@ export const useDeleteBlogs = () => {
             return deleteBlogsApi(id)
         },
         mutationKey: ['Delete Blogs'],
+        enabled: token.length > 0,
 
         onSuccess: (data, { handleCloseFunction }) => {
             console.log(data)
@@ -83,6 +87,7 @@ export const useAddBlogs = () => {
             return addBlogsApi(data)
         },
         mutationKey: ['Add Blogs'],
+        enabled: token.length > 0,
 
         onSuccess: (data, { handleCloseFunction }) => {
             console.log(data)
@@ -110,6 +115,7 @@ export const useEditTestimonials = () => {
             return editTestimonialsApi(data, id)
         },
         mutationKey: ['Edit Testimonials'],
+        enabled: token.length > 0,
 
         onSuccess: (data, { handleCloseFunction }) => {
             console.log(data)
@@ -135,6 +141,7 @@ export const useDeleteTestimonials = () => {
             return deleteTestimonialsApi(id)
         },
         mutationKey: ['Delete Testimonials'],
+        enabled: token.length > 0,
 
         onSuccess: (data, { handleCloseFunction }) => {
             console.log(data)
@@ -160,6 +167,7 @@ export const useAddTestimonials = () => {
             return addTestimonialsApi(data)
         },
         mutationKey: ['Add Testimonials'],
+        enabled: token.length > 0,
 
         onSuccess: (data, { handleCloseFunction }) => {
             console.log(data)
@@ -185,6 +193,7 @@ export const useAddContact = () => {
             return sendContactApi(data)
         },
         mutationKey: ['Add Contact'],
+
 
         onSuccess: (data, { handleCloseFunction }) => {
             console.log(data)

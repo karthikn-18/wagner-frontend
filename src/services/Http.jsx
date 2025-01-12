@@ -1,10 +1,11 @@
 import axios from "axios";
 import { REACT_APP_BACKEND_URL, REACT_APP_BASE_URL } from "../env/env";
+import { Userlogin } from "../store";
 
 const handleResponse = (response) => {
   console.log(response, "response12344");
   if (response.status === 200 || response.status === 201) {
-    return response; // Return the response data
+    return response; 
   } else {
     return [];
   }
@@ -12,15 +13,22 @@ const handleResponse = (response) => {
 
 const handleError = (error) => {
   if (error?.response) {
-    // Handle errors with a response from the server
+    
     console.error("Error Response:", error.response);
+
+    if (error.response.status === 403) {
+      console.log("Access forbidden, logging out...");
+      Userlogin.getState().login = []; 
+      window.location.href = "/admin-login";
+    }
+
     return {
       success: false,
       status: error.response.status,
       data: error.response.data || "Something went wrong",
     };
   } else if (error?.request) {
-    // Handle errors with no response (e.g., network issues)
+ 
     console.error("Error Request:", error.request);
     return {
       success: false,
@@ -28,7 +36,7 @@ const handleError = (error) => {
       data: "No response received. Please check your network connection.",
     };
   } else {
-    // Handle other errors
+    
     console.error("Error Message:", error.message);
     return {
       success: false,
@@ -38,15 +46,16 @@ const handleError = (error) => {
   }
 };
 
+
 const senderRequest = async (
   method,
   apiUrl,
-  token ,
+  token,
   body = {}
 ) => {
   try {
     let response;
-    console.log(apiUrl, "apiUrl",token);
+    console.log(apiUrl, "apiUrl", token);
     switch (method.toLowerCase()) {
       case "get":
         response = await axios.get(apiUrl, {
@@ -96,7 +105,7 @@ const senderRequest = async (
     return handleResponse(response);
   } catch (error) {
     console.log(error, "error");
-    return handleError(error); // Return the error response to the client
+    return handleError(error); 
   }
 };
 

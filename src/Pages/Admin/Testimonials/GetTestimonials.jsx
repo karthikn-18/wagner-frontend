@@ -82,7 +82,7 @@ const GetTestimonials = () => {
     }
 
     const columns = [
-         // { field: 'title', headerName: 'Title', sortable: true, filter: true },
+        // { field: 'title', headerName: 'Title', sortable: true, filter: true },
         { field: 'description', headerName: 'Description', sortable: true, filter: true },
         {
             field: 'image',
@@ -111,7 +111,7 @@ const GetTestimonials = () => {
                     onClick={() => handleEditClick(params.data)}
                     className="bg-blue-500 rounded-4 text-sm text-white px-3 py-1 rounded hover:bg-blue-600 transition"
                 >
-                    Edit 
+                    Edit
                 </button>
             )
         },
@@ -192,6 +192,10 @@ const GetTestimonials = () => {
                         ref={gridRef}
                         rowData={filteredData}
                         columnDefs={columns}
+                        pagination={true}
+                        animateRows={true}
+                        enableCellTextSelection={true}
+                        paginationPageSize={10}
                         defaultColDef={defaultColDef}
                     />
                 )}

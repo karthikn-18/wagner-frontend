@@ -9,6 +9,6 @@ export const sendContactApi = async (data) => {
     return response
 }
 export const getContactApi = async () => {
-    const response = await senderRequest("GET", `${REACT_APP_BACKEND_URL}/contact`, token);
+    const response = await senderRequest("GET", `${REACT_APP_BACKEND_URL}/contact`, token, undefined);
     return response
 }

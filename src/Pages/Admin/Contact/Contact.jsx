@@ -197,6 +197,10 @@ const GetContact = () => {
                         rowData={filteredData}
                         columnDefs={columns}
                         defaultColDef={defaultColDef}
+                        animateRows={true}
+                        enableCellTextSelection={true}
+                        pagination={true}
+                        paginationPageSize={10}
                     />
                 )}
             </div>
