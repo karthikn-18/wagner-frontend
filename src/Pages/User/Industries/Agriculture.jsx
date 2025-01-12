@@ -12,8 +12,8 @@ const Agriculture = () => {
       <div className="breadcrumb about-breadcrumb automation">
         <div className="container">
           <div className="breadcrumb-content">
-            <h1><span>Industries &gt; </span><br />Agriculture & Forestry</h1>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+            <h1 data-aos="fade-right"><span>Industries &gt; </span><br />Agriculture & Forestry</h1>
+            <p data-aos="fade-left">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
           </div>
         </div>
       </div>
@@ -21,7 +21,7 @@ const Agriculture = () => {
       <div className="automation-page ">
         <div className="overview space">
           <div className="container">
-            <div className="title-content title-content-all text-center">
+            <div className="title-content title-content-all text-center" data-aos="fade-down">
               <div className="sub-heading-dark">
                 <button>OVERVIEW</button>
               </div>
@@ -31,20 +31,24 @@ const Agriculture = () => {
             </div>
             <div className="row">
               <div className="col-lg-5 left">
-                <div className="image">
-                  <img src={AutomationCar1} alt="" />
+                <div data-aos="fade-right">
+                  <div className="image">
+                    <img src={AutomationCar1} alt="" />
+                  </div>
                 </div>
               </div>
               <div className="col-lg-7">
-                <div className="content">
-                  <h1>At Wagner German Oil, we produce premium oils</h1>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                  <ul>
-                    <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</li>
-                    <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</li>
-                  </ul>
-                  <div className="common-btn d-none d-lg-block">
-                    <button>Shop Now</button>
+                <div data-aos="fade-left">
+                  <div className="content">
+                    <h1>At Wagner German Oil, we produce premium oils</h1>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                    <ul>
+                      <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</li>
+                      <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry</li>
+                    </ul>
+                    <div className="common-btn d-none d-lg-block">
+                      <button>Shop Now</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -56,7 +60,7 @@ const Agriculture = () => {
 
         <div className="productsandbenefits space">
           <div className="container">
-            <div className="title-content title-content-all text-center">
+            <div className="title-content title-content-all text-center" data-aos="fade-down">
               <div className="sub-heading-dark">
                 <button>PRODUCTS & BENEFITS</button>
               </div>
@@ -66,7 +70,7 @@ const Agriculture = () => {
             </div>
 
             <div className="nav-tabs">
-              <nav>
+              <nav data-aos="fade-down">
                 <div className="nav nav-tabs custom-tabs" id="nav-tab" role="tablist">
                   <button
                     className="nav-link active"
@@ -137,6 +141,7 @@ const Agriculture = () => {
                   id="nav-description"
                   role="tabpanel"
                   aria-labelledby="nav-description-tab"
+                  data-aos="fade-up"
                 >
                   <h6>Heading</h6>
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
@@ -180,6 +185,7 @@ const Agriculture = () => {
                   id="nav-specifications"
                   role="tabpanel"
                   aria-labelledby="nav-specifications-tab"
+                  data-aos="fade-up"
                 >
                   <h6>Heading</h6>
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
@@ -222,6 +228,7 @@ const Agriculture = () => {
                   id="nav-product"
                   role="tabpanel"
                   aria-labelledby="nav-product-tab"
+                  data-aos="fade-up"
                 >
                   <h6>Heading</h6>
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
@@ -264,6 +271,7 @@ const Agriculture = () => {
                   id="nav-gearbox"
                   role="tabpanel"
                   aria-labelledby="nav-gearbox-tab"
+                  data-aos="fade-up"
                 >
                   <h6>Heading</h6>
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
@@ -306,6 +314,7 @@ const Agriculture = () => {
                   id="nav-care"
                   role="tabpanel"
                   aria-labelledby="nav-care-tab"
+                  data-aos="fade-up"
                 >
                   <h6>Heading</h6>
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
@@ -353,18 +362,22 @@ const Agriculture = () => {
           <div className="container">
             <div className="row">
               <div className="col-lg-7">
-                <div className="content">
-                  <h1>At Wagner German Oil, we produce premium oils</h1>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                  <div className="common-btn d-none d-lg-block">
-                    <button>Lets Connect</button>
+                <div data-aos="fade-right">
+                  <div className="content">
+                    <h1>At Wagner German Oil, we produce premium oils</h1>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                    <div className="common-btn d-none d-lg-block">
+                      <button>Lets Connect</button>
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="col-lg-5 left">
-                <div className="image">
-                  <img src={AutomationCar2} alt="" />
+                <div data-aos="fade-left">
+                  <div className="image">
+                    <img src={AutomationCar2} alt="" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -373,30 +386,32 @@ const Agriculture = () => {
 
 
 
-        <div className="cta-section mini-space" >
+        <div div className="cta-section mini-space" data-aos="fade-down">
           <div className="container">
             <div className="row">
-              <div className="col-lg-2">
-                <div className="image image-left">
-                  <img src={CtaLeft} alt="" />
-                </div>
-              </div>
-              <div className="col-lg-8">
-                <div className="content">
-                  <h1>A Word from Our Leadership</h1>
-                </div>
-                <div className="mini-content">
-                  <p>
-                    At Wagner Oils, we believe in creating value through innovation and sustainability. Our journey has always been about staying ahead.</p>
-                  <div className="cta-btn">
-                    <button>Let's Connect</button>
+              <div className="col-lg-10">
+                <div data-aos="fade-right" data-aos-delay="200">
+                  <div className="content">
+                    <h1>A Word from Our Leadership</h1>
                   </div>
-                  <p>We are excited to continue this journey with you, always striving for excellence and delivering solutions that make a difference.</p>
+                  <div className="mini-content">
+                    <p>"At Wagner Oils, our mission extends beyond providing exceptional lubricants. We’re
+                      dedicated to forging lasting partnerships with our customers, inspiring confidence through
+                      unwavering quality, responsible innovation, and unparalleled service. As we look to the
+                      future, we remain committed to pushing boundaries, embracing new technologies, and
+                      maintaining the highest standards. We believe that by working together, we can create a
+                      more sustainable, efficient, and prosperous environment for industries around the globe."</p>
+                    <div className="cta-btn">
+                      <button>Let's Connect</button>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="col-lg-2">
-                <div className="image">
-                  <img src={CtaRight} alt="" />
+                <div data-aos="fade-left" data-aos-delay="200">
+                  <div className="image">
+                    <img src={CtaRight} alt="" />
+                  </div>
                 </div>
               </div>
             </div>

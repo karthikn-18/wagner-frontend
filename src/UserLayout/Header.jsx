@@ -20,39 +20,51 @@ const Header = () => {
                     <div className="row">
                         <div className="col-lg-8">
                             <div className="star-items">
-                                <div className="item">
-                                    <PiStarFill className="icon" />
-                                    <p className="fontSize14 fontWeight300">New Micro-Ceramic Technology</p>
+                                <div data-aos="fade-down" >
+                                    <div className="item">
+                                        <PiStarFill className="icon" />
+                                        <p className="fontSize14 fontWeight300">New Micro-Ceramic Technology</p>
+                                    </div>
                                 </div>
-                                <div className="item">
-                                    <PiStarFill className="icon" />
-                                    <p className="fontSize14 fontWeight300">High-Quality</p>
+                                <div data-aos="fade-down">
+                                    <div className="item">
+                                        <PiStarFill className="icon" />
+                                        <p className="fontSize14 fontWeight300">High-Quality</p>
+                                    </div>
                                 </div>
-                                <div className="item">
-                                    <PiStarFill className="icon" />
-                                    <p className="fontSize14 fontWeight300">Free shipping Available</p>
+                                <div data-aos="fade-down">
+                                    <div className="item">
+                                        <PiStarFill className="icon" />
+                                        <p className="fontSize14 fontWeight300">Free shipping Available</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div className="col-lg-4">
                             <div className="right">
-                                <div className="item mobiletopheader">
-                                    <p className="fontSize14 fontWeight300"><a href="/blog">Blog</a></p>
-                                </div>
-                                <div className="item">
-                                    <CiGlobe className="icon" />
-                                    <div className="language-selector">
-                                        <select className="select-language">
-                                            <option value="en">ENG</option>
-                                            <option value="fr">Français</option>
-                                            <option value="de">Deutsch</option>
-                                            <option value="it">Italiano</option>
-                                            <option value="es">Español</option>
-                                        </select>
+                                <div data-aos="fade-down">
+                                    <div className="item mobiletopheader">
+                                        <p className="fontSize14 fontWeight300"><a href="/blog">Blog</a></p>
                                     </div>
                                 </div>
-                                <div className="item">
-                                    <LuSearch className="icon" />
+                                <div data-aos="fade-down">
+                                    <div className="item">
+                                        <CiGlobe className="icon" />
+                                        <div className="language-selector">
+                                            <select className="select-language">
+                                                <option value="en">ENG</option>
+                                                <option value="fr">Français</option>
+                                                <option value="de">Deutsch</option>
+                                                <option value="it">Italiano</option>
+                                                <option value="es">Español</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div data-aos="fade-down">
+                                    <div className="item">
+                                        <LuSearch className="icon" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -193,6 +205,7 @@ const Header = () => {
                                             </ul>
                                         )}
                                     </li>
+                                    <li><a href="/blog">Blog</a></li>
                                     <li><a href="/products">Products</a></li>
                                 </ul>
                             </div>
