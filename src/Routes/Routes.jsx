@@ -31,6 +31,10 @@ import GetTestimonials from "../Pages/Admin/Testimonials/GetTestimonials";
 import GetContact from "../Pages/Admin/Contact/Contact";
 import Login from "../Pages/Admin/Login";
 import ProtectedRoute from "../ProtectedRoute";
+import Industries from "../Pages/Admin/Industries/Industries";
+import Category from "../Pages/Admin/Category/Category";
+import Application from "../Pages/Admin/Application/Application";
+import AddProductForm from "../Pages/Admin/Products/AddProducts";
 
 const Routes = () => {
   const routes = useRoutes([
@@ -96,6 +100,38 @@ const Routes = () => {
             <ProtectedRoute>
               <GetContact />
             </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/admin/industries",
+          element: (
+            <ProtectedRoute>
+              <Industries />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/admin/category",
+          element: (
+            <ProtectedRoute>
+              <Category />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/admin/application",
+          element: (
+            <ProtectedRoute>
+              <Application />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/admin/add-product",
+          element: (
+            // <ProtectedRoute>
+              <AddProductForm />
+            // </ProtectedRoute>
           ),
         },
       ],

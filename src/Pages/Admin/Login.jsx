@@ -7,7 +7,7 @@ import { AdminLogin } from '../../api/AdminLogin';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    
+
     const [formData, setFormData] = useState({ email: '', password: '' })
 
 
@@ -31,16 +31,17 @@ const Login = () => {
 
         try {
             const response = await AdminLogin({ email, password })
-            console.log(response,"123333")
+            console.log(response, "123333")
             if (response.status === 200) {
                 loginStore(response?.data?.data?.token);
                 navigate('/admin/dashboard')
+                window.location.reload();
                 toast.success(response?.data?.message)
             } else {
                 toast.error(response.data.message)
             }
         } catch (error) {
-            console.log(error,"error")
+            console.log(error, "error")
             toast.error(error.message)
         }
     }

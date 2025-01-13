@@ -1,11 +1,11 @@
 import axios from "axios";
 import { REACT_APP_BACKEND_URL, REACT_APP_BASE_URL } from "../env/env";
-import { Userlogin } from "../store";
+import { useUserStore } from "../store";
 
 const handleResponse = (response) => {
   console.log(response, "response12344");
   if (response.status === 200 || response.status === 201) {
-    return response; 
+    return response;
   } else {
     return [];
   }
@@ -13,12 +13,12 @@ const handleResponse = (response) => {
 
 const handleError = (error) => {
   if (error?.response) {
-    
+
     console.error("Error Response:", error.response);
 
     if (error.response.status === 403) {
       console.log("Access forbidden, logging out...");
-      Userlogin.getState().login = []; 
+      useUserStore.getState().login = [];
       window.location.href = "/admin-login";
     }
 
@@ -28,7 +28,7 @@ const handleError = (error) => {
       data: error.response.data || "Something went wrong",
     };
   } else if (error?.request) {
- 
+
     console.error("Error Request:", error.request);
     return {
       success: false,
@@ -36,7 +36,7 @@ const handleError = (error) => {
       data: "No response received. Please check your network connection.",
     };
   } else {
-    
+
     console.error("Error Message:", error.message);
     return {
       success: false,
@@ -105,7 +105,7 @@ const senderRequest = async (
     return handleResponse(response);
   } catch (error) {
     console.log(error, "error");
-    return handleError(error); 
+    return handleError(error);
   }
 };
 

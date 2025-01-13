@@ -1,9 +1,12 @@
-import React from 'react'
-import { Userlogin } from '../../store';
+import React, { useEffect } from 'react'
 
 const Dashboard = () => {
-    // const token = Userlogin.getState().login
+    // const token = useUserStore(state => state?.login)
     // console.log(token, "token");
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        // window.location.reload();
+    }, [])
     return (
         <div>Dashboard</div>
     )

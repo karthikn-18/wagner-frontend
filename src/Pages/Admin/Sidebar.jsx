@@ -17,7 +17,7 @@ const Sidebar = () => {
 
     return (
         <>
-            <div class='flex flex-col justify-between border-e bg-white w-[250px] sticky' style={{width: '250px'}}>
+            <div class='flex flex-col justify-between border-e bg-white w-[250px] sticky' style={{ width: '250px' }}>
                 <div class='px-6 py-6 h-screen min-w-[250px]'>
                     <span class='grid w-32 lace-content-center   text-xs text-gray-600 '>
                         {/* <img src={logo} className='' /> */}
@@ -44,7 +44,7 @@ const Sidebar = () => {
                             onClick={() => navigate('/admin/blogs')}
                             style={{ cursor: 'pointer' }}
                         >
-                           Blogs
+                            Blogs
                         </li>
 
                         <li
@@ -56,9 +56,42 @@ const Sidebar = () => {
                             onClick={() => navigate('/admin/testimonials')}
                             style={{ cursor: 'pointer' }}
                         >
-                           Testimonials
+                            Testimonials
                         </li>
 
+                        <li
+                            className={
+                                pathname.includes('industries')
+                                    ? 'block   bg-red-400 px-4 py-3 text-sm font-medium text-white'
+                                    : 'block   px-4 py-3 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700'
+                            }
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => navigate('/admin/industries')}
+                        >
+                            Industries
+                        </li>
+                        <li
+                            className={
+                                pathname.includes('category')
+                                    ? 'block   bg-red-400 px-4 py-3 text-sm font-medium text-white'
+                                    : 'block   px-4 py-3 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700'
+                            }
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => navigate('/admin/category')}
+                        >
+                            Category
+                        </li>
+                        <li
+                            className={
+                                pathname.includes('application')
+                                    ? 'block   bg-red-400 px-4 py-3 text-sm font-medium text-white'
+                                    : 'block   px-4 py-3 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700'
+                            }
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => navigate('/admin/application')}
+                        >
+                            Application
+                        </li>
                         <li
                             className={
                                 pathname.includes('products')
@@ -68,7 +101,7 @@ const Sidebar = () => {
                             style={{ cursor: 'pointer' }}
                             onClick={() => navigate('/admin/products')}
                         >
-                           Products
+                            Products
                         </li>
                         <li
                             className={
@@ -87,7 +120,7 @@ const Sidebar = () => {
                                 'block   px-4 py-3 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700'
                             }
                             style={{ cursor: 'pointer' }}
-                            // onClick={AdminlogOut}
+                        // onClick={AdminlogOut}
                         >
                             <button className='btn-danger'> Logout</button>
                         </li>

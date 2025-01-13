@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Userlogin } from './store';
+import { useUserStore } from './store';
 
 const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate();
-  const { login } = Userlogin();
+  const { login } = useUserStore();
 
   useEffect(() => {
     if (!login || login.length === 0) {
