@@ -8,11 +8,11 @@ const Sidebar = () => {
     const { pathname } = useLocation()
     const [count, setCount] = useState(0)
 
-    // const AdminlogOut = () => {
-    //     console.log('logout')
-    //     sessionStorage.clear()
-    //     navigate('admin/login')
-    // }
+    const AdminlogOut = () => {
+        console.log('logout')
+        sessionStorage.clear()
+        navigate('admin-login')
+    }
 
 
     return (
@@ -94,7 +94,7 @@ const Sidebar = () => {
                         </li>
                         <li
                             className={
-                                pathname.includes('products')
+                                pathname.includes('product')
                                     ? 'block   bg-red-400 px-4 py-3 text-sm font-medium text-white'
                                     : 'block   px-4 py-3 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700'
                             }
@@ -120,30 +120,12 @@ const Sidebar = () => {
                                 'block   px-4 py-3 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700'
                             }
                             style={{ cursor: 'pointer' }}
-                        // onClick={AdminlogOut}
+                            onClick={AdminlogOut}
                         >
                             <button className='btn-danger'> Logout</button>
                         </li>
                     </ul>
                 </div>
-
-                {/* <div class=" inset-x-0 bottom-0 border-t border-gray-100">
-        <a href="#" class="flex items-center gap-2 bg-gray-100 p-4 hover:bg-gray-300">
-        <img
-            alt="Man"
-            src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-            class="h-10 w-10 rounded-full object-cover"
-        />
-
-        <div>
-            <p class="text-xs">
-            <strong class="block font-medium">Admin</strong>
-
-            <span> Admin@example.com </span>
-            </p>
-        </div>
-        </a>
-    </div> */}
             </div>
         </>
     )

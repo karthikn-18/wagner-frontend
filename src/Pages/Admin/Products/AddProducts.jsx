@@ -90,10 +90,15 @@ const AddProductForm = () => {
 
     const handleImageUpload = (e) => {
         const files = Array.from(e.target.files);
+        console.log(files, "files");
+
         if (images.length + files.length <= 4) {
-            setImages(prev => [...prev, ...files]);
+            setImages((prev) => [...prev, ...files]);
         }
+
+        e.target.value = '';
     };
+
 
     const removeImage = (index) => {
         setImages(prev => prev.filter((_, i) => i !== index));
@@ -235,6 +240,8 @@ const AddProductForm = () => {
             // setIsLoading(false);
         }
     };
+
+    console.log(applicationInfo, "applicationInfo", images)
 
     return (
         <form onSubmit={handleSubmit} className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-sm space-y-8">

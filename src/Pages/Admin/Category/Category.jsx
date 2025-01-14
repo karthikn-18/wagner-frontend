@@ -1,35 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { AgGridReact } from 'ag-grid-react';
-import "ag-grid-community/styles/ag-grid.css";
-import "ag-grid-community/styles/ag-theme-quartz.css";
-import { ModuleRegistry } from "@ag-grid-community/core";
-import { CsvExportModule } from "@ag-grid-community/csv-export";
-import { useCategoryGetQuery, useIndustriesGetQuery } from '../../../query/useQuery';
+import React, {  useState } from 'react'
+
+import { useCategoryGetQuery } from '../../../query/useQuery';
 import CategoryModal from './CategoryModal';
+import TableComponent from '../../../Components/TableComponent';
 
 const Category = () => {
 
-    const { data, refetch } = useCategoryGetQuery();
-    const gridRef = useRef(null);
-    const [filteredData, setfilteredData] = useState([]);
-    const [originalData, setOriginalData] = useState([]);
+    const { data, refetch } = useCategoryGetQuery()
     const [openModal, setOpenModal] = useState(false);
     const [seletedCategory, setSelectedCategory] = useState(null)
-    useEffect(() => {
-        if (data) {
-            setOriginalData(data?.data?.data);
-            setfilteredData(data?.data?.data);
-        }
-    }, [data]);
 
-    const onBtnExport = () => {
-        gridRef.current.api.exportDataAsCsv();
-    };
-
-    const defaultColDef = {
-        resizable: true,
-        flex: 1
-    };
 
     const handleEditClick = (industry) => {
         console.log(industry)
@@ -80,46 +60,7 @@ const Category = () => {
     ]
     return (
         <div className="p-4 max-w-[1280px] md:m-auto">
-            <h1 className=" font-medium text-center text-heading md:text-[1.75rem] text-[1.5rem]">
-                Category
-            </h1>
-
-            <button
-                className=" mb-3 text-sm me-3 font-medium text-white px-4 py-2 rounded hover:bg-blue-600 transition"
-                  style={{ backgroundColor: "rgb(2, 126, 240)", borderRadius: '10px' }}
-                onClick={onBtnExport}
-            >
-                Download CSV
-            </button>
-            <button
-                className=" mb-3 text-sm font-medium text-white px-4 py-2 rounded hover:bg-blue-600 transition"
-                  style={{ backgroundColor: "rgb(2, 126, 240)", borderRadius: '10px' }}
-                onClick={() => { setOpenModal(true), setSelectedCategory(null) }}
-            >
-                Create Category
-            </button>
-            <div
-                className="ag-theme-quartz"
-                style={{ height: 500 }}
-            >
-                {filteredData?.length === 0 && (
-                    <div className="flex items-center justify-center h-full">
-                        <p className="text-gray-600 text-lg">No data available</p>
-                    </div>
-                )}
-                {filteredData?.length > 0 && (
-                    <AgGridReact
-                        ref={gridRef}
-                        rowData={filteredData}
-                        columnDefs={columns}
-                        defaultColDef={defaultColDef}
-                        animateRows={true}
-                        enableCellTextSelection={true}
-                        pagination={true}
-                        paginationPageSize={10}
-                    />
-                )}
-            </div>
+            <TableComponent tableTitle="Industries" data={data} dateFiterOption={false} exportOption={false} CreateOption={'create Category'} handleCreateClick={() => setOpenModal(true)} columns={columns} />
 
             <CategoryModal openModal={openModal} setOpenModal={setOpenModal} onSave={handleModalClose} selectedValue={seletedCategory} refetch={refetch} />
             {/* <BlogDelete openModal={deleteModal} setOpenModal={setDeleteModal} selectedBlog={selectedBlog} refetch={refetch} /> */}

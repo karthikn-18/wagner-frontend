@@ -3,7 +3,7 @@ import { TextInput, Textarea } from 'flowbite-react';
 import { Button, Modal } from 'flowbite-react';
 import { useAddTestimonials, useEditTestimonials } from '../../../query/useMutation';
 
-const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetch }) => {
+const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetch, setSelectedTestimonial }) => {
     const [formData, setFormData] = useState({
         description: '',
         image: '',
@@ -69,7 +69,7 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
             return;
         }
 
-        setError(''); 
+        setError('');
 
         const handleCloseFunction = () => {
             resetForm();
@@ -89,6 +89,7 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
             show={openModal}
             onClose={() => {
                 resetForm();
+                setSelectedTestimonial(null);
                 setOpenModal(false);
             }}
         >
@@ -140,6 +141,7 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
                     color="gray"
                     onClick={() => {
                         resetForm();
+                        setSelectedTestimonial(null);
                         setOpenModal(false);
                     }}
                 >
