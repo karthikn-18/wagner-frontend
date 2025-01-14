@@ -5,11 +5,11 @@ import Sidebar from './Sidebar'
 
 const Admin = () => {
     return (
-        <div className="flex h-full bg-gray-200 overflow-y-scroll">
+        <div className="flex h-full bg-gray-200 ">
             <Sidebar />
-            <div className='flex flex-col flex-1 '>
-                <main class="flex-1  bg-gray-200">
-                    <div class="container px-6 py-8 mx-auto">
+            <div className='flex flex-col flex-1 overflow-y-auto'>
+                <main class="flex-1  bg-gray-200  "  style={{marginLeft:'250px'}}>
+                    <div class="container px-6 py-8 ">
                         <Outlet />
                     </div>
                 </main>

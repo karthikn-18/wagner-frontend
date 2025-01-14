@@ -7,7 +7,7 @@ import { getContactApi } from '../api/ContactApi';
 import { useUserStore } from '../store';
 import { getApplicationApi } from '../api/ApplicationApi';
 import { getIndustryApi } from '../api/IndustriesApi';
-import { getProductApi } from '../api/ProductApi';
+import { getProductApi, getSingleProductApi } from '../api/ProductApi';
 import { getCategoryApi } from '../api/CategoryApi';
 
 const token = useUserStore.getState()?.login
@@ -80,6 +80,16 @@ export const useProductGetQuery = () => {
         queryKey: ['get-Product', token],
         queryFn: async () => {
             return getProductApi(token);
+        },
+        staleTime: 60 * 1000,
+    })
+}
+
+export const useProductGetSingleIdQuery = (id) => {
+    return useQuery({
+        queryKey: ['get-Product-id', id],
+        queryFn: async () => {
+            return getSingleProductApi(id);
         },
         staleTime: 60 * 1000,
     })

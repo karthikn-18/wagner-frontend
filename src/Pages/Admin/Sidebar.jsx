@@ -17,7 +17,7 @@ const Sidebar = () => {
 
     return (
         <>
-            <div class='flex flex-col justify-between border-e bg-white w-[250px] sticky' style={{ width: '250px' }}>
+            <div class='flex flex-col justify-between border-e bg-white w-[250px] h-screen fixed' style={{ width: '250px' }}>
                 <div class='px-6 py-6 h-screen min-w-[250px]'>
                     <span class='grid w-32 lace-content-center   text-xs text-gray-600 '>
                         {/* <img src={logo} className='' /> */}

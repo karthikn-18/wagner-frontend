@@ -9,6 +9,7 @@ import { addIndustryApi, deleteIndustryApi, editIndustryApi } from "../api/Indus
 import { addApplicationApi, deleteApplicationApi, editApplicationApi } from "../api/ApplicationApi"
 import { addCategoryApi, deleteCategoryApi, editCategoryApi } from "../api/CategoryApi"
 import { addProductApi, deleteProductApi, editProductApi } from "../api/ProductApi"
+import { useNavigate } from "react-router-dom"
 
 
 const token = useUserStore.getState()?.login
@@ -423,7 +424,7 @@ export const useAddCategory = () => {
                 toast.success(data?.data?.message)
                 handleCloseFunction()
             } else {
-                toast.error(data?.data?.message)
+                toast.error(data?.message)
             }
         },
         onError: (data) => {
@@ -438,6 +439,7 @@ export const useAddCategory = () => {
 export const useEditProduct = () => {
     return useMutation({
         mutationFn: async ({ data, id }) => {
+            console.log(data, id);
             return editProductApi(data, id, token)
         },
         mutationKey: ['Edit Product'],
@@ -449,7 +451,7 @@ export const useEditProduct = () => {
                 toast.success(data?.data?.message)
                 handleCloseFunction()
             } else {
-                toast.error(data?.data?.message)
+                toast.error(data?.message)
             }
         },
         onError: (data) => {
@@ -466,13 +468,13 @@ export const useDeleteProduct = () => {
         mutationKey: ['Delete Product'],
         enabled: token.length > 0,
 
-        onSuccess: (data, { handleCloseFunction }) => {
+        onSuccess: (data,{ handleCloseFunction }) => {
             console.log(data)
             if (data?.status === 200) {
                 toast.success(data?.data?.message)
                 handleCloseFunction()
             } else {
-                toast.error(data?.data?.message)
+                toast.error(data?.message)
             }
         },
         onError: (data) => {
@@ -481,28 +483,34 @@ export const useDeleteProduct = () => {
     })
 }
 
-export const useAddProduct = () => {
+export const useAddProduct = (token) => {
+    const navigate = useNavigate();
+
     return useMutation({
         mutationFn: async ({ data }) => {
-            return addProductApi(data, token)
+
+            return addProductApi(data, token);
         },
         mutationKey: ['Add Product'],
-        enabled: token.length > 0,
+        enabled: token?.length > 0,
 
-        onSuccess: (data, { handleCloseFunction }) => {
-            console.log(data)
+        onSuccess: (data) => {
+            console.log(data);
             if (data?.status === 200 || data?.status === 201) {
-                toast.success(data?.data?.message)
-                handleCloseFunction()
+                toast.success(data?.data?.message);
+                console.log(data,"response201");
+                navigate('/admin/products');
             } else {
-                toast.error(data?.data?.message)
+                toast.error(data?.data?.message || 'Something went wrong');
             }
         },
-        onError: (data) => {
-            toast.error(data?.data?.message)
-        }
-    })
-}
+        onError: (error) => {
+            // Check if the error structure contains a message and display it
+            const errorMessage = error?.data?.message || 'An error occurred';
+            toast.error(errorMessage);
+        },
+    });
+};
 
 
 

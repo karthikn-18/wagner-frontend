@@ -6,6 +6,10 @@ export const getProductApi = async () => {
     const response = await senderRequest("GET", `${REACT_APP_BACKEND_URL}/product`);
     return response
 }
+export const getSingleProductApi = async (id) => {
+    const response = await senderRequest("GET", `${REACT_APP_BACKEND_URL}/product/${id}`);
+    return response
+}
 
 export const editProductApi = async (data, id, token) => {
     console.log(data, id);

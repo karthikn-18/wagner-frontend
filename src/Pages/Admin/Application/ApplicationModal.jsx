@@ -51,7 +51,7 @@ const ApplicationModal = ({ openModal, setOpenModal, onSave, selectedValue, refe
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
-                        placeholder="Enter Industry title"
+                        placeholder="Enter application title"
                         label="Title"
                         required
                     />

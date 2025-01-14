@@ -35,6 +35,7 @@ import Industries from "../Pages/Admin/Industries/Industries";
 import Category from "../Pages/Admin/Category/Category";
 import Application from "../Pages/Admin/Application/Application";
 import AddProductForm from "../Pages/Admin/Products/AddProducts";
+import AdminProducts from "../Pages/Admin/Products/Products";
 
 const Routes = () => {
   const routes = useRoutes([
@@ -129,9 +130,25 @@ const Routes = () => {
         {
           path: "/admin/add-product",
           element: (
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <AddProductForm />
-            // </ProtectedRoute>
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/admin/edit-product/:id",
+          element: (
+            <ProtectedRoute>
+              <AddProductForm />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/admin/products",
+          element: (
+            <ProtectedRoute>
+              <AdminProducts />
+            </ProtectedRoute>
           ),
         },
       ],

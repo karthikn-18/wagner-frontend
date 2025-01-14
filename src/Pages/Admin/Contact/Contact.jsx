@@ -169,14 +169,16 @@ const GetContact = () => {
                 </div>
                 <button
                     onClick={applyDateFilter}
-                    className="bg-[#FF0169] text-sm text-white px-4 py-1 rounded hover:bg-blue-600 transition"
+                    className=" text-sm text-white px-4 py-1 me-3 rounded hover:bg-blue-600 transition"
+                    style={{ backgroundColor: "rgb(2, 126, 240)", borderRadius: '10px' }}
                 >
                     Apply Filter
                 </button>
             </div>
 
             <button
-                className="bg-[#FF0169] mb-3 text-sm font-medium text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                className=" mb-3 text-sm font-medium text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                style={{ backgroundColor: "rgb(2, 126, 240)", borderRadius: '10px' }}
                 onClick={onBtnExport}
             >
                 Download CSV

@@ -5,7 +5,6 @@ import { useAddTestimonials, useEditTestimonials } from '../../../query/useMutat
 
 const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetch }) => {
     const [formData, setFormData] = useState({
-
         description: '',
         image: '',
         author: '',
@@ -13,10 +12,10 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
     });
     const [error, setError] = useState('');
 
+    // Populate form data when editing a testimonial
     useEffect(() => {
         if (selectedTestimonial?._id) {
             setFormData({
-
                 description: selectedTestimonial?.description || '',
                 image: selectedTestimonial?.image || '',
                 author: selectedTestimonial?.author || '',
@@ -25,6 +24,7 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
         }
     }, [selectedTestimonial]);
 
+    // Handle input change for form fields
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
@@ -33,29 +33,46 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
     const { mutate } = useAddTestimonials();
     const { mutate: editMutate } = useEditTestimonials();
 
+    // Reset form state and error
+    const resetForm = () => {
+        setFormData({
+            description: '',
+            image: '',
+            author: '',
+            designation: '',
+        });
+        setError('');
+    };
+
     const handleSubmit = () => {
         const { description, image, author, designation } = formData;
 
-        if (!description || !image || !author || !designation) {
-            setError('All fields are required.');
+        // Validation
+        if (!description || description.trim().length < 10) {
+            setError('Description is required and must be at least 10 characters.');
             return;
         }
 
-        const imageUriPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
-        if (!imageUriPattern.test(image)) {
-            setError('Image must be a valid URI.');
+        // const imageUriPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
+        // if (!imageUriPattern.test(image)) {
+        //     setError('Image URL must be a valid URI.');
+        //     return;
+        // }
+
+        if (!author || author.trim().length < 3 || /\d/.test(author)) {
+            setError('Author name must be at least 3 characters and should not contain numbers.');
             return;
         }
+
+        if (!designation || designation.trim().length < 2) {
+            setError('Designation must be at least 3 characters.');
+            return;
+        }
+
+        setError(''); 
 
         const handleCloseFunction = () => {
-            setFormData({
-               
-                description: '',
-                image: '',
-                author: '',
-                designation: '',
-            });
-            setError('');
+            resetForm();
             refetch();
             setOpenModal(false);
         };
@@ -68,31 +85,23 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
     };
 
     return (
-        <Modal show={openModal} onClose={() => {
-            setOpenModal(false), setFormData({
-              
-                description: '',
-                image: '',
-                author: '',
-                designation: '',
-            });
-        }}>
-            <Modal.Header className='p-3'>{selectedTestimonial ? 'Edit Testimonial' : 'Add Testimonial'}</Modal.Header>
+        <Modal
+            show={openModal}
+            onClose={() => {
+                resetForm();
+                setOpenModal(false);
+            }}
+        >
+            <Modal.Header className="p-3">
+                {selectedTestimonial ? 'Edit Testimonial' : 'Add Testimonial'}
+            </Modal.Header>
             <Modal.Body>
                 <div className="space-y-4">
-                    {/* <TextInput
-                        name="title"
-                        value={formData.title}
-                        onChange={handleInputChange}
-                        placeholder="Enter title"
-                        label="Title"
-                        required
-                    /> */}
                     <Textarea
                         name="description"
                         value={formData.description}
                         onChange={handleInputChange}
-                        placeholder="Enter description"
+                        placeholder="Enter testimonial description"
                         label="Description"
                         required
                     />
@@ -124,16 +133,16 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button color="gray" onClick={handleSubmit}>Save</Button>
-                <Button color="gray" onClick={() => {
-                    setOpenModal(false), setFormData({
-                      
-                        description: '',
-                        image: '',
-                        author: '',
-                        designation: '',
-                    });
-                }}>
+                <Button color="gray" onClick={handleSubmit}>
+                    Save
+                </Button>
+                <Button
+                    color="gray"
+                    onClick={() => {
+                        resetForm();
+                        setOpenModal(false);
+                    }}
+                >
                     Cancel
                 </Button>
             </Modal.Footer>

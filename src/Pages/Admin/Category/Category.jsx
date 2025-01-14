@@ -85,13 +85,15 @@ const Category = () => {
             </h1>
 
             <button
-                className="bg-[#FF0169] mb-3 text-sm font-medium text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                className=" mb-3 text-sm me-3 font-medium text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                  style={{ backgroundColor: "rgb(2, 126, 240)", borderRadius: '10px' }}
                 onClick={onBtnExport}
             >
                 Download CSV
             </button>
             <button
-                className="bg-[#FF0169] mb-3 text-sm font-medium text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                className=" mb-3 text-sm font-medium text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                  style={{ backgroundColor: "rgb(2, 126, 240)", borderRadius: '10px' }}
                 onClick={() => { setOpenModal(true), setSelectedCategory(null) }}
             >
                 Create Category

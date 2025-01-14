@@ -3,7 +3,7 @@ import { TextInput, Textarea } from 'flowbite-react';
 import { Button, Modal } from 'flowbite-react';
 import { useAddBlogs, useEditBlogs } from '../../../query/useMutation';
 
-const BlogModal = ({ openModal, setOpenModal, onSave, selectedBlog, refetch }) => {
+const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch }) => {
     const [formData, setFormData] = useState({
         title: '',
         description: '',
@@ -14,23 +14,18 @@ const BlogModal = ({ openModal, setOpenModal, onSave, selectedBlog, refetch }) =
     const [error, setError] = useState('');
     const [selectedImageName, setSelectedImageName] = useState('');
 
-    console.log(selectedBlog?._id, "selectedBlog");
-
     useEffect(() => {
         if (selectedBlog?._id) {
             setFormData({
-                title: selectedBlog?.title,
-                description: selectedBlog?.description,
-                link: selectedBlog?.link,
+                title: selectedBlog?.title || '',
+                description: selectedBlog?.description || '',
+                link: selectedBlog?.link || '',
                 date: selectedBlog?.date ? new Date(selectedBlog.date).toISOString().split('T')[0] : '',
                 image: selectedBlog?.image || null,
             });
             setSelectedImageName(selectedBlog?.image ? 'Current Image' : '');
         }
     }, [selectedBlog]);
-
-
-    console.log(formData, "formData");
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -55,8 +50,9 @@ const BlogModal = ({ openModal, setOpenModal, onSave, selectedBlog, refetch }) =
         setSelectedImageName('');
     };
 
-    const { mutate } = useEditBlogs()
-    const { mutate: addBlogsMutate } = useAddBlogs()
+    const { mutate } = useEditBlogs();
+    const { mutate: addBlogsMutate } = useAddBlogs();
+
     const handleCloseFunction = () => {
         setFormData({
             title: '',
@@ -68,69 +64,96 @@ const BlogModal = ({ openModal, setOpenModal, onSave, selectedBlog, refetch }) =
         setError('');
         refetch();
         setOpenModal(false);
-    }
+    };
+
     const handleSubmit = () => {
-        if (!formData.title || !formData.description || !formData.date) {
-            setError('Title, Description, and Date are required.');
+        const titleTrimmed = formData.title.trim();
+        const descriptionTrimmed = formData.description.trim();
+        
+        if (!titleTrimmed || titleTrimmed.length < 5 || titleTrimmed.length > 100) {
+            setError('Title is required and should be between 5 and 100 characters.');
+            return;
+        }
+        if (!descriptionTrimmed || descriptionTrimmed.length < 20) {
+            setError('Description is required and should be at least 20 characters long.');
             return;
         }
 
-        if (selectedBlog?._id) {
-            mutate({ data: formData, id: selectedBlog?._id, handleCloseFunction })
-        }
-        else {
-            addBlogsMutate({ data: formData, handleCloseFunction })
+        const today = new Date().toISOString().split('T')[0];
+        if (!formData.date || formData.date > today) {
+            setError('Date is required and should not be in the future.');
+            return;
         }
 
-        // onSave(formData);
-        // setOpenModal(false);
+        setError(''); 
+
+        if (selectedBlog?._id) {
+            mutate({ data: formData, id: selectedBlog?._id, handleCloseFunction });
+        } else {
+            addBlogsMutate({ data: formData, handleCloseFunction });
+        }
     };
 
     return (
-        <Modal show={openModal} onClose={() => {
-            setOpenModal(false), setFormData({
-                title: '',
-                description: '',
-                link: '',
-                date: '',
-                image: null,
-            })
-        }}>
-            <Modal.Header className='p-3'>{selectedBlog ? 'Edit Blog' : 'Add Blog'}</Modal.Header>
+        <Modal
+            show={openModal}
+            onClose={() => {
+                setOpenModal(false);
+                setFormData({
+                    title: '',
+                    description: '',
+                    link: '',
+                    date: '',
+                    image: null,
+                });
+            }}
+        >
+            <Modal.Header className="p-3">{selectedBlog ? 'Edit Blog' : 'Add Blog'}</Modal.Header>
             <Modal.Body>
                 <div className="space-y-4">
-                    <TextInput
-                        name="title"
-                        value={formData.title}
-                        onChange={handleInputChange}
-                        placeholder="Enter blog title"
-                        label="Title"
-                        required
-                    />
-                    <Textarea
-                        name="description"
-                        value={formData.description}
-                        onChange={handleInputChange}
-                        placeholder="Enter blog description"
-                        label="Description"
-                        required
-                    />
-                    <TextInput
-                        name="link"
-                        value={formData.link}
-                        onChange={handleInputChange}
-                        placeholder="Enter blog link (optional)"
-                        label="Link"
-                    />
-                    <TextInput
-                        type="date"
-                        name="date"
-                        value={formData.date}
-                        onChange={handleInputChange}
-                        placeholder="Enter publish date"
-                        label="Date"
-                        required
-                    />
+                    <div>
+                        <TextInput
+                            name="title"
+                            value={formData.title}
+                            onChange={handleInputChange}
+                            placeholder="Enter blog title"
+                            label="Title"
+                            required
+                        />
+                        {error.includes('Title') && <p className="text-sm text-red-500">{error}</p>}
+                    </div>
+                    <div>
+                        <Textarea
+                            name="description"
+                            value={formData.description}
+                            onChange={handleInputChange}
+                            placeholder="Enter blog description"
+                            label="Description"
+                            required
+                        />
+                        {error.includes('Description') && <p className="text-sm text-red-500">{error}</p>}
+                    </div>
+                    <div>
+                        <TextInput
+                            name="link"
+                            value={formData.link}
+                            onChange={handleInputChange}
+                            placeholder="Enter blog link (optional)"
+                            label="Link"
+                        />
+                    </div>
+                    <div>
+                        <TextInput
+                            type="date"
+                            name="date"
+                            value={formData.date}
+                            onChange={handleInputChange}
+                            placeholder="Enter publish date"
+                            label="Date"
+                            required
+                        />
+                        {error.includes('Date') && <p className="text-sm text-red-500">{error}</p>}
+                    </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700">
                             {formData.image ? 'Edit Image (optional)' : 'Upload Image (optional)'}
@@ -161,20 +184,28 @@ const BlogModal = ({ openModal, setOpenModal, onSave, selectedBlog, refetch }) =
                             <p className="text-sm text-gray-500 mt-1">Selected: {selectedImageName}</p>
                         )}
                     </div>
-                    {error && <p className="text-sm text-red-500">{error}</p>}
+                    {error && !error.includes('Title') && !error.includes('Description') && !error.includes('Date') && (
+                        <p className="text-sm text-red-500">{error}</p>
+                    )}
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button color="gray" onClick={handleSubmit}>Save</Button>
-                <Button color="gray" onClick={() => {
-                    setOpenModal(false), setFormData({
-                        title: '',
-                        description: '',
-                        link: '',
-                        date: '',
-                        image: null,
-                    })
-                }}>
+                <Button color="gray" onClick={handleSubmit}>
+                    Save
+                </Button>
+                <Button
+                    color="gray"
+                    onClick={() => {
+                        setOpenModal(false);
+                        setFormData({
+                            title: '',
+                            description: '',
+                            link: '',
+                            date: '',
+                            image: null,
+                        });
+                    }}
+                >
                     Cancel
                 </Button>
             </Modal.Footer>
