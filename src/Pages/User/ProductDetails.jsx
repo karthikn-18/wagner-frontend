@@ -11,8 +11,15 @@ import Product1 from '../../assets/Resources/5w-30.png'
 import Product1Des from '../../assets/Resources/product-1-des.png'
 import Product1Cover from '../../assets/Resources/product-1-cover.png'
 import { VscDebugBreakpointLog } from "react-icons/vsc";
+import { useProductGetSingleIdQuery } from '../../query/useQuery';
+import { useParams } from 'react-router-dom';
 
 const ProductDetails = () => {
+
+    const params = useParams()
+
+    const { data } = useProductGetSingleIdQuery(params.id);
+    console.log(data, "data");
 
     const productDetailItem = {
         images: [
@@ -54,34 +61,50 @@ const ProductDetails = () => {
                         </div>
                         <div className="col-lg-7">
                             <div className="right-content" data-aos="fade-left">
-                                <h1>Wagner VG 150 Industrial Oil</h1>
-                                <p>WAGNER EVOMAX SAE 0W-16 API
-                                    is formulated with
-                                    synthetic base oils and highly advanced additives Especially
-                                    designed for small block high output gasoline engines. API
-                                    SN technology ensures maximum resistance to low speed
-                                    pre-ignition (LSPI) events and for long service life</p>
+                                <h1>{data?.data?.data?.name}</h1>
+                                <p>{data?.data?.data?.description}</p>
                                 <div className="overview">
                                     <div className="row">
                                         <div className="col-lg-5">
-                                            <h6>Application :</h6>
-                                            <h6>Industry :</h6>
-                                            <h6>Category :</h6>
+                                            <h6>Application:</h6>
+                                            <h6>Industry:</h6>
+                                            <h6>Category:</h6>
                                         </div>
+
                                         <div className="col-lg-7 type">
-                                            <h6>Passenger Cars</h6>
-                                            <h6>Engine Oil</h6>
-                                            <h6>High-tech Additives</h6>
+                                            {data?.data?.data?.applications?.length > 0 ? (
+                                                <h6 className='flex flex-wrap'>
+                                                    {data.data.data.applications.map((item) => item.name).join(", ")}
+                                                </h6>
+                                            ) : (
+                                                <h6>Not Available</h6>
+                                            )}
+
+                                            {data?.data?.data?.industries?.length > 0 ? (
+                                                <h6 className='flex flex-wrap'>
+                                                    {data.data.data.industries.map((item) => item.name).join(", ")}
+                                                </h6>
+                                            ) : (
+                                                <h6>Not Available</h6>
+                                            )}
+
+                                            {data?.data?.data?.category?.name ? (
+                                                <h6>{data.data.data.category.name}</h6>
+                                            ) : (
+                                                <h6>Not Available</h6>
+                                            )}
                                         </div>
                                     </div>
+
+
                                 </div>
                                 <div className="sizes-itemno">
-                                    <h6><b>Available sizes:</b>1L, 4L, 5L, 20L, 208 Drum</h6>
+                                    <h6><b>Available sizes:</b>{data?.data?.data?.availableSizes}</h6>
                                     <h6><b>Item no:</b>#EN128001</h6>
                                 </div>
                                 <div className="button">
                                     <div className="common-btn">
-                                        <a href="/">
+                                        <a href={data?.data?.data?.buyExternalLinks?.main} target="_blank">
                                             <button>Buy Now</button>
                                         </a>
                                     </div>
@@ -156,17 +179,23 @@ const ProductDetails = () => {
                             role="tabpanel"
                             aria-labelledby="nav-description-tab"
                             data-aos="fade-up"
-                        ><p><VscDebugBreakpointLog className='icon' />Fully Synthetic SAE 0W-16 Engine
-                            Oil is recommended for passenger
-                            cars, light trucks that are gasoline
-                            powered. Particularly suitable for
-                            engines to prevent low-speed
-                            pre-ignition issues.</p><p><VscDebugBreakpointLog className='icon' />
-                                With exceptionally high shear
-                                stability, this oil is made for todays
-                                Suitable for all gasoline powered
-                                cars with or without a TWC and
-                                turbo</p></div>
+                        >
+
+                            {
+                                data?.data?.data?.applicationInfo?.length > 0 ? (
+                                    data.data.data.applicationInfo.map((item) => (
+                                        <p className='flex'><VscDebugBreakpointLog className='icon' />
+                                            {item}
+                                        </p>
+
+                                    ))
+                                ) : (
+                                    <h6>Not Available</h6>
+                                )
+                            }
+
+                        </div>
+
                         <div
                             className="tab-pane fade"
                             id="nav-specifications"
@@ -174,19 +203,20 @@ const ProductDetails = () => {
                             aria-labelledby="nav-specifications-tab"
                             data-aos="fade-up"
                         >
-                            <p><VscDebugBreakpointLog className='icon' />Excellent engine cleanliness
-                                through advanced soot
-                                handling technology.</p>
-                            <p> <VscDebugBreakpointLog className='icon' />Superior protection against
-                                corrosive wear helps in
-                                sustaining engine durability.
-                            </p>
-                            <p><VscDebugBreakpointLog className='icon' /> Excellent TBN retention helps
-                                in countering harmful effects
-                                of corrosive exhaust gases
-                                and extending oil life</p>
-                            <p><VscDebugBreakpointLog className='icon' />All season gasoline engine oil</p>
+                            {
+                                data?.data?.data?.properties?.length > 0 ? (
+                                    data.data.data.properties.map((item) => (
+                                        <p className='flex'><VscDebugBreakpointLog className='icon' />
+                                            {item}
+                                        </p>
+
+                                    ))
+                                ) : (
+                                    <h6>Not Available</h6>
+                                )
+                            }
                         </div>
+
                         <div
                             className="tab-pane fade"
                             id="nav-product"
@@ -211,26 +241,17 @@ const ProductDetails = () => {
                                     <th>Packing</th>
                                     <th>Item No</th>
                                 </tr>
-                                <tr>
-                                    <td>1L Plastic</td>
-                                    <td>EN128001</td>
-                                </tr>
-                                <tr>
-                                    <td>4L Plastic</td>
-                                    <td>EN128004</td>
-                                </tr>
-                                <tr>
-                                    <td>5L Plastic</td>
-                                    <td>EN128005</td>
-                                </tr>
-                                <tr>
-                                    <td>20L Plastic</td>
-                                    <td>EN128020</td>
-                                </tr>
-                                <tr>
-                                    <td>208 Drum Plastic</td>
-                                    <td>EN128200</td>
-                                </tr>
+                                {
+                                    data?.data?.data?.packageInfo?.length > 0 ? (
+                                        data.data.data.packageInfo.map((item) => (
+                                            < tr >
+                                                <td>{item?.packing}</td>
+                                                <td>{item?.itemNo}</td>
+                                            </tr>
+
+                                        ))
+                                    ) : ""
+                                }
                             </table>
                         </div>
 

@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { TextInput, Textarea } from 'flowbite-react';
 import { Button, Modal } from 'flowbite-react';
 import { useAddBlogs, useEditBlogs } from '../../../query/useMutation';
+import { Plus, X } from 'lucide-react';
 
-const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch }) => {
+const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelectedBlog }) => {
     const [formData, setFormData] = useState({
         title: '',
-        description: '',
-        link: '',
         date: '',
         image: null,
     });
+    const [description, setDescription] = useState([''])
     const [error, setError] = useState('');
     const [selectedImageName, setSelectedImageName] = useState('');
 
@@ -19,10 +19,10 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch }) => {
             setFormData({
                 title: selectedBlog?.title || '',
                 description: selectedBlog?.description || '',
-                link: selectedBlog?.link || '',
                 date: selectedBlog?.date ? new Date(selectedBlog.date).toISOString().split('T')[0] : '',
                 image: selectedBlog?.image || null,
             });
+            setDescription(selectedBlog?.description || [''])
             setSelectedImageName(selectedBlog?.image ? 'Current Image' : '');
         }
     }, [selectedBlog]);
@@ -68,13 +68,14 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch }) => {
 
     const handleSubmit = () => {
         const titleTrimmed = formData.title.trim();
-        const descriptionTrimmed = formData.description.trim();
-        
+        const descriptionTrimmed = description.join('').trim();
+
         if (!titleTrimmed || titleTrimmed.length < 5 || titleTrimmed.length > 100) {
             setError('Title is required and should be between 5 and 100 characters.');
             return;
         }
-        if (!descriptionTrimmed || descriptionTrimmed.length < 20) {
+
+        if (!description || description.every((desc) => !desc.trim()) || descriptionTrimmed.length < 20) {
             setError('Description is required and should be at least 20 characters long.');
             return;
         }
@@ -85,13 +86,25 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch }) => {
             return;
         }
 
-        setError(''); 
+        setError('');
+
+
+        const payload = { ...formData, description };
+
 
         if (selectedBlog?._id) {
-            mutate({ data: formData, id: selectedBlog?._id, handleCloseFunction });
+            mutate({ data: payload, id: selectedBlog?._id, handleCloseFunction });
         } else {
-            addBlogsMutate({ data: formData, handleCloseFunction });
+            addBlogsMutate({ data: payload, handleCloseFunction });
         }
+    };
+
+
+    const handleDescriptionChange = (index, e) => {
+        // const { value } = e.target;
+        const value = [...description];
+        value[index] = e.target.value;
+        setDescription(value);
     };
 
     return (
@@ -99,10 +112,10 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch }) => {
             show={openModal}
             onClose={() => {
                 setOpenModal(false);
+                setDescription(['']);
+                setSelectedBlog('')
                 setFormData({
                     title: '',
-                    description: '',
-                    link: '',
                     date: '',
                     image: null,
                 });
@@ -123,17 +136,39 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch }) => {
                         {error.includes('Title') && <p className="text-sm text-red-500">{error}</p>}
                     </div>
                     <div>
-                        <Textarea
-                            name="description"
-                            value={formData.description}
-                            onChange={handleInputChange}
-                            placeholder="Enter blog description"
-                            label="Description"
-                            required
-                        />
-                        {error.includes('Description') && <p className="text-sm text-red-500">{error}</p>}
+                        {
+                            description.map((item, index) => (
+                                <div className='flex space-x-2 mb-2'>
+                                    <Textarea
+                                        name="description"
+                                        value={item}
+                                        onChange={(e) => handleDescriptionChange(index, e)}
+                                        placeholder="Enter blog description"
+                                        label="Description"
+                                        required
+                                    />
+                                    {error.includes('Description') && <p className="text-sm text-red-500">{error}</p>}
+                                    {description.length > 1 && (
+                                        <button
+                                            type="button"
+                                            onClick={() => setDescription(prev => prev.filter((_, i) => i !== index))}
+                                            className="p-2 text-red-500 hover:bg-red-50 rounded-md h-fit"
+                                        >
+                                            <X size={20} />
+                                        </button>
+                                    )}
+                                </div>
+                            ))
+                        }
+                        <button
+                            type="button"
+                            onClick={() => setDescription(prev => [...prev, ''])}
+                            className="inline-flex  items-center text-sm text-blue-500 hover:text-blue-600"
+                        >
+                            <Plus size={16} className="mr-1" /> Add More Description
+                        </button>
                     </div>
-                    <div>
+                    {/* <div>
                         <TextInput
                             name="link"
                             value={formData.link}
@@ -141,7 +176,7 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch }) => {
                             placeholder="Enter blog link (optional)"
                             label="Link"
                         />
-                    </div>
+                    </div> */}
                     <div>
                         <TextInput
                             type="date"
@@ -197,6 +232,7 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch }) => {
                     color="gray"
                     onClick={() => {
                         setOpenModal(false);
+                        setDescription(['']);
                         setFormData({
                             title: '',
                             description: '',
@@ -204,6 +240,7 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch }) => {
                             date: '',
                             image: null,
                         });
+                        setSelectedBlog('')
                     }}
                 >
                     Cancel

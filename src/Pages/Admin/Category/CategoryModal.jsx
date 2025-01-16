@@ -3,8 +3,9 @@ import { TextInput, Button, Modal } from 'flowbite-react';
 import { useAddCategory, useAddIndustry, useEditCategory, useEditIndustry } from '../../../query/useMutation';
 
 const CategoryModal = ({ openModal, setOpenModal, onSave, selectedValue, refetch }) => {
-    const [formData, setFormData] = useState({ name: '' });
+    const [formData, setFormData] = useState({ name: '', image: null });
     const [error, setError] = useState('');
+    const [selectedImageName, setSelectedImageName] = useState('');
 
     useEffect(() => {
         if (selectedValue?._id) {
@@ -21,8 +22,9 @@ const CategoryModal = ({ openModal, setOpenModal, onSave, selectedValue, refetch
     const { mutate: addCategoryMutate } = useAddCategory();
 
     const handleCloseFunction = () => {
-        setFormData({ name: '' });
+        setFormData({ name: '', image: null });
         setError('');
+        setSelectedImageName('');
         setOpenModal(false);
         refetch();
     };
@@ -40,10 +42,23 @@ const CategoryModal = ({ openModal, setOpenModal, onSave, selectedValue, refetch
         }
     };
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            if (['image/png', 'image/jpeg'].includes(file.type) && file.size <= 4 * 1024 * 1024) {
+                setFormData((prev) => ({ ...prev, image: file }));
+                setSelectedImageName(file.name);
+                setError('');
+            } else {
+                setError('Only PNG/JPG images under 4MB are allowed.');
+            }
+        }
+    };
+
     return (
         <Modal show={openModal} onClose={handleCloseFunction}>
             <Modal.Header className='p-3'>
-                {selectedValue ? 'Edit Industry' : 'Add Industry'}
+                {selectedValue ? 'Edit Category' : 'Add Category'}
             </Modal.Header>
             <Modal.Body>
                 <div className="space-y-4">
@@ -51,12 +66,37 @@ const CategoryModal = ({ openModal, setOpenModal, onSave, selectedValue, refetch
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
-                        placeholder="Enter Industry title"
+                        placeholder="Enter Category title"
                         label="Title"
                         required
                     />
                     {error && <div className="text-red-500 text-sm">{error}</div>}
                 </div>
+                {formData.image && typeof formData.image === 'string' && (
+                    <div className="my-2">
+                        <img
+                            src={formData.image}
+                            alt="Blog"
+                            className="w-24 h-24 object-cover rounded"
+                        />
+                        <button
+                            type="button"
+                            className="text-red-500 text-sm underline mt-2"
+                            onClick={handleRemoveImage}
+                        >
+                            Remove Image
+                        </button>
+                    </div>
+                )}
+                <input
+                    type="file"
+                    accept=".png,.jpg"
+                    onChange={handleImageChange}
+                    className="mt-1"
+                />
+                {selectedImageName && (
+                    <p className="text-sm text-gray-500 mt-1">Selected: {selectedImageName}</p>
+                )}
             </Modal.Body>
             <Modal.Footer>
                 <Button color="gray" onClick={handleSubmit}>

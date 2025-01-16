@@ -40,6 +40,7 @@ import CtaWagner from '../../assets/Resources/cta-wagner.png'
 import { gsap } from "gsap";
 import { TextPlugin } from 'gsap/TextPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Testimonials from '../../Components/Testimonials';
 // Register the TextPlugin
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
@@ -900,66 +901,7 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="testimonial-content">
-                        <div className="row">
-                            <div className="col-lg-6">
-                                <div className="item" data-aos="fade-up">
-                                    <div className="row">
-                                        <div className="col-lg-4">
-                                            <div className="image">
-                                                <img src={TestiImg1} alt="" />
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-8">
-                                            <div className="content">
-                                                <div className="review">
-                                                    <span>“</span>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                                </div>
-                                                <div className="review-profile">
-                                                    <div className="profile">
-                                                        <img src={TestiProfile} alt="" />
-                                                    </div>
-                                                    <div className="author">
-                                                        <h5>Jake Smith</h5>
-                                                        <p>CEO, Google</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-6">
-                                <div className="item" data-aos="fade-up">
-                                    <div className="row">
-                                        <div className="col-lg-4">
-                                            <div className="image">
-                                                <img src={TestiImg2} alt="" />
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-8">
-                                            <div className="content">
-                                                <div className="review">
-                                                    <span>“</span>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                                </div>
-                                                <div className="review-profile">
-                                                    <div className="profile">
-                                                        <img src={TestiProfile} alt="" />
-                                                    </div>
-                                                    <div className="author">
-                                                        <h5>Jake Smith</h5>
-                                                        <p>CEO, Google</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <Testimonials />
                 </div>
             </div >
 

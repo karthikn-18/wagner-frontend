@@ -148,7 +148,7 @@ const AddProductForm = () => {
             const productNameRegex = /^[a-zA-Z0-9\s]+$/;
             const priceRegex = /^\d+(\.\d{1,2})?$/;
             const descriptionRegex = /^[a-zA-Z0-9\s.,;:'"!?()-_&]*$/;
-            const availableSizeRegex = /^[a-zA-Z0-9 ]+$/;
+            const availableSizeRegex = /^[a-zA-Z0-9\s, ]+$/;
             const urlRegex = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[^\s]*)?$/;
             const applicationInfoRegex = /^[a-zA-Z0-9\s]+$/;
             const propertiesRegex = /^[a-zA-Z0-9\s]+$/;
@@ -191,20 +191,20 @@ const AddProductForm = () => {
             }
 
 
-            for (let info of applicationInfo) {
-                if (!applicationInfoRegex.test(info)) {
-                    toast.error('Application Info contains invalid characters.');
-                    return;
-                }
-            }
+            // for (let info of applicationInfo) {
+            //     if (!applicationInfoRegex.test(info)) {
+            //         toast.error('Application Info contains invalid characters.');
+            //         return;
+            //     }
+            // }
 
 
-            for (let property of properties) {
-                if (!propertiesRegex.test(property)) {
-                    toast.error('Property contains invalid characters.');
-                    return;
-                }
-            }
+            // for (let property of properties) {
+            //     if (!propertiesRegex.test(property)) {
+            //         toast.error('Property contains invalid characters.');
+            //         return;
+            //     }
+            // }
             if (images?.length === 0) {
                 toast.error('Please add at least one image!');
                 return;

@@ -1,11 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { MdKeyboardBackspace } from "react-icons/md";
 import BlogImage from "../../assets/Resources/blog-image.jpg"
 import BlogOverviewImage from '../../assets/Resources/blog-overview.jpg'
 import { CgCalendarDates } from "react-icons/cg";
 import { PiShareFat } from "react-icons/pi";
+import { useBlogsByIdGetQuery, useBlogsGetQuery } from '../../query/useQuery';
+import { Link, useLocation, useParams } from 'react-router-dom';
+import { format } from 'date-fns';
 
 const BlogOverview = () => {
+    const params = useParams();
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [params]);
+    console.log(params?.id, "params")
+    const { data, refetch } = useBlogsGetQuery();
+    const { data: blog } = useBlogsByIdGetQuery(params?.id);
+
+    let recentBlogs = data?.data?.data?.filter((item) => item?._id !== params?.id);
+    console.log(blog, "blog")
+
     return (
         <>
             <div className="blog-overview space ">
@@ -24,17 +38,24 @@ const BlogOverview = () => {
                                 <div className="main-contents">
                                     <div className="date-share" data-aos="fade-down">
                                         <div className="date item">
-                                            <h5><CgCalendarDates className='icon' />19 Dec 2024</h5>
+                                            {
+                                                blog?.data?.data?.date &&
+                                                <h5><CgCalendarDates className='icon' />{format(new Date(blog?.data?.data?.date), 'dd MMM yyyy')}</h5>
+                                            }
                                         </div>
                                         <div className="share item">
                                             <h5><PiShareFat className='icon' />Share</h5>
                                         </div>
                                     </div>
                                     <div className="blog-content" data-aos="fade-down">
-                                        <h1>Top 10 Ipsum is simply dummy text of the printing and typesetting industry.</h1>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p><br />
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p><br />
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                        <h1>{blog?.data?.data?.title}</h1>
+                                        {
+                                            blog?.data?.data?.description.map((item) => (
+                                                <>
+                                                    <p>{item}</p><br />
+                                                </>
+                                            ))
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -47,98 +68,38 @@ const BlogOverview = () => {
                             </div>
                             <div className="blog-items">
                                 <div className="row">
-                                    <div className="col-lg-3">
-                                        <div data-aos="fade-up">
-                                            <div className="item">
-                                                <div className="image">
-                                                    <img src={BlogImage} alt="" />
-                                                </div>
-                                                <div className="blog-content">
-                                                    <div className="date-share">
-                                                        <div className="date item">
-                                                            <h5><CgCalendarDates className='icon' />19 Dec 2024</h5>
-                                                        </div>
-                                                        <div className="share item">
-                                                            <h5><PiShareFat className='icon' />Share</h5>
+                                    {
+                                        recentBlogs?.map((item, index) => (
+                                            <div className="col-lg-3" key={index}>
+                                                <Link to={`/blog-overview/${item?._id}`} scrollToTop className='text-decoration-none text-black'>
+                                                    <div data-aos="fade-up">
+                                                        <div className="item">
+                                                            <div className="image">
+                                                                <img src={BlogImage} alt="" />
+                                                            </div>
+                                                            <div className="blog-content">
+                                                                <div className="date-share">
+                                                                    <div className="date item">
+                                                                        {
+                                                                            item?.date &&
+                                                                            <h5><CgCalendarDates className='icon' />{format(new Date(item?.date), 'dd MMM yyyy')}</h5>
+                                                                        }
+                                                                    </div>
+                                                                    <div className="share item">
+                                                                        <h5><PiShareFat className='icon' />Share</h5>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="blog-content">
+                                                                    <h1>{item?.title}</h1>
+                                                                    <p>{item?.description[0].slice(0, 150)}</p>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div className="blog-content">
-                                                        <h1>Top 10 Ipsum is simply dummy text of the printing and typesetting industry.</h1>
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum has been the industry's standard.</p>
-                                                    </div>
-                                                </div>
+                                                </Link>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-3">
-                                        <div data-aos="fade-up" data-aos-delay="200">
-                                            <div className="item">
-                                                <div className="image">
-                                                    <img src={BlogImage} alt="" />
-                                                </div>
-                                                <div className="blog-content">
-                                                    <div className="date-share">
-                                                        <div className="date item">
-                                                            <h5><CgCalendarDates className='icon' />19 Dec 2024</h5>
-                                                        </div>
-                                                        <div className="share item">
-                                                            <h5><PiShareFat className='icon' />Share</h5>
-                                                        </div>
-                                                    </div>
-                                                    <div className="blog-content">
-                                                        <h1>Top 10 Ipsum is simply dummy text of the printing and typesetting industry.</h1>
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum has been the industry's standard.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-3">
-                                        <div data-aos="fade-up" data-aos-delay="400">
-                                            <div className="item">
-                                                <div className="image">
-                                                    <img src={BlogImage} alt="" />
-                                                </div>
-                                                <div className="blog-content">
-                                                    <div className="date-share">
-                                                        <div className="date item">
-                                                            <h5><CgCalendarDates className='icon' />19 Dec 2024</h5>
-                                                        </div>
-                                                        <div className="share item">
-                                                            <h5><PiShareFat className='icon' />Share</h5>
-                                                        </div>
-                                                    </div>
-                                                    <div className="blog-content">
-                                                        <h1>Top 10 Ipsum is simply dummy text of the printing and typesetting industry.</h1>
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum has been the industry's standard.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-3">
-                                        <div data-aos="fade-up" data-aos-delay="600">
-                                            <div className="item">
-                                                <div className="image">
-                                                    <img src={BlogImage} alt="" />
-                                                </div>
-                                                <div className="blog-content">
-                                                    <div className="date-share">
-                                                        <div className="date item">
-                                                            <h5><CgCalendarDates className='icon' />19 Dec 2024</h5>
-                                                        </div>
-                                                        <div className="share item">
-                                                            <h5><PiShareFat className='icon' />Share</h5>
-                                                        </div>
-                                                    </div>
-                                                    <div className="blog-content">
-                                                        <h1>Top 10 Ipsum is simply dummy text of the printing and typesetting industry.</h1>
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum has been the industry's standard.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        ))
+                                    }
                                 </div>
                             </div>
                         </div>

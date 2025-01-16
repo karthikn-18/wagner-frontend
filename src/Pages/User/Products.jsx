@@ -3,33 +3,46 @@ import ProductSlider1 from '../../assets/Resources/product-page-1.png'
 import { IoIosArrowForward } from "react-icons/io";
 import { TbFileDownload } from "react-icons/tb";
 import { IoIosArrowDown } from "react-icons/io";
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import ProductImage from '../../assets/Resources/oil-product-1.png'
 import { IoSearchOutline } from "react-icons/io5";
+import { useApplicationGetQuery, useCategoryGetQuery, useIndustriesGetQuery, useProductGetQuery } from '../../query/useQuery';
 
 const Products = () => {
 
+    const { data: categories } = useCategoryGetQuery()
+    const { data: applications } = useApplicationGetQuery()
+    const { data: industries } = useIndustriesGetQuery()
+    const { data: products } = useProductGetQuery()
+
+    console.log(products, "categories, applications, industries")
+
     // Initialize state to have both 'applications' and 'industries' open by default
     const [activeSection, setActiveSection] = useState(['applications', 'industries']);
+    const [checkedState, setCheckedState] = useState({});
+
+    const navigate = useNavigate();
+
+    console.log(checkedState, "checkedState")
 
     // Track the checked state of each checkbox individually using an object
-    const [checkedState, setCheckedState] = useState({
-        cars: false,
-        motorcycle: false,
-        classic: false,
-        offRoad: false,
-        tuning: false,
-        truck: false,
-        boat: false,
-        ship: false,
-        aviation: false,
-        agriculture: false,
-        construction: false,
-        windTurbines: false,
-        shipping: false,
-        cableCars: false,
-        heatPowerPlants: false,
-    });
+    // const [checkedState, setCheckedState] = useState({
+    //     cars: false,
+    //     motorcycle: false,
+    //     classic: false,
+    //     offRoad: false,
+    //     tuning: false,
+    //     truck: false,
+    //     boat: false,
+    //     ship: false,
+    //     aviation: false,
+    //     agriculture: false,
+    //     construction: false,
+    //     windTurbines: false,
+    //     shipping: false,
+    //     cableCars: false,
+    //     heatPowerPlants: false,
+    // });
 
     // Function to toggle the section
     const toggleSection = (section) => {
@@ -43,13 +56,15 @@ const Products = () => {
     };
 
     // Handle individual checkbox state change
-    const handleChange = (event) => {
-        const { name, checked } = event.target;
+    const handleChange = (event, name) => {
+        const { checked } = event.target;
+
         setCheckedState((prevState) => ({
             ...prevState,
             [name]: checked,
         }));
     };
+
 
 
     return (
@@ -71,126 +86,18 @@ const Products = () => {
                                 <h6>All</h6>
                             </div>
                         </div>
-                        <div data-aos="fade-down">
-                            <div className="item">
-                                <div className="image">
-                                    <img src={ProductSlider1} alt="" />
+                        {
+                            categories?.data?.data?.map((item, index) => (
+                                <div data-aos="fade-down">
+                                    <div className="item">
+                                        <div className="image">
+                                            <img src={ProductSlider1} alt="" />
+                                        </div>
+                                        <h6>{item.name}</h6>
+                                    </div>
                                 </div>
-                                <h6>Automotive Oils</h6>
-                            </div>
-                        </div>
-                        <div data-aos="fade-down">
-                            <div className="item">
-                                <div className="image">
-                                    <img src={ProductSlider1} alt="" />
-                                </div>
-                                <h6>Automotive Oils</h6>
-                            </div>
-                        </div>
-                        <div data-aos="fade-down">
-                            <div className="item">
-                                <div className="image">
-                                    <img src={ProductSlider1} alt="" />
-                                </div>
-                                <h6>Automotive Oils</h6>
-                            </div>
-                        </div>
-                        <div data-aos="fade-down">
-                            <div className="item">
-                                <div className="image">
-                                    <img src={ProductSlider1} alt="" />
-                                </div>
-                                <h6>Automotive Oils</h6>
-                            </div>
-                        </div>
-                        <div data-aos="fade-down">
-                            <div className="item">
-                                <div className="image">
-                                    <img src={ProductSlider1} alt="" />
-                                </div>
-                                <h6>Automotive Oils</h6>
-                            </div>
-                        </div>
-                        <div data-aos="fade-down">
-                            <div className="item">
-                                <div className="image">
-                                    <img src={ProductSlider1} alt="" />
-                                </div>
-                                <h6>Automotive Oils</h6>
-                            </div>
-                        </div>
-                        <div data-aos="fade-down">
-                            <div className="item">
-                                <div className="image">
-                                    <img src={ProductSlider1} alt="" />
-                                </div>
-                                <h6>Automotive Oils</h6>
-                            </div>
-                        </div>
-                        <div data-aos="fade-down">
-                            <div className="item">
-                                <div className="image">
-                                    <img src={ProductSlider1} alt="" />
-                                </div>
-                                <h6>Automotive Oils</h6>
-                            </div>
-                        </div>
-                        <div data-aos="fade-down">
-                            <div className="item">
-                                <div className="image">
-                                    <img src={ProductSlider1} alt="" />
-                                </div>
-                                <h6>Automotive Oils</h6>
-                            </div>
-                        </div>
-                        <div data-aos="fade-down">
-                            <div className="item">
-                                <div className="image">
-                                    <img src={ProductSlider1} alt="" />
-                                </div>
-                                <h6>Automotive Oils</h6>
-                            </div>
-                        </div>
-                        <div data-aos="fade-down">
-                            <div className="item">
-                                <div className="image">
-                                    <img src={ProductSlider1} alt="" />
-                                </div>
-                                <h6>Automotive Oils</h6>
-                            </div>
-                        </div>
-                        <div data-aos="fade-down">
-                            <div className="item">
-                                <div className="image">
-                                    <img src={ProductSlider1} alt="" />
-                                </div>
-                                <h6>Automotive Oils</h6>
-                            </div>
-                        </div>
-                        <div data-aos="fade-down">
-                            <div className="item">
-                                <div className="image">
-                                    <img src={ProductSlider1} alt="" />
-                                </div>
-                                <h6>Automotive Oils</h6>
-                            </div>
-                        </div>
-                        <div data-aos="fade-down">
-                            <div className="item">
-                                <div className="image">
-                                    <img src={ProductSlider1} alt="" />
-                                </div>
-                                <h6>Automotive Oils</h6>
-                            </div>
-                        </div>
-                        <div data-aos="fade-down">
-                            <div className="item">
-                                <div className="image">
-                                    <img src={ProductSlider1} alt="" />
-                                </div>
-                                <h6>Automotive Oils</h6>
-                            </div>
-                        </div>
+                            ))
+                        }
                     </div>
 
                     {/* product section */}
@@ -212,96 +119,21 @@ const Products = () => {
                                                     </NavLink>
                                                     {activeSection.includes('applications') && (
                                                         <div className="submenu">
-                                                            <div>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    id="vehicle1"
-                                                                    name="cars"
-                                                                    checked={checkedState.cars}
-                                                                    onChange={handleChange}
-                                                                />
-                                                                <label htmlFor="vehicle1">Cars</label>
-                                                            </div>
-                                                            <div>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    id="vehicle2"
-                                                                    name="motorcycle"
-                                                                    checked={checkedState.motorcycle}
-                                                                    onChange={handleChange}
-                                                                />
-                                                                <label htmlFor="vehicle2">Motorcycle</label>
-                                                            </div>
-                                                            <div>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    id="vehicle3"
-                                                                    name="classic"
-                                                                    checked={checkedState.classic}
-                                                                    onChange={handleChange}
-                                                                />
-                                                                <label htmlFor="vehicle3">Classic</label>
-                                                            </div>
-                                                            <div>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    id="vehicle4"
-                                                                    name="offRoad"
-                                                                    checked={checkedState.offRoad}
-                                                                    onChange={handleChange}
-                                                                />
-                                                                <label htmlFor="vehicle4">Off-road</label>
-                                                            </div>
-                                                            <div>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    id="vehicle5"
-                                                                    name="tuning"
-                                                                    checked={checkedState.tuning}
-                                                                    onChange={handleChange}
-                                                                />
-                                                                <label htmlFor="vehicle5">Tuning</label>
-                                                            </div>
-                                                            <div>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    id="vehicle6"
-                                                                    name="truck"
-                                                                    checked={checkedState.truck}
-                                                                    onChange={handleChange}
-                                                                />
-                                                                <label htmlFor="vehicle6">Truck</label>
-                                                            </div>
-                                                            <div>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    id="vehicle7"
-                                                                    name="boat"
-                                                                    checked={checkedState.boat}
-                                                                    onChange={handleChange}
-                                                                />
-                                                                <label htmlFor="vehicle7">Boat</label>
-                                                            </div>
-                                                            <div>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    id="vehicle8"
-                                                                    name="ship"
-                                                                    checked={checkedState.ship}
-                                                                    onChange={handleChange}
-                                                                />
-                                                                <label htmlFor="vehicle8">Ship</label>
-                                                            </div>
-                                                            <div>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    id="vehicle9"
-                                                                    name="aviation"
-                                                                    checked={checkedState.aviation}
-                                                                    onChange={handleChange}
-                                                                />
-                                                                <label htmlFor="vehicle9">Aviation</label>
-                                                            </div>
+                                                            {
+                                                                applications?.data?.data?.map((item, index) => (
+                                                                    <div key={index}>
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            id={`checkbox-${index}`}
+                                                                            name={item.name}
+                                                                            checked={checkedState[item.name] || false}
+                                                                            onChange={(e) => handleChange(e, item.name)}
+                                                                        />
+                                                                        <label htmlFor={`checkbox-${index}`}>{item.name}</label>
+                                                                    </div>
+                                                                ))
+                                                            }
+
                                                         </div>
                                                     )}
                                                 </li>
@@ -317,66 +149,21 @@ const Products = () => {
                                                     </NavLink>
                                                     {activeSection.includes('industries') && (
                                                         <div className="submenu">
-                                                            <div>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    id="industry1"
-                                                                    name="agriculture"
-                                                                    checked={checkedState.agriculture}
-                                                                    onChange={handleChange}
-                                                                />
-                                                                <label htmlFor="industry1">Agriculture & Forestry</label>
-                                                            </div>
-                                                            <div>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    id="industry2"
-                                                                    name="construction"
-                                                                    checked={checkedState.construction}
-                                                                    onChange={handleChange}
-                                                                />
-                                                                <label htmlFor="industry2">Construction</label>
-                                                            </div>
-                                                            <div>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    id="industry3"
-                                                                    name="windTurbines"
-                                                                    checked={checkedState.windTurbines}
-                                                                    onChange={handleChange}
-                                                                />
-                                                                <label htmlFor="industry3">Wind Turbines</label>
-                                                            </div>
-                                                            <div>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    id="industry4"
-                                                                    name="shipping"
-                                                                    checked={checkedState.shipping}
-                                                                    onChange={handleChange}
-                                                                />
-                                                                <label htmlFor="industry4">Shipping</label>
-                                                            </div>
-                                                            <div>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    id="industry5"
-                                                                    name="cableCars"
-                                                                    checked={checkedState.cableCars}
-                                                                    onChange={handleChange}
-                                                                />
-                                                                <label htmlFor="industry5">Cable Cars & Lifts</label>
-                                                            </div>
-                                                            <div>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    id="industry6"
-                                                                    name="heatPowerPlants"
-                                                                    checked={checkedState.heatPowerPlants}
-                                                                    onChange={handleChange}
-                                                                />
-                                                                <label htmlFor="industry6">Combined Heat & Power Plants</label>
-                                                            </div>
+                                                            {
+                                                                industries?.data?.data?.map((item, index) => (
+                                                                    <div key={index}>
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            id={`industry-${index}`}
+                                                                            name={item.name}
+                                                                            checked={checkedState[item.name] || false}
+                                                                            onChange={(e) => handleChange(e, item.name)}
+                                                                        />
+                                                                        <label htmlFor={`industry-${index}`}>{item.name}</label>
+                                                                    </div>
+                                                                ))
+                                                            }
+
                                                         </div>
                                                     )}
                                                 </li>
@@ -395,258 +182,36 @@ const Products = () => {
                                                 </div>
                                             </div>
                                             <div className="row">
-                                                <div className="col-lg-3">
-                                                    <div data-aos="fade-up">
-                                                        <div className="box">
-                                                            <div className="product-image">
-                                                                <img src={ProductImage} alt="" />
-                                                            </div>
-                                                            <div className="product-detail">
-                                                                <h5>Wagner VG 150 Industrial Oil</h5>
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                            </div>
-                                                            <div className="product-btns">
-                                                                <div className="common-border-btn">
-                                                                    <button>View Details</button>
-                                                                </div>
-                                                                <div className="common-btn">
-                                                                    <button>Buy Now</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <div data-aos="fade-up" data-aos-delay="200">
-                                                        <div className="box">
-                                                            <div className="product-image">
-                                                                <img src={ProductImage} alt="" />
-                                                            </div>
-                                                            <div className="product-detail">
-                                                                <h5>Wagner VG 150 Industrial Oil</h5>
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                            </div>
-                                                            <div className="product-btns">
-                                                                <div className="common-border-btn">
-                                                                    <button>View Details</button>
-                                                                </div>
-                                                                <div className="common-btn">
-                                                                    <button>Buy Now</button>
+                                                {
+                                                    products?.data?.data?.map((item, index) => (
+                                                        <div className="col-lg-3">
+                                                            <div data-aos="fade-up">
+                                                                <div className="box">
+                                                                    <div className="product-image">
+                                                                        <img src={ProductImage} alt="" />
+                                                                    </div>
+                                                                    <div className="product-detail">
+                                                                        <h5>{item?.name}</h5>
+                                                                        <p>{item?.description?.slice(0, 100)}</p>
+                                                                    </div>
+                                                                    <div className="product-btns">
+                                                                        <div className="common-border-btn">
+                                                                            <button onClick={() => navigate(`/product-detail/${item?._id}`)}>View Details</button>
+                                                                        </div>
+                                                                        <div className="common-btn">
+                                                                            <button
+                                                                                onClick={() => window.open(item?.buyExternalLinks?.main, "_blank", "noopener,noreferrer")}
+                                                                                className="text-decoration-none"
+                                                                            >
+                                                                                Buy Now
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <div data-aos="fade-up" data-aos-delay="400">
-                                                        <div className="box">
-                                                            <div className="product-image">
-                                                                <img src={ProductImage} alt="" />
-                                                            </div>
-                                                            <div className="product-detail">
-                                                                <h5>Wagner VG 150 Industrial Oil</h5>
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                            </div>
-                                                            <div className="product-btns">
-                                                                <div className="common-border-btn">
-                                                                    <button>View Details</button>
-                                                                </div>
-                                                                <div className="common-btn">
-                                                                    <button>Buy Now</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <div data-aos="fade-up" data-aos-delay="600">
-                                                        <div className="box">
-                                                            <div className="product-image">
-                                                                <img src={ProductImage} alt="" />
-                                                            </div>
-                                                            <div className="product-detail">
-                                                                <h5>Wagner VG 150 Industrial Oil</h5>
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                            </div>
-                                                            <div className="product-btns">
-                                                                <div className="common-border-btn">
-                                                                    <button>View Details</button>
-                                                                </div>
-                                                                <div className="common-btn">
-                                                                    <button>Buy Now</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <div data-aos="fade-up">
-                                                        <div className="box">
-                                                            <div className="product-image">
-                                                                <img src={ProductImage} alt="" />
-                                                            </div>
-                                                            <div className="product-detail">
-                                                                <h5>Wagner VG 150 Industrial Oil</h5>
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                            </div>
-                                                            <div className="product-btns">
-                                                                <div className="common-border-btn">
-                                                                    <button>View Details</button>
-                                                                </div>
-                                                                <div className="common-btn">
-                                                                    <button>Buy Now</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <div data-aos="fade-up" data-aos-delay="200">
-                                                        <div className="box">
-                                                            <div className="product-image">
-                                                                <img src={ProductImage} alt="" />
-                                                            </div>
-                                                            <div className="product-detail">
-                                                                <h5>Wagner VG 150 Industrial Oil</h5>
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                            </div>
-                                                            <div className="product-btns">
-                                                                <div className="common-border-btn">
-                                                                    <button>View Details</button>
-                                                                </div>
-                                                                <div className="common-btn">
-                                                                    <button>Buy Now</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <div data-aos="fade-up" data-aos-delay="400">
-                                                        <div className="box">
-                                                            <div className="product-image">
-                                                                <img src={ProductImage} alt="" />
-                                                            </div>
-                                                            <div className="product-detail">
-                                                                <h5>Wagner VG 150 Industrial Oil</h5>
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                            </div>
-                                                            <div className="product-btns">
-                                                                <div className="common-border-btn">
-                                                                    <button>View Details</button>
-                                                                </div>
-                                                                <div className="common-btn">
-                                                                    <button>Buy Now</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <div data-aos="fade-up" data-aos-delay="600">
-                                                        <div className="box">
-                                                            <div className="product-image">
-                                                                <img src={ProductImage} alt="" />
-                                                            </div>
-                                                            <div className="product-detail">
-                                                                <h5>Wagner VG 150 Industrial Oil</h5>
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                            </div>
-                                                            <div className="product-btns">
-                                                                <div className="common-border-btn">
-                                                                    <button>View Details</button>
-                                                                </div>
-                                                                <div className="common-btn">
-                                                                    <button>Buy Now</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <div data-aos="fade-up">
-                                                        <div className="box">
-                                                            <div className="product-image">
-                                                                <img src={ProductImage} alt="" />
-                                                            </div>
-                                                            <div className="product-detail">
-                                                                <h5>Wagner VG 150 Industrial Oil</h5>
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                            </div>
-                                                            <div className="product-btns">
-                                                                <div className="common-border-btn">
-                                                                    <button>View Details</button>
-                                                                </div>
-                                                                <div className="common-btn">
-                                                                    <button>Buy Now</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <div data-aos="fade-up" data-aos-delay="200">
-                                                        <div className="box">
-                                                            <div className="product-image">
-                                                                <img src={ProductImage} alt="" />
-                                                            </div>
-                                                            <div className="product-detail">
-                                                                <h5>Wagner VG 150 Industrial Oil</h5>
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                            </div>
-                                                            <div className="product-btns">
-                                                                <div className="common-border-btn">
-                                                                    <button>View Details</button>
-                                                                </div>
-                                                                <div className="common-btn">
-                                                                    <button>Buy Now</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <div data-aos="fade-up" data-aos-delay="400">
-                                                        <div className="box">
-                                                            <div className="product-image">
-                                                                <img src={ProductImage} alt="" />
-                                                            </div>
-                                                            <div className="product-detail">
-                                                                <h5>Wagner VG 150 Industrial Oil</h5>
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                            </div>
-                                                            <div className="product-btns">
-                                                                <div className="common-border-btn">
-                                                                    <button>View Details</button>
-                                                                </div>
-                                                                <div className="common-btn">
-                                                                    <button>Buy Now</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <div data-aos="fade-up" data-aos-delay="600">
-                                                        <div className="box">
-                                                            <div className="product-image">
-                                                                <img src={ProductImage} alt="" />
-                                                            </div>
-                                                            <div className="product-detail">
-                                                                <h5>Wagner VG 150 Industrial Oil</h5>
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                            </div>
-                                                            <div className="product-btns">
-                                                                <div className="common-border-btn">
-                                                                    <button>View Details</button>
-                                                                </div>
-                                                                <div className="common-btn">
-                                                                    <button>Buy Now</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                    ))
+                                                }
                                             </div>
                                         </div>
                                     </div>

@@ -60,7 +60,7 @@ const Category = () => {
     ]
     return (
         <div className="p-4 max-w-[1280px] md:m-auto">
-            <TableComponent tableTitle="Industries" data={data} dateFiterOption={false} exportOption={false} CreateOption={'create Category'} handleCreateClick={() => setOpenModal(true)} columns={columns} />
+            <TableComponent tableTitle="Category" data={data} dateFiterOption={false} exportOption={false} CreateOption={'create Category'} handleCreateClick={() => setOpenModal(true)} columns={columns} />
 
             <CategoryModal openModal={openModal} setOpenModal={setOpenModal} onSave={handleModalClose} selectedValue={seletedCategory} refetch={refetch} />
             {/* <BlogDelete openModal={deleteModal} setOpenModal={setDeleteModal} selectedBlog={selectedBlog} refetch={refetch} /> */}

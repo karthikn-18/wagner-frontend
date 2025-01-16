@@ -49,7 +49,7 @@ export const useEditBlogs = () => {
                 handleCloseFunction()
 
             } else {
-                toast.error(data?.data?.messag)
+                toast.error(data?.data?.message)
             }
         },
         onError: (data) => {
@@ -75,7 +75,7 @@ export const useDeleteBlogs = () => {
                 handleCloseFunction()
 
             } else {
-                toast.error(data?.data?.messag)
+                toast.error(data?.data?.message)
             }
         },
         onError: (data) => {
@@ -95,18 +95,18 @@ export const useAddBlogs = () => {
         enabled: token.length > 0,
 
         onSuccess: (data, { handleCloseFunction }) => {
-            console.log(data)
+            console.log(data, "success")
             if (data?.status === 200 || data?.status === 201) {
                 toast.success(data?.data?.message)
                 handleCloseFunction()
-
             } else {
-                toast.error(data?.data?.messag)
+
+                toast.error(data?.data?.message)
             }
         },
         onError: (data) => {
+            console.log(data, "error")
             toast.error(data?.data?.message)
-            //console.log(data)
         }
     })
 }
@@ -129,7 +129,7 @@ export const useEditTestimonials = () => {
                 handleCloseFunction()
 
             } else {
-                toast.error(data?.data?.messag)
+                toast.error(data?.data?.message)
             }
         },
         onError: (data) => {
@@ -155,7 +155,7 @@ export const useDeleteTestimonials = () => {
                 handleCloseFunction()
 
             } else {
-                toast.error(data?.data?.messag)
+                toast.error(data?.data?.message)
             }
         },
         onError: (data) => {
@@ -181,7 +181,7 @@ export const useAddTestimonials = () => {
                 handleCloseFunction()
 
             } else {
-                toast.error(data?.data?.messag)
+                toast.error(data?.data?.message)
             }
         },
         onError: (data) => {
@@ -207,7 +207,7 @@ export const useAddContact = () => {
                 handleCloseFunction()
 
             } else {
-                toast.error(data?.data?.messag)
+                toast.error(data?.data?.message)
             }
         },
         onError: (data) => {
@@ -424,7 +424,7 @@ export const useAddCategory = () => {
                 toast.success(data?.data?.message)
                 handleCloseFunction()
             } else {
-                toast.error(data?.message)
+                toast.error(data?.data?.message)
             }
         },
         onError: (data) => {
@@ -437,6 +437,7 @@ export const useAddCategory = () => {
 // Product
 
 export const useEditProduct = () => {
+    const navigate = useNavigate();
     return useMutation({
         mutationFn: async ({ data, id }) => {
             console.log(data, id);
@@ -445,13 +446,14 @@ export const useEditProduct = () => {
         mutationKey: ['Edit Product'],
         enabled: token.length > 0,
 
-        onSuccess: (data, { handleCloseFunction }) => {
+        onSuccess: (data) => {
             console.log(data)
-            if (data?.status === 200) {
+            if (data?.status === 200 || data?.status === 201) {
                 toast.success(data?.data?.message)
-                handleCloseFunction()
+                // handleCloseFunction()
+                navigate('/admin/products');
             } else {
-                toast.error(data?.message)
+                toast.error(data?.data?.message)
             }
         },
         onError: (data) => {
@@ -468,13 +470,13 @@ export const useDeleteProduct = () => {
         mutationKey: ['Delete Product'],
         enabled: token.length > 0,
 
-        onSuccess: (data,{ handleCloseFunction }) => {
+        onSuccess: (data, { handleCloseFunction }) => {
             console.log(data)
-            if (data?.status === 200) {
+            if (data?.status === 200 || data?.status === 201) {
                 toast.success(data?.data?.message)
                 handleCloseFunction()
             } else {
-                toast.error(data?.message)
+                toast.error(data?.data?.message)
             }
         },
         onError: (data) => {
@@ -483,7 +485,7 @@ export const useDeleteProduct = () => {
     })
 }
 
-export const useAddProduct = (token) => {
+export const useAddProduct = () => {
     const navigate = useNavigate();
 
     return useMutation({
@@ -498,16 +500,16 @@ export const useAddProduct = (token) => {
             console.log(data);
             if (data?.status === 200 || data?.status === 201) {
                 toast.success(data?.data?.message);
-                console.log(data,"response201");
+                console.log(data, "response201");
                 navigate('/admin/products');
             } else {
-                toast.error(data?.data?.message || 'Something went wrong');
+                toast.error(data?.data?.message)
             }
         },
         onError: (error) => {
             // Check if the error structure contains a message and display it
             const errorMessage = error?.data?.message || 'An error occurred';
-            toast.error(errorMessage);
+            toast.error(data?.data?.message)
         },
     });
 };

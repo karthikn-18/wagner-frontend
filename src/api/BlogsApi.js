@@ -7,6 +7,10 @@ export const getBlogsApi = async () => {
     const response = await senderRequest("GET", `${REACT_APP_BACKEND_URL}/blogs`);
     return response
 }
+export const getBlogsByIdApi = async (id) => {
+    const response = await senderRequest("GET", `${REACT_APP_BACKEND_URL}/blogs/${id}`);
+    return response
+}
 
 export const editBlogsApi = async (data, id, token) => {
     console.log(data, id);

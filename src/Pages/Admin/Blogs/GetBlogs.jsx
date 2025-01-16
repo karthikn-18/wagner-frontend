@@ -37,7 +37,13 @@ const GetBlogs = () => {
 
     const columns = [
         { field: 'title', headerName: 'Title', sortable: true, filter: true },
-        { field: 'description', headerName: 'Description', sortable: true, filter: true },
+        {
+            field: 'description', headerName: 'Description',
+            cellRenderer: (params) => (
+                params.value ? <div className="max-w-md truncate" title={params.value}>{params.value[0]}</div> : 'No Description'
+            ),
+            sortable: true, filter: true
+        },
         {
             field: 'image',
             headerName: 'Image',
@@ -45,22 +51,7 @@ const GetBlogs = () => {
                 params.value ? <img src={params.value} alt="Blog Image" style={{ width: 50, height: 50 }} /> : 'No Image'
             )
         },
-        {
-            field: 'link',
-            headerName: 'Link',
-            cellRenderer: (params) => (
-                params.value ? (
-                    <a
-                        href={params.value}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-500 underline"
-                    >
-                        Visit
-                    </a>
-                ) : 'No Link'
-            )
-        },
+
         { field: 'date', headerName: 'Date', sortable: true, filter: true },
         {
             headerName: 'Update',
@@ -91,7 +82,7 @@ const GetBlogs = () => {
         <div className="p-4 max-w-[1280px] md:m-auto">
             <TableComponent tableTitle="Blogs" data={data} dateFiterOption={true} exportOption={false} CreateOption={'create blog'} handleCreateClick={() => setOpenModal(true)} columns={columns} />
 
-            <BlogModal openModal={openModal} setOpenModal={setOpenModal} onSave={handleModalClose} selectedBlog={selectedBlog} refetch={refetch} />
+            <BlogModal openModal={openModal} setOpenModal={setOpenModal} onSave={handleModalClose} selectedBlog={selectedBlog} refetch={refetch} setSelectedBlog={setSelectedBlog} />
 
             <ModalComponent modalName="Blog" openModal={deleteModal} setOpenModal={setDeleteModal} refetch={refetch} selectedValue={selectedBlog} mutate={mutate} />
             {/* <BlogDelete openModal={deleteModal} setOpenModal={setDeleteModal} selectedBlog={selectedBlog} refetch={refetch} /> */}

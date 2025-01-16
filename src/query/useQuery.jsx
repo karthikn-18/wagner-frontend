@@ -1,7 +1,7 @@
 
 
 import { useQuery } from '@tanstack/react-query';
-import { getBlogsApi } from '../api/BlogsApi';
+import { getBlogsApi, getBlogsByIdApi } from '../api/BlogsApi';
 import { getTestimonialsApi } from '../api/TestimonialsApi';
 import { getContactApi } from '../api/ContactApi';
 import { useUserStore } from '../store';
@@ -18,6 +18,16 @@ export const useBlogsGetQuery = () => {
         queryKey: ['get-Blogs', token],
         queryFn: async () => {
             return getBlogsApi(token);
+        },
+        staleTime: 60 * 1000,
+    })
+}
+
+export const useBlogsByIdGetQuery = (id) => {
+    return useQuery({
+        queryKey: ['get-Blogs', id],
+        queryFn: async () => {
+            return getBlogsByIdApi(id);
         },
         staleTime: 60 * 1000,
     })
