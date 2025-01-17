@@ -7,7 +7,7 @@ import { useDeleteProduct } from '../../../query/useMutation';
 
 
 const AdminProducts = () => {
-    const { data, refetch } = useProductGetQuery();
+    const { data, refetch, revalidate } = useProductGetQuery();
     const { mutate } = useDeleteProduct()
 
     const [selectedProduct, setSelectedProduct] = useState(null);
@@ -59,7 +59,7 @@ const AdminProducts = () => {
         <div className="p-4 max-w-[1280px] md:m-auto">
             <TableComponent tableTitle="Products List" data={data} columns={columns} dateFiterOption={true} exportOption={true} CreateOption={"Create Product"} handleCreateClick={() => navigate('/admin/add-product')} />
             {/* <ProductDelete openModal={deleteModal} setOpenModal={setDeleteModal} refetch={refetch} selectedProduct={selectedProduct} /> */}
-            <ModalComponent modalName="Product" openModal={deleteModal} setOpenModal={setDeleteModal} refetch={refetch} selectedValue={selectedProduct} mutate={mutate} />
+            <ModalComponent modalName="Product" openModal={deleteModal} setOpenModal={setDeleteModal} refetch={refetch}  selectedValue={selectedProduct} mutate={mutate} setSelectedValue={setSelectedProduct} />
         </div>
     )
 }

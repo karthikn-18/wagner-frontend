@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { TextInput, Textarea } from 'flowbite-react';
 import { Button, Modal } from 'flowbite-react';
 import { useAddTestimonials, useEditTestimonials } from '../../../query/useMutation';
+import { Loader2 } from 'lucide-react';
 
 const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetch, setSelectedTestimonial }) => {
     const [formData, setFormData] = useState({
@@ -12,7 +13,7 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
     });
     const [error, setError] = useState('');
 
-    // Populate form data when editing a testimonial
+
     useEffect(() => {
         if (selectedTestimonial?._id) {
             setFormData({
@@ -21,19 +22,26 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
                 author: selectedTestimonial?.author || '',
                 designation: selectedTestimonial?.designation || '',
             });
+        }else{
+            setFormData({
+                description: '',
+                image: '',
+                author: '',
+                designation: '',
+            });
         }
     }, [selectedTestimonial]);
 
-    // Handle input change for form fields
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const { mutate } = useAddTestimonials();
-    const { mutate: editMutate } = useEditTestimonials();
+    const { mutate, isLoading: isAdding } = useAddTestimonials();
+    const { mutate: editMutate, isLoading: isEditing } = useEditTestimonials();
 
-    // Reset form state and error
+
     const resetForm = () => {
         setFormData({
             description: '',
@@ -41,23 +49,17 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
             author: '',
             designation: '',
         });
+
         setError('');
     };
 
     const handleSubmit = () => {
         const { description, image, author, designation } = formData;
 
-        // Validation
         if (!description || description.trim().length < 10) {
             setError('Description is required and must be at least 10 characters.');
             return;
         }
-
-        // const imageUriPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
-        // if (!imageUriPattern.test(image)) {
-        //     setError('Image URL must be a valid URI.');
-        //     return;
-        // }
 
         if (!author || author.trim().length < 3 || /\d/.test(author)) {
             setError('Author name must be at least 3 characters and should not contain numbers.');
@@ -73,6 +75,7 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
 
         const handleCloseFunction = () => {
             resetForm();
+            setSelectedTestimonial(null);
             refetch();
             setOpenModal(false);
         };
@@ -83,6 +86,8 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
             mutate({ data: formData, handleCloseFunction });
         }
     };
+
+    const isLoading = isAdding || isEditing;
 
     return (
         <Modal
@@ -134,7 +139,12 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button color="gray" onClick={handleSubmit}>
+                <Button
+                    color="gray"
+                    onClick={handleSubmit}
+                    disabled={isLoading}
+                >
+                    {isLoading && <Loader2 size={20} className="animate-spin mr-2" />}
                     Save
                 </Button>
                 <Button

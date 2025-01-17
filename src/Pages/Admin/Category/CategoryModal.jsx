@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { TextInput, Button, Modal } from 'flowbite-react';
-import { useAddCategory, useAddIndustry, useEditCategory, useEditIndustry } from '../../../query/useMutation';
+import { useAddCategory, useEditCategory } from '../../../query/useMutation';
+import { Loader2 } from 'lucide-react';
 
 const CategoryModal = ({ openModal, setOpenModal, onSave, selectedValue, refetch }) => {
     const [formData, setFormData] = useState({ name: '', image: null });
     const [error, setError] = useState('');
     const [selectedImageName, setSelectedImageName] = useState('');
+
 
     useEffect(() => {
         if (selectedValue?._id) {
@@ -18,8 +20,8 @@ const CategoryModal = ({ openModal, setOpenModal, onSave, selectedValue, refetch
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const { mutate: editCategoryMutate } = useEditCategory();
-    const { mutate: addCategoryMutate } = useAddCategory();
+    const { mutate: editCategoryMutate, isLoading: isEditing } = useEditCategory();
+    const { mutate: addCategoryMutate, isLoading: isAdding } = useAddCategory();
 
     const handleCloseFunction = () => {
         setFormData({ name: '', image: null });
@@ -55,9 +57,12 @@ const CategoryModal = ({ openModal, setOpenModal, onSave, selectedValue, refetch
         }
     };
 
+    // Combine loading state for both add and edit operations
+    const isLoading = isAdding || isEditing;
+
     return (
         <Modal show={openModal} onClose={handleCloseFunction}>
-            <Modal.Header className='p-3'>
+            <Modal.Header className="p-3">
                 {selectedValue ? 'Edit Category' : 'Add Category'}
             </Modal.Header>
             <Modal.Body>
@@ -76,7 +81,7 @@ const CategoryModal = ({ openModal, setOpenModal, onSave, selectedValue, refetch
                     <div className="my-2">
                         <img
                             src={formData.image}
-                            alt="Blog"
+                            alt="Category"
                             className="w-24 h-24 object-cover rounded"
                         />
                         <button
@@ -99,7 +104,12 @@ const CategoryModal = ({ openModal, setOpenModal, onSave, selectedValue, refetch
                 )}
             </Modal.Body>
             <Modal.Footer>
-                <Button color="gray" onClick={handleSubmit}>
+                <Button
+                    color="gray"
+                    onClick={handleSubmit}
+                    disabled={isLoading}
+                >
+                    {isLoading && <Loader2 size={20} className="animate-spin mr-2" />}
                     Save
                 </Button>
                 <Button color="gray" onClick={handleCloseFunction}>

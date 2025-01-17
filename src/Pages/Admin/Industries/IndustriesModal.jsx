@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { TextInput, Button, Modal } from 'flowbite-react';
 import { useAddIndustry, useEditIndustry } from '../../../query/useMutation';
+import { Loader2 } from 'lucide-react';
 
 const IndustriesModal = ({ openModal, setOpenModal, onSave, selectedIndustry, refetch }) => {
     const [formData, setFormData] = useState({ name: '' });
@@ -17,8 +18,8 @@ const IndustriesModal = ({ openModal, setOpenModal, onSave, selectedIndustry, re
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const { mutate: editIndustryMutate } = useEditIndustry();
-    const { mutate: addIndustryMutate } = useAddIndustry();
+    const { mutate: editIndustryMutate, isLoading: isEditing } = useEditIndustry();
+    const { mutate: addIndustryMutate, isLoading: isAdding } = useAddIndustry();
 
     const handleCloseFunction = () => {
         setFormData({ name: '' });
@@ -40,6 +41,8 @@ const IndustriesModal = ({ openModal, setOpenModal, onSave, selectedIndustry, re
         }
     };
 
+    const isLoading = isAdding || isEditing;
+
     return (
         <Modal show={openModal} onClose={handleCloseFunction}>
             <Modal.Header className='p-3'>
@@ -59,7 +62,8 @@ const IndustriesModal = ({ openModal, setOpenModal, onSave, selectedIndustry, re
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button color="gray" onClick={handleSubmit}>
+                <Button color="gray" onClick={handleSubmit} disabled={isLoading}>
+                    {isLoading && <Loader2 size={20} className="animate-spin mr-2" />}
                     Save
                 </Button>
                 <Button color="gray" onClick={handleCloseFunction}>

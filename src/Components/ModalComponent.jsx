@@ -1,7 +1,7 @@
 import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
-const ModalComponent = ({ modalName, openModal, setOpenModal, refetch, selectedValue, mutate }) => {
+const ModalComponent = ({ modalName, openModal, setOpenModal, refetch, selectedValue, mutate, setSelectedValue }) => {
 
     const handleDelete = () => {
         console.log(selectedValue?._id);
@@ -11,6 +11,8 @@ const ModalComponent = ({ modalName, openModal, setOpenModal, refetch, selectedV
     const handleCloseFunction = () => {
         setOpenModal(false)
         refetch()
+        setSelectedValue(null)
+        // selectedValue(null)
     }
 
     return (

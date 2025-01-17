@@ -84,7 +84,7 @@ const GetBlogs = () => {
 
             <BlogModal openModal={openModal} setOpenModal={setOpenModal} onSave={handleModalClose} selectedBlog={selectedBlog} refetch={refetch} setSelectedBlog={setSelectedBlog} />
 
-            <ModalComponent modalName="Blog" openModal={deleteModal} setOpenModal={setDeleteModal} refetch={refetch} selectedValue={selectedBlog} mutate={mutate} />
+            <ModalComponent modalName="Blog" openModal={deleteModal} setOpenModal={setDeleteModal} refetch={refetch} selectedValue={selectedBlog} mutate={mutate} setSelectedValue={setSelectedBlog} />
             {/* <BlogDelete openModal={deleteModal} setOpenModal={setDeleteModal} selectedBlog={selectedBlog} refetch={refetch} /> */}
         </div>
     );

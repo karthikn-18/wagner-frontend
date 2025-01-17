@@ -16,18 +16,24 @@ const AddProductForm = () => {
     const { data: applicationsValue } = useApplicationGetQuery();
 
     const { id } = useParams();
+    // const [isLoading, setIsLoading] = useState(false);
+
+    let isLoading = false;
 
     let mutate;
     let SingleProduct;
-
     if (id) {
-        const { mutate: singleProduct } = useEditProduct();
+        const { mutate: singleProduct, isLoading: isEditLoading } = useEditProduct();
         mutate = singleProduct;
         const { data: product } = useProductGetSingleIdQuery(id);
         SingleProduct = product?.data?.data;
+        // setIsLoading(isEditLoading);
+        isLoading = isEditLoading;
     } else {
-        const { mutate: addProduct } = useAddProduct();
+        const { mutate: addProduct, isLoading: isAddLoading } = useAddProduct();
         mutate = addProduct;
+        isLoading = isAddLoading;
+        // setIsLoading(isAddLoading);
     }
 
     console.log(SingleProduct, "SingleProduct")
@@ -53,7 +59,7 @@ const AddProductForm = () => {
             setProperties(SingleProduct.properties || ['']);
             setBuyExternalLinks(SingleProduct.buyExternalLinks || { main: '', amazon: '', flipkart: '', noon: '' });
         }
-    }, [SingleProduct]);
+    }, [SingleProduct, id]);
 
 
     console.log(SingleProduct, "product")
@@ -76,7 +82,7 @@ const AddProductForm = () => {
     const [applicationInfo, setApplicationInfo] = useState(['']);
     const [applications, setApplications] = useState([]);
     const [industries, setIndustries] = useState([]);
-    let isLoading = false
+
     const [properties, setProperties] = useState(['']);
     const [buyExternalLinks, setBuyExternalLinks] = useState({
         main: '',

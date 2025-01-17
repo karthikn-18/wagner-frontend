@@ -91,7 +91,7 @@ export const useProductGetQuery = () => {
         queryFn: async () => {
             return getProductApi(token);
         },
-        staleTime: 60 * 1000,
+        // staleTime: 60 * 1000,
     })
 }
 
@@ -101,6 +101,6 @@ export const useProductGetSingleIdQuery = (id) => {
         queryFn: async () => {
             return getSingleProductApi(id);
         },
-        staleTime: 60 * 1000,
+        // staleTime: 60 * 1000,
     })
 }

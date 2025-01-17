@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { TextInput, Textarea } from 'flowbite-react';
 import { Button, Modal } from 'flowbite-react';
 import { useAddBlogs, useEditBlogs } from '../../../query/useMutation';
-import { Plus, X } from 'lucide-react';
+import { Plus, X, Loader2 } from 'lucide-react'; // Import the loader icon
 
 const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelectedBlog }) => {
     const [formData, setFormData] = useState({
@@ -10,7 +10,7 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelected
         date: '',
         image: null,
     });
-    const [description, setDescription] = useState([''])
+    const [description, setDescription] = useState(['']);
     const [error, setError] = useState('');
     const [selectedImageName, setSelectedImageName] = useState('');
 
@@ -22,8 +22,17 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelected
                 date: selectedBlog?.date ? new Date(selectedBlog.date).toISOString().split('T')[0] : '',
                 image: selectedBlog?.image || null,
             });
-            setDescription(selectedBlog?.description || [''])
+            setDescription(selectedBlog?.description || ['']);
             setSelectedImageName(selectedBlog?.image ? 'Current Image' : '');
+        } else {
+            setFormData({
+                title: '',
+                description: '',
+                date: '',
+                image: null,
+            });
+            setDescription(['']);
+            setSelectedImageName('');
         }
     }, [selectedBlog]);
 
@@ -50,8 +59,8 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelected
         setSelectedImageName('');
     };
 
-    const { mutate } = useEditBlogs();
-    const { mutate: addBlogsMutate } = useAddBlogs();
+    const { mutate, isLoading: isEditing } = useEditBlogs(); // Access isLoading from React Query
+    const { mutate: addBlogsMutate, isLoading: isAdding } = useAddBlogs(); // Access isLoading from React Query
 
     const handleCloseFunction = () => {
         setFormData({
@@ -61,8 +70,10 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelected
             date: '',
             image: null,
         });
+        setDescription(['']);
         setError('');
         refetch();
+        setSelectedBlog('');
         setOpenModal(false);
     };
 
@@ -88,9 +99,7 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelected
 
         setError('');
 
-
         const payload = { ...formData, description };
-
 
         if (selectedBlog?._id) {
             mutate({ data: payload, id: selectedBlog?._id, handleCloseFunction });
@@ -99,13 +108,13 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelected
         }
     };
 
-
     const handleDescriptionChange = (index, e) => {
-        // const { value } = e.target;
         const value = [...description];
         value[index] = e.target.value;
         setDescription(value);
     };
+
+    const isLoading = isEditing || isAdding; // Combine both loading states
 
     return (
         <Modal
@@ -113,7 +122,7 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelected
             onClose={() => {
                 setOpenModal(false);
                 setDescription(['']);
-                setSelectedBlog('')
+                setSelectedBlog('');
                 setFormData({
                     title: '',
                     date: '',
@@ -136,47 +145,36 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelected
                         {error.includes('Title') && <p className="text-sm text-red-500">{error}</p>}
                     </div>
                     <div>
-                        {
-                            description.map((item, index) => (
-                                <div className='flex space-x-2 mb-2'>
-                                    <Textarea
-                                        name="description"
-                                        value={item}
-                                        onChange={(e) => handleDescriptionChange(index, e)}
-                                        placeholder="Enter blog description"
-                                        label="Description"
-                                        required
-                                    />
-                                    {error.includes('Description') && <p className="text-sm text-red-500">{error}</p>}
-                                    {description.length > 1 && (
-                                        <button
-                                            type="button"
-                                            onClick={() => setDescription(prev => prev.filter((_, i) => i !== index))}
-                                            className="p-2 text-red-500 hover:bg-red-50 rounded-md h-fit"
-                                        >
-                                            <X size={20} />
-                                        </button>
-                                    )}
-                                </div>
-                            ))
-                        }
+                        {description.map((item, index) => (
+                            <div className="flex space-x-2 mb-2" key={index}>
+                                <Textarea
+                                    name="description"
+                                    value={item}
+                                    onChange={(e) => handleDescriptionChange(index, e)}
+                                    placeholder="Enter blog description"
+                                    label="Description"
+                                    required
+                                />
+                                {error.includes('Description') && <p className="text-sm text-red-500">{error}</p>}
+                                {description.length > 1 && (
+                                    <button
+                                        type="button"
+                                        onClick={() => setDescription(prev => prev.filter((_, i) => i !== index))}
+                                        className="p-2 text-red-500 hover:bg-red-50 rounded-md h-fit"
+                                    >
+                                        <X size={20} />
+                                    </button>
+                                )}
+                            </div>
+                        ))}
                         <button
                             type="button"
                             onClick={() => setDescription(prev => [...prev, ''])}
-                            className="inline-flex  items-center text-sm text-blue-500 hover:text-blue-600"
+                            className="inline-flex items-center text-sm text-blue-500 hover:text-blue-600"
                         >
                             <Plus size={16} className="mr-1" /> Add More Description
                         </button>
                     </div>
-                    {/* <div>
-                        <TextInput
-                            name="link"
-                            value={formData.link}
-                            onChange={handleInputChange}
-                            placeholder="Enter blog link (optional)"
-                            label="Link"
-                        />
-                    </div> */}
                     <div>
                         <TextInput
                             type="date"
@@ -225,7 +223,12 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelected
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button color="gray" onClick={handleSubmit}>
+                <Button
+                    color="gray"
+                    onClick={handleSubmit}
+                    disabled={isLoading}
+                >
+                    {isLoading ? <Loader2 size={20} className="animate-spin mr-2" /> : null}
                     Save
                 </Button>
                 <Button
@@ -240,7 +243,7 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelected
                             date: '',
                             image: null,
                         });
-                        setSelectedBlog('')
+                        setSelectedBlog('');
                     }}
                 >
                     Cancel

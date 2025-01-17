@@ -127,7 +127,6 @@ export const useEditTestimonials = () => {
             if (data?.status === 200) {
                 toast.success(data?.data?.message)
                 handleCloseFunction()
-
             } else {
                 toast.error(data?.data?.message)
             }

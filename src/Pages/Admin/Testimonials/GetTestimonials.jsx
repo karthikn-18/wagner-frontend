@@ -91,7 +91,7 @@ const GetTestimonials = () => {
         <div className="p-4 max-w-[1280px] md:m-auto">
             <TableComponent tableTitle="Testimonials" data={data} dateFiterOption={true} exportOption={false} CreateOption={'create Testimonial'} handleCreateClick={() => setOpenModal(true)} columns={columns} />
 
-            <ModalComponent modalName="Testimonial" openModal={deleteModal} setOpenModal={setDeleteModal} refetch={refetch} selectedValue={selectedTestimonial} mutate={mutate} />
+            <ModalComponent modalName="Testimonial" openModal={deleteModal} setOpenModal={setDeleteModal} refetch={refetch} selectedValue={selectedTestimonial} mutate={mutate}  setSelectedValue={setSelectedTestimonial} />
 
             <TestimonialModal openModal={openModal} setOpenModal={setOpenModal} onSave={handleModalClose} selectedTestimonial={selectedTestimonial} refetch={refetch} setSelectedTestimonial={setSelectedTestimonial} />
             {/* <TestimonialDelete openModal={deleteModal} setOpenModal={setDeleteModal} selectedTestimonial={selectedTestimonial} refetch={refetch} /> */}
