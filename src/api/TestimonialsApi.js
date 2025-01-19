@@ -8,7 +8,7 @@ export const getTestimonialsApi = async () => {
 
 export const editTestimonialsApi = async (data, id, token) => {
     console.log(data, id);
-    const response = await senderRequest("PUT", `${REACT_APP_BACKEND_URL}/testimonial/${id}`, token, data);
+    const response = await senderRequest("post-photo", `${REACT_APP_BACKEND_URL}/testimonial/${id}`, token, data);
     return response;
 };
 
@@ -18,6 +18,6 @@ export const deleteTestimonialsApi = async (id, token) => {
 }
 
 export const addTestimonialsApi = async (data, token) => {
-    const response = await senderRequest("POST", `${REACT_APP_BACKEND_URL}/create-testimonial`, token, data);
+    const response = await senderRequest("post-photo", `${REACT_APP_BACKEND_URL}/create-testimonial`, token, data);
     return response
 }

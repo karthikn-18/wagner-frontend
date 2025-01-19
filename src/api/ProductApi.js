@@ -13,7 +13,7 @@ export const getSingleProductApi = async (id) => {
 
 export const editProductApi = async (data, id, token) => {
     console.log(data, id);
-    const response = await senderRequest("PUT", `${REACT_APP_BACKEND_URL}/product/${id}`, token, data);
+    const response = await senderRequest("post-photo", `${REACT_APP_BACKEND_URL}/product/${id}`, token, data);
     return response;
 };
 
@@ -23,6 +23,6 @@ export const deleteProductApi = async (id, token) => {
 }
 
 export const addProductApi = async (data, token) => {
-    const response = await senderRequest("POST", `${REACT_APP_BACKEND_URL}/create-product`, token, data);
+    const response = await senderRequest("post-photo", `${REACT_APP_BACKEND_URL}/create-product`, token, data);
     return response
 }

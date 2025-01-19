@@ -11,6 +11,7 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
         author: '',
         designation: '',
     });
+    const [selectedImageName, setSelectedImageName] = useState('');
     const [error, setError] = useState('');
 
 
@@ -22,7 +23,7 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
                 author: selectedTestimonial?.author || '',
                 designation: selectedTestimonial?.designation || '',
             });
-        }else{
+        } else {
             setFormData({
                 description: '',
                 image: '',
@@ -38,8 +39,8 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const { mutate, isLoading: isAdding } = useAddTestimonials();
-    const { mutate: editMutate, isLoading: isEditing } = useEditTestimonials();
+    const { mutate, isPending: isAdding } = useAddTestimonials();
+    const { mutate: editMutate, isPending: isEditing } = useEditTestimonials();
 
 
     const resetForm = () => {
@@ -52,6 +53,26 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
 
         setError('');
     };
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            if (['image/png', 'image/jpeg'].includes(file.type) && file.size <= 4 * 1024 * 1024) {
+                setFormData((prev) => ({ ...prev, image: file }));
+                setSelectedImageName(file.name);
+                setError('');
+            } else {
+                setError('Only PNG/JPG images under 4MB are allowed.');
+            }
+        }
+        e.target.value = '';
+    };
+
+    const handleRemoveImage = () => {
+        setFormData((prev) => ({ ...prev, image: null }));
+        setSelectedImageName('');
+    };
+
 
     const handleSubmit = () => {
         const { description, image, author, designation } = formData;
@@ -80,14 +101,20 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
             setOpenModal(false);
         };
 
+        const formDataValue = new FormData();
+        formDataValue.append('description', description);
+        formDataValue.append('image', image);
+        formDataValue.append('author', author);
+        formDataValue.append('designation', designation);
+
         if (selectedTestimonial?._id) {
-            editMutate({ data: formData, id: selectedTestimonial?._id, handleCloseFunction });
+            editMutate({ data: formDataValue, id: selectedTestimonial?._id, handleCloseFunction });
         } else {
-            mutate({ data: formData, handleCloseFunction });
+            mutate({ data: formDataValue, handleCloseFunction });
         }
     };
 
-    const isLoading = isAdding || isEditing;
+
 
     return (
         <Modal
@@ -111,14 +138,7 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
                         label="Description"
                         required
                     />
-                    <TextInput
-                        name="image"
-                        value={formData.image}
-                        onChange={handleInputChange}
-                        placeholder="Enter image URL"
-                        label="Image URL"
-                        required
-                    />
+
                     <TextInput
                         name="author"
                         value={formData.author}
@@ -135,6 +155,37 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
                         label="Designation"
                         required
                     />
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">
+                            {formData.image ? 'Edit Image (optional)' : 'Upload Image (optional)'}
+                        </label>
+                        {formData.image && typeof formData.image === 'string' && (
+                            <div className="my-2">
+                                <img
+                                    src={formData.image}
+                                    alt="Blog"
+                                    className="w-24 h-24 object-cover rounded"
+                                />
+                                <button
+                                    type="button"
+                                    className="text-red-500 text-sm underline mt-2"
+                                    onClick={handleRemoveImage}
+                                >
+                                    Remove Image
+                                </button>
+                            </div>
+                        )}
+                        <input
+                            type="file"
+                            accept=".png,.jpg"
+                            onChange={handleImageChange}
+                            className="mt-1"
+                        />
+                        {selectedImageName && (
+                            <p className="text-sm text-gray-500 mt-1">Selected: {selectedImageName}</p>
+                        )}
+                    </div>
+
                     {error && <p className="text-sm text-red-500">{error}</p>}
                 </div>
             </Modal.Body>
@@ -142,9 +193,9 @@ const TestimonialModal = ({ openModal, setOpenModal, selectedTestimonial, refetc
                 <Button
                     color="gray"
                     onClick={handleSubmit}
-                    disabled={isLoading}
+                    disabled={selectedTestimonial?._id ? isEditing : isAdding}
                 >
-                    {isLoading && <Loader2 size={20} className="animate-spin mr-2" />}
+                    {(selectedTestimonial?._id ? isEditing : isAdding) && <Loader2 size={20} className="animate-spin mr-2" />}
                     Save
                 </Button>
                 <Button

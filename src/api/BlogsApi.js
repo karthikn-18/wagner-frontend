@@ -14,7 +14,7 @@ export const getBlogsByIdApi = async (id) => {
 
 export const editBlogsApi = async (data, id, token) => {
     console.log(data, id);
-    const response = await senderRequest("PUT", `${REACT_APP_BACKEND_URL}/blogs/${id}`, token, data);
+    const response = await senderRequest("post-photo", `${REACT_APP_BACKEND_URL}/blogs/${id}`, token, data);
     return response;
 };
 
@@ -24,6 +24,6 @@ export const deleteBlogsApi = async (id, token) => {
 }
 
 export const addBlogsApi = async (data, token) => {
-    const response = await senderRequest("POST", `${REACT_APP_BACKEND_URL}/create-blogs`, token, data);
+    const response = await senderRequest("post-photo", `${REACT_APP_BACKEND_URL}/create-blogs`, token, data);
     return response
 }

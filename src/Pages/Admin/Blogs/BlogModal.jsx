@@ -52,6 +52,7 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelected
                 setError('Only PNG/JPG images under 4MB are allowed.');
             }
         }
+        e.target.value = '';
     };
 
     const handleRemoveImage = () => {
@@ -59,8 +60,8 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelected
         setSelectedImageName('');
     };
 
-    const { mutate, isLoading: isEditing } = useEditBlogs(); // Access isLoading from React Query
-    const { mutate: addBlogsMutate, isLoading: isAdding } = useAddBlogs(); // Access isLoading from React Query
+    const { mutate, isPending: isEditing } = useEditBlogs();
+    const { mutate: addBlogsMutate, isPending: isAdding } = useAddBlogs();
 
     const handleCloseFunction = () => {
         setFormData({
@@ -81,6 +82,9 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelected
         const titleTrimmed = formData.title.trim();
         const descriptionTrimmed = description.join('').trim();
 
+        let formDataValue = new FormData();
+
+
         if (!titleTrimmed || titleTrimmed.length < 5 || titleTrimmed.length > 100) {
             setError('Title is required and should be between 5 and 100 characters.');
             return;
@@ -99,12 +103,16 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelected
 
         setError('');
 
-        const payload = { ...formData, description };
+        // const payload = { ...formData, description };
+        formDataValue.append('title', formData.title);
+        formDataValue.append('description', description);
+        formDataValue.append('date', formData.date);
+        formDataValue.append('image', formData.image);
 
         if (selectedBlog?._id) {
-            mutate({ data: payload, id: selectedBlog?._id, handleCloseFunction });
+            mutate({ data: formDataValue, id: selectedBlog?._id, handleCloseFunction });
         } else {
-            addBlogsMutate({ data: payload, handleCloseFunction });
+            addBlogsMutate({ data: formDataValue, handleCloseFunction });
         }
     };
 
@@ -113,8 +121,6 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelected
         value[index] = e.target.value;
         setDescription(value);
     };
-
-    const isLoading = isEditing || isAdding; // Combine both loading states
 
     return (
         <Modal
@@ -226,9 +232,9 @@ const BlogModal = ({ openModal, setOpenModal, selectedBlog, refetch, setSelected
                 <Button
                     color="gray"
                     onClick={handleSubmit}
-                    disabled={isLoading}
+                    disabled={selectedBlog?._id ? isEditing : isAdding}
                 >
-                    {isLoading ? <Loader2 size={20} className="animate-spin mr-2" /> : null}
+                    {(selectedBlog?._id ? isEditing : isAdding) ? <Loader2 size={20} className="animate-spin mr-2" /> : null}
                     Save
                 </Button>
                 <Button
