@@ -198,14 +198,14 @@ const Products = () => {
                                                                         <div className="common-border-btn">
                                                                             <button onClick={() => navigate(`/product-detail/${item?._id}`)}>View Details</button>
                                                                         </div>
-                                                                        <div className="common-btn">
+                                                                        {/* <div className="common-btn">
                                                                             <button
                                                                                 onClick={() => window.open(item?.buyExternalLinks?.main, "_blank", "noopener,noreferrer")}
                                                                                 className="text-decoration-none"
                                                                             >
                                                                                 Buy Now
                                                                             </button>
-                                                                        </div>
+                                                                        </div> */}
                                                                     </div>
                                                                 </div>
                                                             </div>

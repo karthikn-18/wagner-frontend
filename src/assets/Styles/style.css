@@ -237,6 +237,9 @@ p{
   justify-content: space-between;
   align-items: center;
 }
+.common-btn a{
+  text-decoration: none;
+}
 .common-btn button {
   padding: 10px 20px;
   background-color: var(--primary);
@@ -277,7 +280,9 @@ p{
   text-decoration: none;
   color: inherit; /* Use inherited color from button */
 }
-
+.common-border-btn a{
+  text-decoration: none;
+}
 .common-border-btn button {
   padding: 9px 20px;
   background-color: transparent;
@@ -290,6 +295,7 @@ p{
   overflow: hidden;
   z-index: 1; /* Ensures the text stays on top */
   transition: all 0.5s ease;
+  display: flex;
 }
 
 .common-border-btn button::before {
@@ -321,6 +327,8 @@ p{
   background-color: #fff ;
   color: var(--primary) ;
   font-weight: 500;
+  display: flex;
+  width: auto;
 }
 
 .banner-btn button .icon{
@@ -417,13 +425,34 @@ color: #fff;
 .language-selector .select-language option{
   color: #000;
 }
-/* header styles */
+/* header styles *//* Sticky header when scrolled */
 
-.header{
-    background-color: #fff;
-    padding: 20px 0px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+.main-header.sticky-header.scrolled {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow to make it stand out */
+  background-color: white; /* Ensure the background is opaque */
+  z-index: 9999; /* Make sure the header is above other content */
 }
+
+/* Optional: Add a style for when the header is scrolled */
+.main-header.sticky-header.scrolled .brand-logo img {
+      width: 200px;
+}
+/* Default header style */
+.main-header {
+  position: relative;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  transition: all 0.3s ease-in-out; /* Smooth transition when scrolling */
+  background-color: #fff;
+  padding: 20px 0px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
 .header-items{
     display: flex;
     justify-content: space-between;
@@ -495,9 +524,6 @@ color: #fff;
 
 
 /* *** Banner Styles *** */
-.banner-section{
-  padding-top: 5px;
-}
 .banner-section .slider{
   overflow-x: hidden;
 }
@@ -537,7 +563,7 @@ color: #fff;
   height: 650px;
 }
 .banner-section .banner-contents{
-  max-width: 50%;
+  max-width: 45%;
   padding: 30px 0px;
 
 }
@@ -628,7 +654,6 @@ color: #fff;
 .banner-section .banner-btn{
   margin-top: 20px;
 }
-
 
 
 /* about section */
@@ -919,6 +944,8 @@ color: #fff;
   background-color: #D9D9D9;
   border-radius: 20px;
   transition: all .5s ease;
+  display: flex;
+  justify-content: center;
 }
 .product-section .products .box:hover .product-image{
   background-color: var(--primary);
@@ -1036,13 +1063,13 @@ color: #fff;
 .test-btn button{
   background-color: var(--primary);
   padding: 20px 20px;
-  width: 200px;
   border-radius: 40px;
   border: 2px solid var(--primary);
   box-shadow: none;
   color: #fff;
   position: relative;
   overflow: hidden;
+  display: flex;
   z-index: 1; /* Ensure the text stays on top */
   transition: all 0.5s ease;
 }
@@ -1360,9 +1387,26 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
 }
 .footer-secction .main-footer {
   padding: 30px 0px;
+  border-top: 1px solid #dbdbdb;
 }
 .footer-secction .main-footer .logo img{
   width: 220px;
+  padding-bottom: 20px;
+}
+.footer-secction .main-footer .icon{
+  font-size: 16px;
+  color: var(--primary);
+}
+.footer-secction .main-footer .phone{
+  display: flex;
+  gap: 10px;
+}
+.footer-secction .main-footer .location{
+  display: flex;
+  gap: 10px;
+  font-size: 16px;
+  color: #9A9A9A;
+  padding-top: 20px;
 }
 .footer-secction .main-footer .footer-menu h2{
   font-size: 16px;
@@ -1822,11 +1866,17 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
 /* leadership styles */
 
 .leadership-team .image{
-  padding: 40px;
   transition: all 1s ease;
+  height: 500px;
+  width: 100%;
+  padding: 40px;
 }
 .leadership-team .image img{
   transition: all 1s ease;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 20px;
 }
 .leadership-team .image:hover img{
   transform: scale(1.05);
@@ -2420,7 +2470,7 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
 }
 .product-overview .right-content .overview .row{
   width: 400px;
-  padding: 10px;
+
 }
 /* .product-overview .right-content .overview{
   border: 1px solid #dddddd;
@@ -2444,8 +2494,6 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
 .product-overview .right-content .overview{
   border: 1px solid #dddddd;
   width: auto;
-  display: flex;
-  gap: 30px;
   width: max-content;
   border-radius: 20px;
   margin: 20px 0px;
@@ -2495,6 +2543,32 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
   padding: 50px 0px 100px 0px;
   margin-top: 70px;
 }
+.product-overview-contents .title h2{
+  font-size: 28px;
+  color: var(--primary);
+}
+.product-overview-contents  .row{
+  padding: 30px 0px;
+  border-bottom: 1px solid #bdbdbd;
+}
+.product-overview-contents .title{
+  padding-bottom: 10px;
+}
+.product-overview-contents ul li{
+  font-size: 16px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.product-overview-contents ul li .icon{
+  color: var(--primary-bright);
+}
+.product-overview-contents table{
+  background-color: var(--primary);
+  padding: 50px;
+  border-radius: 20px !important;
+  width: auto;
+}
 .product-overview-contents .custom-tabs {
   display: flex;
   justify-content: space-evenly;
@@ -2533,22 +2607,18 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
   margin-right: 10px;
 }
 
-.product-overview-contents .table {
-  border: 1px solid var(--primary);
-  padding: 20px;
-  border-radius: 20px !important;
-  width: auto;
-}
 .product-overview-contents .table tr{
-  border-bottom: 1px solid var(--primary);
+  border-bottom: 1px solid #fff;
   padding: 20px;
   border-radius: 20px;
 }
 .product-overview-contents .table tr th{
-  padding: 10px;
+  padding: 15px 40px;
+  color: #fff;
 }
 .product-overview-contents .table tr td{
-  padding: 10px;
+  padding: 15px 40px;
+  color: #fff;
 }
 /* privacy-policy style */
 
@@ -3363,4 +3433,8 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
 
 .add-career-form-sec .select option{
   width: 100%;
+}
+
+#google_translate_element{
+  display: none !important;
 }

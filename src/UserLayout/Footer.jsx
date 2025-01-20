@@ -4,35 +4,41 @@ import { LuInstagram } from "react-icons/lu";
 import { AiOutlineYoutube } from "react-icons/ai";
 import { SlSocialFacebook } from "react-icons/sl";
 import FooterMap from '../assets/Resources/footer-map.png'
+import { IoCall } from "react-icons/io5";
+import { FaLocationDot } from "react-icons/fa6";
 
 const Footer = () => {
     return (
         <div className="footer-secction">
             <div className="container">
-                <div className="top-footer">
+                {/* <div className="top-footer">
                     <div className="left">
                         <h6 className='phone'>
                             +49 (0) 9085 96 00 9-10
                         </h6>
-                        {/* <p>Monday - Friday 8am - 5pm</p> */}
                     </div>
                     <div className="right">
                         <h5>WAGNER Spezialschmierstoffe GmbH & Co. KG Speckbrodi 8 • 86759 Wechingen • GERMANY</h5>
                     </div>
-                </div>
+                </div> */}
                 <div className="main-footer">
                     <div className="row">
                         <div className="col-lg-4">
                             <div className="logo">
                                 <img src={Logo} alt="" />
                             </div>
+                            <h6 className='phone'>
+                                <IoCall className='icon' />+49 (0) 9085 96 00 9-10
+                            </h6>
+                            <div className="mail">
+                                <p>wagner@wagner-german-oil.com</p>
+                            </div>
+                            <h5 className='location'>
+                                WAGNER Spezialschmierstoffe GmbH & Co. KG Speckbrodi 8 • 86759 Wechingen • GERMANY</h5>
                             <div className="social-media">
                                 <a href="https://www.instagram.com/wagnergermanoil/"><LuInstagram /></a>
                                 <a href="https://www.youtube.com/c/WAGNERHighQualityLubricants"><AiOutlineYoutube /></a>
                                 <a href="https://www.facebook.com/wagnergermanoil/"><SlSocialFacebook /></a>
-                            </div>
-                            <div className="mail">
-                                <p>wagner@wagner-german-oil.com</p>
                             </div>
                         </div>
                         <div className="col-lg-3">

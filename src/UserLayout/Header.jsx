@@ -1,16 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PiStarFill } from "react-icons/pi";
 import { CiGlobe } from "react-icons/ci";
 import { LuSearch } from "react-icons/lu";
 import { HiMenu } from "react-icons/hi";
+import { Link, useLocation } from "react-router-dom"; // Import useLocation
 import Logo from '../assets/Resources/wagner-logo.svg';
 
 const Header = () => {
+    const [scrolled, setScrolled] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
+    const location = useLocation(); // Get current location
 
     const toggleDropdown = (dropdown) => {
         setActiveDropdown((prevDropdown) => (prevDropdown === dropdown ? null : dropdown));
     };
+
+    const isActive = (path) => {
+        const currentPath = location.pathname;
+
+        // Check if we're on the homepage and specifically the home menu
+        if (currentPath === "/" && path === "/") {
+            return "active"; // Home page active
+        }
+
+        // For other pages, match the menu based on path
+        if (currentPath.startsWith(path) && path !== "/") {
+            return "active"; // Mark as active for nested paths, but not home
+        }
+
+        return ""; // If no match, return empty string
+    };
+
+    // Check if the link is active
+
+    const closeDropdown = () => {
+        setActiveDropdown(null); // Close the dropdown when a submenu is clicked
+    };
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 50); // Change this value as needed
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     return (
         <>
@@ -44,21 +78,7 @@ const Header = () => {
                             <div className="right">
                                 <div data-aos="fade-down">
                                     <div className="item mobiletopheader">
-                                        <p className="fontSize14 fontWeight300"><a href="/blog">Blog</a></p>
-                                    </div>
-                                </div>
-                                <div data-aos="fade-down">
-                                    <div className="item">
-                                        <CiGlobe className="icon" />
-                                        <div className="language-selector">
-                                            <select className="select-language">
-                                                <option value="en">ENG</option>
-                                                <option value="fr">Français</option>
-                                                <option value="de">Deutsch</option>
-                                                <option value="it">Italiano</option>
-                                                <option value="es">Español</option>
-                                            </select>
-                                        </div>
+                                        <p className="fontSize14 fontWeight300"><Link to="/blog" className={isActive("/blog")}>Blog</Link></p>
                                     </div>
                                 </div>
                                 <div data-aos="fade-down">
@@ -73,12 +93,14 @@ const Header = () => {
             </div>
 
             {/* Main Header */}
-            <div className="header">
+            <div className={`header main-header sticky-header ${scrolled ? "scrolled" : ""}`}>
                 <div className="container">
                     <div className="header-items">
                         {/* Logo */}
                         <div className="brand-logo">
-                            <img src={Logo} alt="Logo" />
+                            <Link to="/" className={isActive("/")}>
+                                <img src={Logo} alt="Logo" />
+                            </Link>
                         </div>
 
                         {/* Hamburger Menu for Mobile */}
@@ -112,49 +134,49 @@ const Header = () => {
                             <div className="offcanvas-body">
                                 <nav>
                                     <ul className="menu-list">
-                                        <li><a href="/">Home</a></li>
-                                        <li><a href="/about">About</a></li>
+                                        <li><Link to="/" className={isActive("/")}>Home</Link></li>
+                                        <li><Link to="/about" className={isActive("/about")}>About</Link></li>
                                         <li className="dropdown">
                                             <button
-                                                className="dropdown-toggle"
+                                                className={`dropdown-toggle ${isActive("/application-cars")}`}
                                                 onClick={() => toggleDropdown('applications')}
                                             >
                                                 Applications
                                             </button>
                                             {activeDropdown === 'applications' && (
                                                 <ul className="dropdown-menu">
-                                                    <li><a href="/application-cars">Cars</a></li>
-                                                    <li><a href="/application-motorcycle">Motorcycle</a></li>
-                                                    <li><a href="/application-classic">Classic</a></li>
-                                                    <li><a href="/application-offroad">Off-road</a></li>
-                                                    <li><a href="/application-tuning">Tuning</a></li>
-                                                    <li><a href="/application-truck">Truck</a></li>
-                                                    <li><a href="/application-boat">Boat</a></li>
-                                                    <li><a href="/application-ship">Ship</a></li>
-                                                    <li><a href="/application-aviation">Aviation</a></li>
+                                                    <li><Link to="/application-cars" className={isActive("/application-cars")} onClick={closeDropdown}>Cars</Link></li>
+                                                    <li><Link to="/application-motorcycle" className={isActive("/application-motorcycle")} onClick={closeDropdown}>Motorcycle</Link></li>
+                                                    <li><Link to="/application-classic" className={isActive("/application-classic")} onClick={closeDropdown}>Classic</Link></li>
+                                                    <li><Link to="/application-offroad" className={isActive("/application-offroad")} onClick={closeDropdown}>Off-road</Link></li>
+                                                    <li><Link to="/application-tuning" className={isActive("/application-tuning")} onClick={closeDropdown}>Tuning</Link></li>
+                                                    <li><Link to="/application-truck" className={isActive("/application-truck")} onClick={closeDropdown}>Truck</Link></li>
+                                                    <li><Link to="/application-boat" className={isActive("/application-boat")} onClick={closeDropdown}>Boat</Link></li>
+                                                    <li><Link to="/application-ship" className={isActive("/application-ship")} onClick={closeDropdown}>Ship</Link></li>
+                                                    <li><Link to="/application-aviation" className={isActive("/application-aviation")} onClick={closeDropdown}>Aviation</Link></li>
                                                 </ul>
                                             )}
                                         </li>
                                         <li className="dropdown">
                                             <button
-                                                className="dropdown-toggle"
+                                                className={`dropdown-toggle ${isActive("/industry-agriculture-&-forestry")}`}
                                                 onClick={() => toggleDropdown('industries')}
                                             >
                                                 Industries
                                             </button>
                                             {activeDropdown === 'industries' && (
                                                 <ul className="dropdown-menu">
-                                                    <li><a href="/industry-agriculture-&-forestry">Agriculture & Forestry</a></li>
-                                                    <li><a href="/industry-construction">Construction</a></li>
-                                                    <li><a href="/industry-wind-turbines">Wind Turbines</a></li>
-                                                    <li><a href="/industry-shipping">Shipping</a></li>
-                                                    <li><a href="/industry-cable-cars-&-lifts">Cable Cars & Lifts</a></li>
-                                                    <li><a href="/industry-combines-heat-&-power-plants">Combined Heat & Power Plants</a></li>
+                                                    <li><Link to="/industry-agriculture-&-forestry" className={isActive("/industry-agriculture-&-forestry")} onClick={closeDropdown}>Agriculture & Forestry</Link></li>
+                                                    <li><Link to="/industry-construction" className={isActive("/industry-construction")} onClick={closeDropdown}>Construction</Link></li>
+                                                    <li><Link to="/industry-wind-turbines" className={isActive("/industry-wind-turbines")} onClick={closeDropdown}>Wind Turbines</Link></li>
+                                                    <li><Link to="/industry-shipping" className={isActive("/industry-shipping")} onClick={closeDropdown}>Shipping</Link></li>
+                                                    <li><Link to="/industry-cable-cars-&-lifts" className={isActive("/industry-cable-cars-&-lifts")} onClick={closeDropdown}>Cable Cars & Lifts</Link></li>
+                                                    <li><Link to="/industry-combines-heat-&-power-plants" className={isActive("/industry-combines-heat-&-power-plants")} onClick={closeDropdown}>Combined Heat & Power Plants</Link></li>
                                                 </ul>
                                             )}
                                         </li>
-                                        <li><a href="/products">Products</a></li>
-                                        <li><a href="/contact">Contact</a></li>
+                                        <li><Link to="/blog" className={isActive("/blog")}>Blog</Link></li>
+                                        <li><Link to="/products" className={isActive("/products")}>Products</Link></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -164,60 +186,60 @@ const Header = () => {
                         <nav className="d-none d-lg-block">
                             <div className="main-menu">
                                 <ul className="menu-list">
-                                    <li><a href="/">Home</a></li>
-                                    <li><a href="/about">About</a></li>
+                                    <li><Link to="/" className={isActive("/")}>Home</Link></li>
+                                    <li><Link to="/about" className={isActive("/about")}>About</Link></li>
                                     <li className="dropdown">
                                         <button
-                                            className="dropdown-toggle"
+                                            className={`dropdown-toggle ${isActive("/application-cars")}`}
                                             onClick={() => toggleDropdown('applications')}
                                         >
                                             Applications
                                         </button>
                                         {activeDropdown === 'applications' && (
                                             <ul className="dropdown-menu">
-                                                <li><a href="/application-cars">Cars</a></li>
-                                                <li><a href="/application-motorcycle">Motorcycle</a></li>
-                                                <li><a href="/application-classic">Classic</a></li>
-                                                <li><a href="/application-offroad">Off-road</a></li>
-                                                <li><a href="/application-tuning">Tuning</a></li>
-                                                <li><a href="/application-truck">Truck</a></li>
-                                                <li><a href="/application-boat">Boat</a></li>
-                                                <li><a href="/application-ship">Ship</a></li>
-                                                <li><a href="/application-aviation">Aviation</a></li>
+                                                <li><Link to="/application-cars" className={isActive("/application-cars")} onClick={closeDropdown}>Cars</Link></li>
+                                                <li><Link to="/application-motorcycle" className={isActive("/application-motorcycle")} onClick={closeDropdown}>Motorcycle</Link></li>
+                                                <li><Link to="/application-classic" className={isActive("/application-classic")} onClick={closeDropdown}>Classic</Link></li>
+                                                <li><Link to="/application-offroad" className={isActive("/application-offroad")} onClick={closeDropdown}>Off-road</Link></li>
+                                                <li><Link to="/application-tuning" className={isActive("/application-tuning")} onClick={closeDropdown}>Tuning</Link></li>
+                                                <li><Link to="/application-truck" className={isActive("/application-truck")} onClick={closeDropdown}>Truck</Link></li>
+                                                <li><Link to="/application-boat" className={isActive("/application-boat")} onClick={closeDropdown}>Boat</Link></li>
+                                                <li><Link to="/application-ship" className={isActive("/application-ship")} onClick={closeDropdown}>Ship</Link></li>
+                                                <li><Link to="/application-aviation" className={isActive("/application-aviation")} onClick={closeDropdown}>Aviation</Link></li>
                                             </ul>
                                         )}
                                     </li>
                                     <li className="dropdown">
                                         <button
-                                            className="dropdown-toggle"
+                                            className={`dropdown-toggle ${isActive("/industry-agriculture-&-forestry")}`}
                                             onClick={() => toggleDropdown('industries')}
                                         >
                                             Industries
                                         </button>
                                         {activeDropdown === 'industries' && (
                                             <ul className="dropdown-menu">
-                                                <li><a href="/industry-agriculture-&-forestry">Agriculture & Forestry</a></li>
-                                                <li><a href="/industry-construction">Construction</a></li>
-                                                <li><a href="/industry-wind-turbines">Wind Turbines</a></li>
-                                                <li><a href="/industry-shipping">Shipping</a></li>
-                                                <li><a href="/industry-cable-cars-&-lifts">Cable Cars & Lifts</a></li>
-                                                <li><a href="/industry-combines-heat-&-power-plants">Combined Heat & Power Plants</a></li>
+                                                <li><Link to="/industry-agriculture-&-forestry" className={isActive("/industry-agriculture-&-forestry")} onClick={closeDropdown}>Agriculture & Forestry</Link></li>
+                                                <li><Link to="/industry-construction" className={isActive("/industry-construction")} onClick={closeDropdown}>Construction</Link></li>
+                                                <li><Link to="/industry-wind-turbines" className={isActive("/industry-wind-turbines")} onClick={closeDropdown}>Wind Turbines</Link></li>
+                                                <li><Link to="/industry-shipping" className={isActive("/industry-shipping")} onClick={closeDropdown}>Shipping</Link></li>
+                                                <li><Link to="/industry-cable-cars-&-lifts" className={isActive("/industry-cable-cars-&-lifts")} onClick={closeDropdown}>Cable Cars & Lifts</Link></li>
+                                                <li><Link to="/industry-combines-heat-&-power-plants" className={isActive("/industry-combines-heat-&-power-plants")} onClick={closeDropdown}>Combined Heat & Power Plants</Link></li>
                                             </ul>
                                         )}
                                     </li>
-                                    <li><a href="/blog">Blog</a></li>
-                                    <li><a href="/products">Products</a></li>
+                                    <li><Link to="/blog" className={isActive("/blog")}>Blog</Link></li>
+                                    <li><Link to="/products" className={isActive("/products")}>Products</Link></li>
                                 </ul>
                             </div>
                         </nav>
 
                         {/* Call-to-action Button */}
                         <div className="common-btn d-none d-lg-block">
-                            <button><a href="/contact">Let's Connect</a></button>
+                            <button><Link to="/contact" className={isActive("/contact")}>Let's Connect</Link></button>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     );
 };

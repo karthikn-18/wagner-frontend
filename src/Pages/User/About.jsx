@@ -21,6 +21,7 @@ import { gsap } from "gsap";
 import { TextPlugin } from 'gsap/TextPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Testimonials from '../../Components/Testimonials';
+import WagnerProfileImage from '../../assets/Resources/new-wagner-image.jpg'
 // Register the TextPlugin
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
@@ -338,7 +339,7 @@ const About = () => {
                 <div className="container">
                     <div className="title-content title-content-all text-center">
                         <div className="title" data-aos="fade-down">
-                            <h1>Over <span>7+</span> Countries Worldwide</h1>
+                            <h1>Over <span>40+</span> Countries Worldwide</h1>
                         </div>
                     </div>
                     <div className="branch-content">
@@ -492,7 +493,7 @@ const About = () => {
                         <div className="col-lg-5">
                             <div data-aos="flip-right" data-aos-anchor-placement="top-center">
                                 <div className="image">
-                                    <img src={LeaderShipImage} alt="" />
+                                    <img src={WagnerProfileImage} alt="" />
                                 </div>
                             </div>
                         </div>

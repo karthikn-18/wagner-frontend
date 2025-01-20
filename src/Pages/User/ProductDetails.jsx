@@ -64,39 +64,52 @@ const ProductDetails = () => {
                                 <h1>{data?.data?.data?.name}</h1>
                                 <p>{data?.data?.data?.description}</p>
                                 <div className="overview">
-                                    <div className="row">
-                                        <div className="col-lg-5">
-                                            <h6>Application:</h6>
-                                            <h6>Industry:</h6>
-                                            <h6>Category:</h6>
-                                        </div>
-
-                                        <div className="col-lg-7 type">
-                                            {data?.data?.data?.applications?.length > 0 ? (
-                                                <h6 className='flex flex-wrap'>
-                                                    {data.data.data.applications.map((item) => item.name).join(", ")}
-                                                </h6>
-                                            ) : (
-                                                <h6>Not Available</h6>
-                                            )}
-
-                                            {data?.data?.data?.industries?.length > 0 ? (
-                                                <h6 className='flex flex-wrap'>
-                                                    {data.data.data.industries.map((item) => item.name).join(", ")}
-                                                </h6>
-                                            ) : (
-                                                <h6>Not Available</h6>
-                                            )}
-
-                                            {data?.data?.data?.category?.name ? (
-                                                <h6>{data.data.data.category.name}</h6>
-                                            ) : (
-                                                <h6>Not Available</h6>
-                                            )}
+                                    <div className="item">
+                                        <div className="row">
+                                            <div className="col-lg-5">
+                                                <h6>Application:</h6>
+                                            </div>
+                                            <div className="col-lg-7 type">
+                                                {data?.data?.data?.applications?.length > 0 ? (
+                                                    <h6 className='flex flex-wrap'>
+                                                        {data.data.data.applications.map((item) => item.name).join(", ")}
+                                                    </h6>
+                                                ) : (
+                                                    <h6>Not Available</h6>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
-
-
+                                    <div className="item">
+                                        <div className="row">
+                                            <div className="col-lg-5">
+                                                <h6>Industry:</h6>
+                                            </div>
+                                            <div className="col-lg-7 type">
+                                                {data?.data?.data?.industries?.length > 0 ? (
+                                                    <h6 className='flex flex-wrap'>
+                                                        {data.data.data.industries.map((item) => item.name).join(", ")}
+                                                    </h6>
+                                                ) : (
+                                                    <h6>Not Available</h6>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="item">
+                                        <div className="row">
+                                            <div className="col-lg-5">
+                                                <h6>Category:</h6>
+                                            </div>
+                                            <div className="col-lg-7 type">
+                                                {data?.data?.data?.category?.name ? (
+                                                    <h6>{data.data.data.category.name}</h6>
+                                                ) : (
+                                                    <h6>Not Available</h6>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="sizes-itemno">
                                     <h6><b>Available sizes:</b>{data?.data?.data?.availableSizes}</h6>
@@ -117,8 +130,86 @@ const ProductDetails = () => {
                     </div>
                 </div>
             </div>
+
+
+
             <div className="product-overview-contents">
                 <div className="container">
+                    <div className="row">
+                        <div className="title">
+                            <h2>Applications
+                            </h2>
+                        </div>
+                        <ul>
+                            {
+                                data?.data?.data?.applicationInfo?.length > 0 ? (
+                                    data.data.data.applicationInfo.map((item) => (
+                                        <li className='flex'><VscDebugBreakpointLog className='icon' />
+                                            {item}
+                                        </li>
+
+                                    ))
+                                ) : (
+                                    <h6>Not Available</h6>
+                                )
+                            }
+
+                        </ul>
+                    </div>
+
+                    <div className="row">
+                        <div className="title">
+                            <h2>Properties
+                            </h2>
+                        </div>
+                        <ul>
+                            {
+                                data?.data?.data?.properties?.length > 0 ? (
+                                    data.data.data.properties.map((item) => (
+                                        <li className='flex'><VscDebugBreakpointLog className='icon' />
+                                            {item}
+                                        </li>
+
+                                    ))
+                                ) : (
+                                    <h6>Not Available</h6>
+                                )
+                            }
+
+                        </ul>
+                    </div>
+                    <div className="row">
+                        <div className="title">
+                            <h2>Approvals & Recommendation
+                            </h2>
+                        </div>
+                        <h5>API SN</h5>
+                        <p>Mazda, Nissan, Honda, Toyota</p>
+                    </div>
+                    <div className="row">
+                        <div className="title">
+                            <h2>Packing & Item No</h2>
+                        </div>
+                        <table className='table'>
+                            <tr>
+                                <th>Packing</th>
+                                <th>Item No</th>
+                            </tr>
+                            {
+                                data?.data?.data?.packageInfo?.length > 0 ? (
+                                    data.data.data.packageInfo.map((item) => (
+                                        < tr >
+                                            <td>{item?.packing}</td>
+                                            <td>{item?.itemNo}</td>
+                                        </tr>
+
+                                    ))
+                                ) : ""
+                            }
+                        </table>
+                    </div>
+
+                    {/* 
                     <nav data-aos="fade-down">
                         <div className="nav nav-tabs custom-tabs" id="nav-tab" role="tablist">
                             <button
@@ -256,7 +347,7 @@ const ProductDetails = () => {
                         </div>
 
 
-                    </div>
+                    </div> */}
                 </div>
             </div >
 

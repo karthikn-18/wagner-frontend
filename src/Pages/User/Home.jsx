@@ -136,10 +136,94 @@ const Home = () => {
 
     // State to manage the visibility of the filter dropdown
     const [isFilterActive, setFilterActive] = useState(false);
-
-    // Toggle function to show/hide the filter dropdown
+    const [activeTab, setActiveTab] = useState('automotive-oils');
     const toggleFilter = () => {
-        setFilterActive(!isFilterActive);
+        setIsFilterActive(!isFilterActive);
+    };
+
+    const handleTabClick = (tab) => {
+        setActiveTab(tab);
+    };
+
+    const productShowcases = {
+        "automotive-oils": (
+            <div className="row product-section products">
+                <div className="col-lg-3">
+                    <div className="box" data-aos="fade-up">
+                        <div className="product-image">
+                            <img src={Product3} alt="WAGNER EVOMAX SAE 5W-30 SN C3" />
+                        </div>
+                        <div className="product-detail">
+                            <h5>WAGNER EVOMAX SAE 5W-30 SN C3</h5>
+                            <p>High-performance low-viscosity engine oil with synthetic technology.</p>
+                        </div>
+                        <div className="product-btns">
+                            <div className="common-border-btn">
+                                <button onClick={() => navigate(`/product-detail`)}>View Details</button>
+                            </div>
+                            {/* <div className="common-btn"><button
+                            onClick={() => window.open(item?.buyExternalLinks?.main, "_blank", "noopener,noreferrer")}
+                            className="text-decoration-none">
+                            Buy Now</button>
+                            </div> */}
+                        </div>
+                    </div>
+                </div>
+                {/* Add more product items here */}
+            </div>
+        ),
+        "classic-oils": (
+            <div className="row">
+                <div className="col-lg-3">
+                    <div className="box" data-aos="fade-up">
+                        <div className="product-image">
+                            <img src={Product2} alt="Classic Engine Oil 10W-30" />
+                        </div>
+                        <div className="product-detail">
+                            <h5>Classic Engine Oil 10W-30</h5>
+                            <p>Engine oil formulated for classic cars.</p>
+                        </div>
+                        <div className="product-btns">
+                            <div className="common-border-btn">
+                                <button onClick={() => navigate(`/product-detail`)}>View Details</button>
+                            </div>
+                            {/* <div className="common-btn"><button
+                            onClick={() => window.open(item?.buyExternalLinks?.main, "_blank", "noopener,noreferrer")}
+                            className="text-decoration-none">
+                            Buy Now</button>
+                            </div> */}
+                        </div>
+                    </div>
+                </div>
+                {/* Add more product items here */}
+            </div>
+        ),
+        "industrial-lubricants": (
+            <div className="row">
+                <div className="col-lg-3">
+                    <div className="box" data-aos="fade-up">
+                        <div className="product-image">
+                            <img src={Product1} alt="Industrial Lubricant X1" />
+                        </div>
+                        <div className="product-detail">
+                            <h5>Industrial Lubricant X1</h5>
+                            <p>Heavy-duty lubricant for industrial machines.</p>
+                        </div>
+                        <div className="product-btns">
+                            <div className="common-border-btn">
+                                <button onClick={() => navigate(`/product-detail`)}>View Details</button>
+                            </div>
+                            {/* <div className="common-btn"><button
+                            onClick={() => window.open(item?.buyExternalLinks?.main, "_blank", "noopener,noreferrer")}
+                            className="text-decoration-none">
+                            Buy Now</button>
+                            </div> */}
+                        </div>
+                    </div>
+                </div>
+                {/* Add more product items here */}
+            </div>
+        ),
     };
 
 
@@ -215,7 +299,7 @@ const Home = () => {
                     <div className='banner-4'>
                         <div className="container">
                             <div className="banner-contents">
-                                <h5 data-aos="fade-right">UNLOCK THE WORLD OF</h5>
+                                <h5 data-aos="fade-right">UNLOCKING THE WORLD OF</h5>
                                 <h1 data-aos="fade-right" data-aos-delay="500">Lubricants & <span className='ban-outline'>Additives</span></h1>
                                 <p data-aos="fade-right" data-aos-delay="1000">Wagner, a comprehensive range of high-quality
                                     lubricants designed to meet the needs of various
@@ -231,7 +315,7 @@ const Home = () => {
                     <div className='banner-3'>
                         <div className="container">
                             <div className="banner-contents">
-                                <h5 data-aos="fade-right">UNLOCK THE WORLD OF</h5>
+                                <h5 data-aos="fade-right">UNLOCKING THE WORLD OF</h5>
                                 <h1 data-aos="fade-right" data-aos-delay="500">Lubricants & <span className='ban-outline'>Additives</span></h1>
                                 <p data-aos="fade-right" data-aos-delay="1000">Wagner, a comprehensive range of high-quality
                                     lubricants designed to meet the needs of various
@@ -247,7 +331,7 @@ const Home = () => {
                     <div className='banner-1'>
                         <div className="container">
                             <div className="banner-contents">
-                                <h5 data-aos="fade-right">UNLOCK THE WORLD OF</h5>
+                                <h5 data-aos="fade-right">UNLOCKING THE WORLD OF</h5>
                                 <h1 data-aos="fade-right" data-aos-delay="500">Lubricants & <span className='ban-outline'>Additives</span></h1>
                                 <p data-aos="fade-right" data-aos-delay="1000">Wagner, a comprehensive range of high-quality
                                     lubricants designed to meet the needs of various
@@ -263,7 +347,7 @@ const Home = () => {
                     <div className='banner-2'>
                         <div className="container">
                             <div className="banner-contents">
-                                <h5 data-aos="fade-right">UNLOCK THE WORLD OF</h5>
+                                <h5 data-aos="fade-right">UNLOCKING THE WORLD OF</h5>
                                 <h1 data-aos="fade-right" data-aos-delay="500">Lubricants & <span className='ban-outline'>Additives</span></h1>
                                 <p data-aos="fade-right" data-aos-delay="1000">Wagner, a comprehensive range of high-quality
                                     lubricants designed to meet the needs of various
@@ -283,7 +367,7 @@ const Home = () => {
                             <button>SELECT YOUR VEHICLE</button>
                         </div>
                         <div className="vehicle-category">
-                            <div data-aos="fade-up" data-aos-delay="1600">
+                            <div data-aos="fade-up" data-aos-delay="1600" data-aos-offset="0">
                                 <div className="item" >
                                     <a href="/application-cars">
                                         <div className="icon first">
@@ -293,7 +377,7 @@ const Home = () => {
                                     </a>
                                 </div>
                             </div>
-                            <div data-aos="fade-up" data-aos-delay="1700">
+                            <div data-aos="fade-up" data-aos-delay="1700" data-aos-offset="0">
                                 <div className="item" >
                                     <a href="/application-motorcycle">
                                         <div className="icon">
@@ -303,7 +387,7 @@ const Home = () => {
                                     </a>
                                 </div>
                             </div>
-                            <div data-aos="fade-up" data-aos-delay="1800">
+                            <div data-aos="fade-up" data-aos-delay="1800" data-aos-offset="0">
                                 <div className="item">
                                     <a href="/application-classic">
                                         <div className="icon">
@@ -313,7 +397,7 @@ const Home = () => {
                                     </a>
                                 </div>
                             </div>
-                            <div data-aos="fade-up" data-aos-delay="1900">
+                            <div data-aos="fade-up" data-aos-delay="1900" data-aos-offset="0">
                                 <div className="item">
                                     <a href="/application-offroad">
                                         <div className="icon">
@@ -323,7 +407,7 @@ const Home = () => {
                                     </a>
                                 </div>
                             </div>
-                            <div data-aos="fade-up" data-aos-delay="2000">
+                            <div data-aos="fade-up" data-aos-delay="2000" data-aos-offset="0">
                                 <div className="item">
                                     <a href="/application-tuning">
                                         <div className="icon">
@@ -333,7 +417,7 @@ const Home = () => {
                                     </a>
                                 </div>
                             </div>
-                            <div data-aos="fade-up" data-aos-delay="2100">
+                            <div data-aos="fade-up" data-aos-delay="2100" data-aos-offset="0">
                                 <div className="item">
                                     <a href="/application-motorcycle">
                                         <div className="icon">
@@ -343,7 +427,7 @@ const Home = () => {
                                     </a>
                                 </div>
                             </div>
-                            <div data-aos="fade-up" data-aos-delay="2200">
+                            <div data-aos="fade-up" data-aos-delay="2200" data-aos-offset="0">
                                 <div className="item">
                                     <a href="/application-truck">
                                         <div className="icon">
@@ -353,7 +437,7 @@ const Home = () => {
                                     </a>
                                 </div>
                             </div>
-                            <div data-aos="fade-up" data-aos-delay="2300">
+                            <div data-aos="fade-up" data-aos-delay="2300" data-aos-offset="0">
                                 <div className="item">
                                     <a href="/application-boat">
                                         <div className="icon">
@@ -363,7 +447,7 @@ const Home = () => {
                                     </a>
                                 </div>
                             </div>
-                            <div data-aos="fade-up" data-aos-delay="2400">
+                            <div data-aos="fade-up" data-aos-delay="2400" data-aos-offset="0">
                                 <div className="item">
                                     <a href="/application-ship">
                                         <div className="icon">
@@ -373,7 +457,7 @@ const Home = () => {
                                     </a>
                                 </div>
                             </div>
-                            <div data-aos="fade-up" data-aos-delay="2500">
+                            <div data-aos="fade-up" data-aos-delay="2500" data-aos-offset="0">
                                 <div className="item">
                                     <a href="/application-aviation">
                                         <div className="icon">
@@ -504,52 +588,104 @@ const Home = () => {
                             <button>OUR LINEUPS</button>
                         </div>
                         <div className="title">
-                            <h1 >High-performance formulations engineered to boost engine efficiency and
-                                extend your vehicle’s lifespan.</h1>
+                            <h1>High-performance formulations engineered to boost engine efficiency and extend your vehicle’s lifespan.</h1>
                         </div>
                     </div>
                     <div className="product-showcase">
                         <div className="row">
                             <div className="col-lg-3">
                                 <div data-aos="fade-right">
-                                    <div className="product-menu-wrapper" >
+                                    <div className="product-menu-wrapper">
                                         {/* Desktop View */}
                                         <div className="product-menu d-none d-lg-block">
                                             <ul>
-                                                <li><NavLink className="activeTab">Automotive Oils</NavLink><IoIosArrowForward className="activeTab" /></li>
-                                                <li><NavLink>Classic Oils</NavLink><IoIosArrowDown /></li>
-                                                <li><NavLink>Industrial Lubricants</NavLink><IoIosArrowDown /></li>
-                                                <li><NavLink>High-tech Additives</NavLink><IoIosArrowDown /></li>
-                                                <li><NavLink>Aviation</NavLink><IoIosArrowDown /></li>
-                                                <li><NavLink>Tank Restoration</NavLink><IoIosArrowDown /></li>
-                                                <li><NavLink>Technical Sprays</NavLink><IoIosArrowDown /></li>
-                                                <li><NavLink>Greases & Pastes</NavLink><IoIosArrowDown /></li>
-                                                <li><NavLink>Specialty Products</NavLink><IoIosArrowDown /></li>
-                                                <li><NavLink>Cleaning & Care</NavLink><IoIosArrowDown /></li>
+                                                <li onClick={() => handleTabClick('automotive-oils')}>
+                                                    <NavLink className={activeTab === 'automotive-oils' ? 'activeTab' : ''}>
+                                                        Automotive Oils
+                                                    </NavLink>
+                                                    {activeTab === 'automotive-oils' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
+                                                </li>
+                                                <li onClick={() => handleTabClick('classic-oils')}>
+                                                    <NavLink className={activeTab === 'classic-oils' ? 'activeTab' : ''}>
+                                                        Classic Oils
+                                                    </NavLink>
+                                                    {activeTab === 'classic-oils' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
+                                                </li>
+                                                <li onClick={() => handleTabClick('industrial-lubricants')}>
+                                                    <NavLink className={activeTab === 'industrial-lubricants' ? 'activeTab' : ''}>
+                                                        Industrial Lubricants
+                                                    </NavLink>
+                                                    {activeTab === 'industrial-lubricants' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
+                                                </li>
+                                                <li onClick={() => handleTabClick('high-tech-additives')}>
+                                                    <NavLink className={activeTab === 'high-tech-additives' ? 'activeTab' : ''}>
+                                                        High-tech Additives
+                                                    </NavLink>
+                                                    {activeTab === 'high-tech-additives' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
+                                                </li>
+                                                <li onClick={() => handleTabClick('aviation')}>
+                                                    <NavLink className={activeTab === 'aviation' ? 'activeTab' : ''}>
+                                                        Aviation
+                                                    </NavLink>
+                                                    {activeTab === 'aviation' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
+                                                </li>
+                                                <li onClick={() => handleTabClick('tank-restoration')}>
+                                                    <NavLink className={activeTab === 'tank-restoration' ? 'activeTab' : ''}>
+                                                        Tank Restoration
+                                                    </NavLink>
+                                                    {activeTab === 'tank-restoration' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
+                                                </li>
+                                                <li onClick={() => handleTabClick('technical-sprays')}>
+                                                    <NavLink className={activeTab === 'technical-sprays' ? 'activeTab' : ''}>
+                                                        Technical Sprays
+                                                    </NavLink>
+                                                    {activeTab === 'technical-sprays' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
+                                                </li>
+                                                <li onClick={() => handleTabClick('greases-pastes')}>
+                                                    <NavLink className={activeTab === 'greases-pastes' ? 'activeTab' : ''}>
+                                                        Greases & Pastes
+                                                    </NavLink>
+                                                    {activeTab === 'greases-pastes' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
+                                                </li>
+                                                <li onClick={() => handleTabClick('specialty-products')}>
+                                                    <NavLink className={activeTab === 'specialty-products' ? 'activeTab' : ''}>
+                                                        Specialty Products
+                                                    </NavLink>
+                                                    {activeTab === 'specialty-products' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
+                                                </li>
+                                                <li onClick={() => handleTabClick('cleaning-care')}>
+                                                    <NavLink className={activeTab === 'cleaning-care' ? 'activeTab' : ''}>
+                                                        Cleaning & Care
+                                                    </NavLink>
+                                                    {activeTab === 'cleaning-care' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
+                                                </li>
                                             </ul>
                                         </div>
 
                                         {/* Mobile View (Categories Filter) */}
                                         <div className="mobile-filter d-lg-none">
-                                            <button className="filter-button" onClick={toggleFilter}>Categories<IoIosArrowDown /></button>
+                                            <button className="filter-button" onClick={toggleFilter}>
+                                                Categories<IoIosArrowDown />
+                                            </button>
                                             <div className={`filter-dropdown ${isFilterActive ? 'active' : ''}`}>
                                                 <ul>
-                                                    <li><NavLink>Automotive Oils</NavLink></li>
-                                                    <li><NavLink>Classic Oils</NavLink></li>
-                                                    <li><NavLink>Industrial Lubricants</NavLink></li>
-                                                    <li><NavLink>High-tech Additives</NavLink></li>
-                                                    <li><NavLink>Aviation</NavLink></li>
-                                                    <li><NavLink>Tank Restoration</NavLink></li>
-                                                    <li><NavLink>Technical Sprays</NavLink></li>
-                                                    <li><NavLink>Greases & Pastes</NavLink></li>
-                                                    <li><NavLink>Specialty Products</NavLink></li>
-                                                    <li><NavLink>Cleaning & Care</NavLink></li>
+                                                    <li onClick={() => handleTabClick('automotive-oils')}><NavLink>Automotive Oils</NavLink></li>
+                                                    <li onClick={() => handleTabClick('classic-oils')}><NavLink>Classic Oils</NavLink></li>
+                                                    <li onClick={() => handleTabClick('industrial-lubricants')}><NavLink>Industrial Lubricants</NavLink></li>
+                                                    <li onClick={() => handleTabClick('high-tech-additives')}><NavLink>High-tech Additives</NavLink></li>
+                                                    <li onClick={() => handleTabClick('aviation')}><NavLink>Aviation</NavLink></li>
+                                                    <li onClick={() => handleTabClick('tank-restoration')}><NavLink>Tank Restoration</NavLink></li>
+                                                    <li onClick={() => handleTabClick('technical-sprays')}><NavLink>Technical Sprays</NavLink></li>
+                                                    <li onClick={() => handleTabClick('greases-pastes')}><NavLink>Greases & Pastes</NavLink></li>
+                                                    <li onClick={() => handleTabClick('specialty-products')}><NavLink>Specialty Products</NavLink></li>
+                                                    <li onClick={() => handleTabClick('cleaning-care')}><NavLink>Cleaning & Care</NavLink></li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            {/* Other columns with products */}
                             <div className="col-lg-9">
                                 <div className="products">
                                     <div className="header">
@@ -565,222 +701,14 @@ const Home = () => {
                                         </div>
 
                                     </div>
-                                    <div className="row">
-                                        <div className="col-lg-3">
-                                            <div data-aos="fade-up">
-                                                <div className="box">
-                                                    <div className="product-image">
-                                                        <img src={Product1} alt="" />
-                                                    </div>
-                                                    <div className="product-detail">
-                                                        <h5>WAGNER EVOMAX SAE 5W-30 SN C3</h5>
-                                                        <p>WAGNER EVOMAX SAE 5W-30 SN C3
-                                                            is a high-perfor
-                                                            -
-                                                            mance low-viscosity engine oil with synthetic technology</p>
-                                                    </div>
-                                                    <div className="product-btns">
-                                                        <div className="common-border-btn">
-                                                            <button><a href="/product-detail">View Details</a></button>
-                                                        </div>
-                                                        <div className="common-btn">
-                                                            <button>Buy Now</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-3">
-                                            <div data-aos="fade-up" data-aos-delay="200">
-                                                <div className="box">
-                                                    <div className="product-image">
-                                                        <img src={Product2} alt="" />
-                                                    </div>
-                                                    <div className="product-detail">
-                                                        <h5>Wagner CargoX 20W-50 CI-4</h5>
-                                                        <p>It is a robust, high-
-                                                            viscosity engine oil designed for use in heavy-duty
-                                                            diesel engines that operate under extreme
-                                                            temperatures and high-load conditions</p>
-                                                    </div>
-                                                    <div className="product-btns">
-                                                        <div className="common-border-btn">
-                                                            <button>View Details</button>
-                                                        </div>
-                                                        <div className="common-btn">
-                                                            <button>Buy Now</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-3">
-                                            <div data-aos="fade-up" data-aos-delay="400">
-                                                <div className="box">
-                                                    <div className="product-image">
-                                                        <img src={Product3} alt="" />
-                                                    </div>
-                                                    <div className="product-detail">
-                                                        <h5>Wagner CargoX 10W-40 API CI-4</h5>
-                                                        <p>It is is a high-
-                                                            performance synthetic blend engine oil designed for
-                                                            use in modern, high-output diesel engines</p>
-                                                    </div>
-                                                    <div className="product-btns">
-                                                        <div className="common-border-btn">
-                                                            <button>View Details</button>
-                                                        </div>
-                                                        <div className="common-btn">
-                                                            <button>Buy Now</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-3">
-                                            <div data-aos="fade-up" data-aos-delay="600">
-                                                <div className="box">
-                                                    <div className="product-image">
-                                                        <img src={Product4} alt="" />
-                                                    </div>
-                                                    <div className="product-detail">
-                                                        <h5>WAGNER EVOMAX SAE 0W-30 SN C2 C3</h5>
-                                                        <p>It is is a highly
-                                                            modern, fully synthetic, long life engine oil which has been
-                                                            specially developed for the latest requirement.</p>
-                                                    </div>
-                                                    <div className="product-btns">
-                                                        <div className="common-border-btn">
-                                                            <button>View Details</button>
-                                                        </div>
-                                                        <div className="common-btn">
-                                                            <button>Buy Now</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {/* <div className="col-lg-3">
-                                            <div className="box">
-                                                <div className="product-image">
-                                                    <img src={ProductImage} alt="" />
-                                                </div>
-                                                <div className="product-detail">
-                                                    <h5>Wagner VG 150 Industrial Oil</h5>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                </div>
-                                                <div className="product-btns">
-                                                    <div className="common-border-btn">
-                                                        <button>View Details</button>
-                                                    </div>
-                                                    <div className="common-btn">
-                                                        <button>Buy Now</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-3">
-                                            <div className="box">
-                                                <div className="product-image">
-                                                    <img src={ProductImage} alt="" />
-                                                </div>
-                                                <div className="product-detail">
-                                                    <h5>Wagner VG 150 Industrial Oil</h5>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                </div>
-                                                <div className="product-btns">
-                                                    <div className="common-border-btn">
-                                                        <button>View Details</button>
-                                                    </div>
-                                                    <div className="common-btn">
-                                                        <button>Buy Now</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-3">
-                                            <div className="box">
-                                                <div className="product-image">
-                                                    <img src={ProductImage} alt="" />
-                                                </div>
-                                                <div className="product-detail">
-                                                    <h5>Wagner VG 150 Industrial Oil</h5>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                </div>
-                                                <div className="product-btns">
-                                                    <div className="common-border-btn">
-                                                        <button>View Details</button>
-                                                    </div>
-                                                    <div className="common-btn">
-                                                        <button>Buy Now</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-3">
-                                            <div className="box">
-                                                <div className="product-image">
-                                                    <img src={ProductImage} alt="" />
-                                                </div>
-                                                <div className="product-detail">
-                                                    <h5>Wagner VG 150 Industrial Oil</h5>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                </div>
-                                                <div className="product-btns">
-                                                    <div className="common-border-btn">
-                                                        <button>View Details</button>
-                                                    </div>
-                                                    <div className="common-btn">
-                                                        <button>Buy Now</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-3">
-                                            <div className="box">
-                                                <div className="product-image">
-                                                    <img src={ProductImage} alt="" />
-                                                </div>
-                                                <div className="product-detail">
-                                                    <h5>Wagner VG 150 Industrial Oil</h5>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                </div>
-                                                <div className="product-btns">
-                                                    <div className="common-border-btn">
-                                                        <button>View Details</button>
-                                                    </div>
-                                                    <div className="common-btn">
-                                                        <button>Buy Now</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-3">
-                                            <div className="box">
-                                                <div className="product-image">
-                                                    <img src={ProductImage} alt="" />
-                                                </div>
-                                                <div className="product-detail">
-                                                    <h5>Wagner VG 150 Industrial Oil</h5>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                                </div>
-                                                <div className="product-btns">
-                                                    <div className="common-border-btn">
-                                                        <button>View Details</button>
-                                                    </div>
-                                                    <div className="common-btn">
-                                                        <button>Buy Now</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> */}
-                                    </div>
+                                    <div className="row">{productShowcases[activeTab]}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div >
+            </div>
+
 
 
             {/* why us section */}
@@ -888,15 +816,6 @@ const Home = () => {
                                     <h1>At Wagner Oils, customer satisfaction is our highest priority. We’re proud to serve industries
                                         worldwide with products that consistently exceed expectations. Don’t just take our word for
                                         it—here’s what our valued clients have to say about their experiences with us: </h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div data-aos="fade-left">
-                            <div className="title-btn">
-                                <div className="test-btn">
-                                    <a href="/about">
-                                        <button>More About us</button>
-                                    </a>
                                 </div>
                             </div>
                         </div>
