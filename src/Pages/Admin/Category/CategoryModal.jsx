@@ -11,7 +11,7 @@ const CategoryModal = ({ openModal, setOpenModal, onSave, selectedValue, refetch
 
     useEffect(() => {
         if (selectedValue?._id) {
-            setFormData({ name: selectedValue?.name || '' });
+            setFormData({ name: selectedValue?.name || '', image: selectedValue?.image || null });
         }
     }, [selectedValue]);
 
@@ -20,8 +20,8 @@ const CategoryModal = ({ openModal, setOpenModal, onSave, selectedValue, refetch
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const { mutate: editCategoryMutate, isLoading: isEditing } = useEditCategory();
-    const { mutate: addCategoryMutate, isLoading: isAdding } = useAddCategory();
+    const { mutate: editCategoryMutate, isPending: isEditing } = useEditCategory();
+    const { mutate: addCategoryMutate, isPending: isAdding } = useAddCategory();
 
     const handleCloseFunction = () => {
         setFormData({ name: '', image: null });
@@ -55,10 +55,13 @@ const CategoryModal = ({ openModal, setOpenModal, onSave, selectedValue, refetch
                 setError('Only PNG/JPG images under 4MB are allowed.');
             }
         }
+        e.target.value = '';
     };
 
-    // Combine loading state for both add and edit operations
-    const isLoading = isAdding || isEditing;
+    const handleRemoveImage = () => {
+        setFormData((prev) => ({ ...prev, image: null }));
+        setSelectedImageName('');
+    };
 
     return (
         <Modal show={openModal} onClose={handleCloseFunction}>
@@ -107,16 +110,16 @@ const CategoryModal = ({ openModal, setOpenModal, onSave, selectedValue, refetch
                 <Button
                     color="gray"
                     onClick={handleSubmit}
-                    disabled={isLoading}
+                    disabled={selectedValue?._id ? isEditing : isAdding}
                 >
-                    {isLoading && <Loader2 size={20} className="animate-spin mr-2" />}
+                    {(selectedValue?._id ? isEditing : isAdding) && <Loader2 size={20} className="animate-spin mr-2" />}
                     Save
                 </Button>
                 <Button color="gray" onClick={handleCloseFunction}>
                     Cancel
                 </Button>
             </Modal.Footer>
-        </Modal>
+        </Modal >
     );
 };
 

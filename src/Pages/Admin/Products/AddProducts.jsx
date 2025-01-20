@@ -18,25 +18,17 @@ const AddProductForm = () => {
     const { id } = useParams();
     // const [isLoading, setIsLoading] = useState(false);
 
-    let isLoading = false;
-
-    let mutate;
     let SingleProduct;
+    const { mutate: singleProduct, isPending: isEditLoading } = useEditProduct();
     if (id) {
-        const { mutate: singleProduct, isLoading: isEditLoading } = useEditProduct();
-        mutate = singleProduct;
         const { data: product } = useProductGetSingleIdQuery(id);
         SingleProduct = product?.data?.data;
-        // setIsLoading(isEditLoading);
-        isLoading = isEditLoading;
-    } else {
-        const { mutate: addProduct, isLoading: isAddLoading } = useAddProduct();
-        mutate = addProduct;
-        isLoading = isAddLoading;
-        // setIsLoading(isAddLoading);
     }
 
-    console.log(SingleProduct, "SingleProduct")
+    const { mutate: addProduct, isPending: isAddLoading, isError, isPending } = useAddProduct();
+
+
+    console.log(isAddLoading, "SingleProduct", isPending)
 
 
     useEffect(() => {
@@ -82,7 +74,7 @@ const AddProductForm = () => {
     const [applicationInfo, setApplicationInfo] = useState(['']);
     const [applications, setApplications] = useState([]);
     const [industries, setIndustries] = useState([]);
-
+    const [imagesToDelete, setImagesToDelete] = useState([]);
     const [properties, setProperties] = useState(['']);
     const [buyExternalLinks, setBuyExternalLinks] = useState({
         main: '',
@@ -96,13 +88,19 @@ const AddProductForm = () => {
 
     const handleImageUpload = (e) => {
         const files = Array.from(e.target.files);
-        console.log(files, "files");
-
-        if (images.length + files.length <= 4) {
-            setImages((prev) => [...prev, ...files]);
+        if (images.length + files.length > 4) {
+            toast.error("You can only upload up to 4 images.");
+            return;
         }
 
-        e.target.value = '';
+        const newImages = files.map((file) => ({
+            type: "new",
+            file,
+        }));
+
+        setImages((prev) => [...prev, ...newImages]);
+
+        e.target.value = "";
     };
 
 
@@ -148,104 +146,96 @@ const AddProductForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('hello', images)
-        // setIsLoading(true);
+        console.log("hello", images);
         try {
             const productNameRegex = /^[a-zA-Z0-9\s]+$/;
             const priceRegex = /^\d+(\.\d{1,2})?$/;
             const descriptionRegex = /^[a-zA-Z0-9\s.,;:'"!?()-_&]*$/;
             const availableSizeRegex = /^[a-zA-Z0-9\s, ]+$/;
             const urlRegex = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[^\s]*)?$/;
-            const applicationInfoRegex = /^[a-zA-Z0-9\s]+$/;
-            const propertiesRegex = /^[a-zA-Z0-9\s]+$/;
 
             if (!productNameRegex.test(formData.name)) {
-                toast.error('Product Name must only contain letters, numbers, and spaces.');
+                toast.error("Product Name must only contain letters, numbers, and spaces.");
                 return;
             }
-
             if (formData.price && !priceRegex.test(formData.price)) {
-                toast.error('Price must be a valid number.');
+                toast.error("Price must be a valid number.");
                 return;
             }
-
             if (formData.description && !descriptionRegex.test(formData.description)) {
-                toast.error('Description contains invalid characters.');
+                toast.error("Description contains invalid characters.");
                 return;
             }
-
             if (!availableSizeRegex.test(formData.availableSize)) {
-                toast.error('Available Size must be alphanumeric.');
+                toast.error("Available Size must be alphanumeric.");
                 return;
             }
-
             if (buyExternalLinks.main && !urlRegex.test(buyExternalLinks.main)) {
-                toast.error('Main link is not a valid URL.');
-                return;
-            }
-            if (buyExternalLinks.amazon && !urlRegex.test(buyExternalLinks.amazon)) {
-                toast.error('Amazon link is not a valid URL.');
-                return;
-            }
-            if (buyExternalLinks.flipkart && !urlRegex.test(buyExternalLinks.flipkart)) {
-                toast.error('Flipkart link is not a valid URL.');
-                return;
-            }
-            if (buyExternalLinks.noon && !urlRegex.test(buyExternalLinks.noon)) {
-                toast.error('Noon link is not a valid URL.');
+                toast.error("Main link is not a valid URL.");
                 return;
             }
 
-
-            // for (let info of applicationInfo) {
-            //     if (!applicationInfoRegex.test(info)) {
-            //         toast.error('Application Info contains invalid characters.');
-            //         return;
-            //     }
-            // }
-
-
-            // for (let property of properties) {
-            //     if (!propertiesRegex.test(property)) {
-            //         toast.error('Property contains invalid characters.');
-            //         return;
-            //     }
-            // }
             if (images?.length === 0) {
-                toast.error('Please add at least one image!');
+                toast.error("Please add at least one image!");
                 return;
             }
-            console.log({
-                ...formData,
-                images,
-                packageInfo,
-                applicationInfo,
-                properties,
-                buyExternalLinks,
-                selectedIndustries,
-                selectedApplications
+
+            // Prepare FormData
+            const formDataToSend = new FormData();
+
+
+            Object.keys(formData).forEach((key) => {
+                formDataToSend.append(key, formData[key]);
             });
 
-            mutate({
-                data: {
-                    ...formData,
-                    images,
-                    packageInfo,
-                    applicationInfo,
-                    properties,
-                    buyExternalLinks,
-                    selectedIndustries,
-                    selectedApplications
-                }
-                , id
-            })
 
+            images.forEach((image) => {
+                if (image.type === "new") {
+                    formDataToSend.append("images[]", image.file);
+                } else {
+                    formDataToSend.append("existingImages[]", image.url);
+                }
+            });
+
+
+            if (imagesToDelete && imagesToDelete.length > 0) {
+                imagesToDelete.forEach((img, index) => {
+                    formDataToSend.append(`imagesToDelete[${index}]`, img);
+                });
+            }
+
+
+            formDataToSend.append('selectedIndustries', JSON.stringify(selectedIndustries));
+            formDataToSend.append('buyExternalLinks', JSON.stringify(buyExternalLinks));
+            formDataToSend.append('packageInfo', JSON.stringify(packageInfo));
+            formDataToSend.append('applicationInfo', JSON.stringify(applicationInfo));
+            formDataToSend.append('properties', JSON.stringify(properties));
+            formDataToSend.append('selectedApplications', JSON.stringify(selectedApplications));
+
+
+            console.log(formDataToSend, "formDataToSend")
+
+            if (id) {
+                singleProduct({ data: formDataToSend, id });
+            } else {
+                addProduct({ data: formDataToSend });
+            }
+            // mutate({
+            //     data: formDataToSend,
+            //     id,
+            // });
         } catch (error) {
-            // console.error('Error submitting form:', error);
-        } finally {
-            // setIsLoading(false);
+            console.error("Error submitting form:", error);
+            toast.error("An error occurred while submitting the form.");
         }
     };
+
+
+    const handleDeleteImage = (url) => {
+        setImages((prevImages) => prevImages.filter((img) => img !== url));
+        setImagesToDelete((prev) => [...prev, url]);
+    };
+
 
     console.log(applicationInfo, "applicationInfo", images)
 
@@ -254,23 +244,27 @@ const AddProductForm = () => {
             <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Product Images</label>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {images?.map((image, index) => (
-                        <div key={index} className="relative aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
+                    {images.map((image, index) => (
+                        <div
+                            key={index}
+                            className="relative aspect-square bg-gray-100 rounded-lg flex items-center justify-center"
+                        >
                             <img
-                                src={URL.createObjectURL(image)}
+                                src={image.type === "new" ? URL.createObjectURL(image.file) : image}
                                 alt={`Product ${index + 1}`}
                                 className="rounded-lg object-cover w-full h-full"
                             />
                             <button
                                 type="button"
-                                onClick={() => removeImage(index)}
+                                onClick={() => handleDeleteImage(image)}
                                 className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
+                                aria-label={`Remove image ${index + 1}`}
                             >
                                 <X size={16} />
                             </button>
                         </div>
                     ))}
-                    {images?.length < 4 && (
+                    {images.length < 4 && (
                         <label className="aspect-square bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100">
                             <Plus className="w-8 h-8 text-gray-400" />
                             <span className="mt-2 text-sm text-gray-500">Add Image</span>
@@ -279,11 +273,11 @@ const AddProductForm = () => {
                                 accept="image/*"
                                 onChange={handleImageUpload}
                                 className="hidden"
-
                             />
                         </label>
                     )}
                 </div>
+
             </div>
 
             <div className="flex gap-4">
@@ -571,18 +565,30 @@ const AddProductForm = () => {
             </div>
             <button
                 type="submit"
-                disabled={isLoading}
+                disabled={id ? isEditLoading : isAddLoading}
                 className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-blue-300 disabled:cursor-not-allowed flex items-center justify-center"
             >
-                {isLoading ? (
-                    <>
-                        <Loader className="w-5 h-5 mr-2 animate-spin" />
-                        Submitting...
-                    </>
+                {id ? (
+                    isEditLoading ? (
+                        <>
+                            <Loader className="w-5 h-5 mr-2 animate-spin" />
+                            Submitting...
+                        </>
+                    ) : (
+                        'Submit Product'
+                    )
                 ) : (
-                    'Submit Product'
+                    isAddLoading ? (
+                        <>
+                            <Loader className="w-5 h-5 mr-2 animate-spin" />
+                            Submitting...
+                        </>
+                    ) : (
+                        'Submit Product'
+                    )
                 )}
             </button>
+
         </form>
     );
 };

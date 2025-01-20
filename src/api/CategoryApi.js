@@ -8,7 +8,7 @@ export const getCategoryApi = async () => {
 
 export const editCategoryApi = async (data, id, token) => {
     console.log(data, id);
-    const response = await senderRequest("PUT", `${REACT_APP_BACKEND_URL}/category/${id}`, token, data);
+    const response = await senderRequest("post-photo", `${REACT_APP_BACKEND_URL}/category/${id}`, token, data);
     return response;
 };
 
@@ -18,6 +18,6 @@ export const deleteCategoryApi = async (id, token) => {
 }
 
 export const addCategoryApi = async (data, token) => {
-    const response = await senderRequest("POST", `${REACT_APP_BACKEND_URL}/create-category`, token, data);
+    const response = await senderRequest("post-photo", `${REACT_APP_BACKEND_URL}/create-category`, token, data);
     return response
 }

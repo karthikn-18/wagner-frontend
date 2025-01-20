@@ -4,6 +4,7 @@ import Ellipse2 from '../../assets/Resources/ellipse-2.png';
 import { useAddContact } from '../../query/useMutation';
 import ReCAPTCHA from 'react-google-recaptcha';
 import toast from 'react-hot-toast';
+import { Loader2 } from 'lucide-react';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const Contact = () => {
     });
     const [captchaValue, setCaptchaValue] = useState(null);
 
-    const { mutate } = useAddContact();
+    const { mutate, isPending } = useAddContact();
 
     const handleCloseFunction = () => {
         setFormData({
@@ -167,7 +168,12 @@ const Contact = () => {
                                 />
                             </div>
                             <div className="common-btn ">
-                                <button type="submit">Submit</button>
+                                <button type="submit" disabled={isPending}> {
+                                    isPending ?
+                                        <>
+                                            <Loader2 className="w-5 h-5" />  'Sending...'
+                                        </> : "Submit"
+                                } </button>
                             </div>
                         </form>
                     </div>

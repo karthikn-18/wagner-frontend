@@ -62,6 +62,7 @@ const senderRequest = async (
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
+
           },
           next: { revalidate: 60 },
         });
@@ -71,8 +72,17 @@ const senderRequest = async (
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
+
           },
           next: { revalidate: 60 },
+        });
+        break;
+      case "post-photo":
+        response = await axios.post(apiUrl, body, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
         });
         break;
       case "put":
