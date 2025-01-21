@@ -230,6 +230,7 @@ const AddProductForm = () => {
         }
     };
 
+    
 
     const handleDeleteImage = (url) => {
         setImages((prevImages) => prevImages.filter((img) => img !== url));
