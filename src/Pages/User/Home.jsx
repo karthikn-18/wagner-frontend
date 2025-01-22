@@ -41,6 +41,7 @@ import { gsap } from "gsap";
 import { TextPlugin } from 'gsap/TextPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Testimonials from '../../Components/Testimonials';
+import { useCategoryGetQuery, useProductGetQuery } from '../../query/useQuery';
 // Register the TextPlugin
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
@@ -50,6 +51,13 @@ const Home = () => {
     const countriesRef = useRef(null);
     const categoriesRef = useRef(null);
     const sectionRef = useRef(null);
+
+    const [page, setPage] = useState(1);
+    const [categoryId, setCategoryId] = useState('');
+
+    const { data: categories } = useCategoryGetQuery()
+    const { data: products } = useProductGetQuery({ page: page, search: '', categoryId: categoryId, industriesIds: '', applicationsIds: '' })
+    console.log(categories, "categories", products);
 
     useEffect(() => {
         const textElements = document.querySelectorAll('.typewriter-text'); // Select all elements
@@ -136,95 +144,26 @@ const Home = () => {
 
     // State to manage the visibility of the filter dropdown
     const [isFilterActive, setFilterActive] = useState(false);
-    const [activeTab, setActiveTab] = useState('automotive-oils');
+    const [activeTab, setActiveTab] = useState(categories?.data?.data[0]?.name || '');
     const toggleFilter = () => {
-        setIsFilterActive(!isFilterActive);
+        setFilterActive(!isFilterActive);
     };
+
+    useEffect(() => {
+        if (categories?.data.data[0]?.name) {
+            setActiveTab(categories?.data?.data[0]?.name || '')
+            setCategoryId(categories?.data?.data[0]?._id || '')
+            setPage(1)
+        }
+    }, [categories])
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
+        // setCategoryId(tab)
+        setPage(1)
     };
 
-    const productShowcases = {
-        "automotive-oils": (
-            <div className="row product-section products">
-                <div className="col-lg-3">
-                    <div className="box" data-aos="fade-up">
-                        <div className="product-image">
-                            <img src={Product3} alt="WAGNER EVOMAX SAE 5W-30 SN C3" />
-                        </div>
-                        <div className="product-detail">
-                            <h5>WAGNER EVOMAX SAE 5W-30 SN C3</h5>
-                            <p>High-performance low-viscosity engine oil with synthetic technology.</p>
-                        </div>
-                        <div className="product-btns">
-                            <div className="common-border-btn">
-                                <button onClick={() => navigate(`/product-detail`)}>View Details</button>
-                            </div>
-                            {/* <div className="common-btn"><button
-                            onClick={() => window.open(item?.buyExternalLinks?.main, "_blank", "noopener,noreferrer")}
-                            className="text-decoration-none">
-                            Buy Now</button>
-                            </div> */}
-                        </div>
-                    </div>
-                </div>
-                {/* Add more product items here */}
-            </div>
-        ),
-        "classic-oils": (
-            <div className="row">
-                <div className="col-lg-3">
-                    <div className="box" data-aos="fade-up">
-                        <div className="product-image">
-                            <img src={Product2} alt="Classic Engine Oil 10W-30" />
-                        </div>
-                        <div className="product-detail">
-                            <h5>Classic Engine Oil 10W-30</h5>
-                            <p>Engine oil formulated for classic cars.</p>
-                        </div>
-                        <div className="product-btns">
-                            <div className="common-border-btn">
-                                <button onClick={() => navigate(`/product-detail`)}>View Details</button>
-                            </div>
-                            {/* <div className="common-btn"><button
-                            onClick={() => window.open(item?.buyExternalLinks?.main, "_blank", "noopener,noreferrer")}
-                            className="text-decoration-none">
-                            Buy Now</button>
-                            </div> */}
-                        </div>
-                    </div>
-                </div>
-                {/* Add more product items here */}
-            </div>
-        ),
-        "industrial-lubricants": (
-            <div className="row">
-                <div className="col-lg-3">
-                    <div className="box" data-aos="fade-up">
-                        <div className="product-image">
-                            <img src={Product1} alt="Industrial Lubricant X1" />
-                        </div>
-                        <div className="product-detail">
-                            <h5>Industrial Lubricant X1</h5>
-                            <p>Heavy-duty lubricant for industrial machines.</p>
-                        </div>
-                        <div className="product-btns">
-                            <div className="common-border-btn">
-                                <button onClick={() => navigate(`/product-detail`)}>View Details</button>
-                            </div>
-                            {/* <div className="common-btn"><button
-                            onClick={() => window.open(item?.buyExternalLinks?.main, "_blank", "noopener,noreferrer")}
-                            className="text-decoration-none">
-                            Buy Now</button>
-                            </div> */}
-                        </div>
-                    </div>
-                </div>
-                {/* Add more product items here */}
-            </div>
-        ),
-    };
+
 
 
     const settings = {
@@ -289,6 +228,22 @@ const Home = () => {
             },
         ],
     };
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(8);
+
+    console.log(products, "products")
+
+    const totalPages = Math.ceil(products?.data?.totalPages / itemsPerPage);
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+    const currentItems = products?.data?.data?.slice(indexOfFirstItem, indexOfLastItem);
 
 
     return (
@@ -591,6 +546,7 @@ const Home = () => {
                             <h1>High-performance formulations engineered to boost engine efficiency and extend your vehicle’s lifespan.</h1>
                         </div>
                     </div>
+
                     <div className="product-showcase">
                         <div className="row">
                             <div className="col-lg-3">
@@ -599,66 +555,18 @@ const Home = () => {
                                         {/* Desktop View */}
                                         <div className="product-menu d-none d-lg-block">
                                             <ul>
-                                                <li onClick={() => handleTabClick('automotive-oils')}>
-                                                    <NavLink className={activeTab === 'automotive-oils' ? 'activeTab' : ''}>
-                                                        Automotive Oils
-                                                    </NavLink>
-                                                    {activeTab === 'automotive-oils' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
-                                                </li>
-                                                <li onClick={() => handleTabClick('classic-oils')}>
-                                                    <NavLink className={activeTab === 'classic-oils' ? 'activeTab' : ''}>
-                                                        Classic Oils
-                                                    </NavLink>
-                                                    {activeTab === 'classic-oils' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
-                                                </li>
-                                                <li onClick={() => handleTabClick('industrial-lubricants')}>
-                                                    <NavLink className={activeTab === 'industrial-lubricants' ? 'activeTab' : ''}>
-                                                        Industrial Lubricants
-                                                    </NavLink>
-                                                    {activeTab === 'industrial-lubricants' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
-                                                </li>
-                                                <li onClick={() => handleTabClick('high-tech-additives')}>
-                                                    <NavLink className={activeTab === 'high-tech-additives' ? 'activeTab' : ''}>
-                                                        High-tech Additives
-                                                    </NavLink>
-                                                    {activeTab === 'high-tech-additives' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
-                                                </li>
-                                                <li onClick={() => handleTabClick('aviation')}>
-                                                    <NavLink className={activeTab === 'aviation' ? 'activeTab' : ''}>
-                                                        Aviation
-                                                    </NavLink>
-                                                    {activeTab === 'aviation' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
-                                                </li>
-                                                <li onClick={() => handleTabClick('tank-restoration')}>
-                                                    <NavLink className={activeTab === 'tank-restoration' ? 'activeTab' : ''}>
-                                                        Tank Restoration
-                                                    </NavLink>
-                                                    {activeTab === 'tank-restoration' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
-                                                </li>
-                                                <li onClick={() => handleTabClick('technical-sprays')}>
-                                                    <NavLink className={activeTab === 'technical-sprays' ? 'activeTab' : ''}>
-                                                        Technical Sprays
-                                                    </NavLink>
-                                                    {activeTab === 'technical-sprays' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
-                                                </li>
-                                                <li onClick={() => handleTabClick('greases-pastes')}>
-                                                    <NavLink className={activeTab === 'greases-pastes' ? 'activeTab' : ''}>
-                                                        Greases & Pastes
-                                                    </NavLink>
-                                                    {activeTab === 'greases-pastes' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
-                                                </li>
-                                                <li onClick={() => handleTabClick('specialty-products')}>
-                                                    <NavLink className={activeTab === 'specialty-products' ? 'activeTab' : ''}>
-                                                        Specialty Products
-                                                    </NavLink>
-                                                    {activeTab === 'specialty-products' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
-                                                </li>
-                                                <li onClick={() => handleTabClick('cleaning-care')}>
-                                                    <NavLink className={activeTab === 'cleaning-care' ? 'activeTab' : ''}>
-                                                        Cleaning & Care
-                                                    </NavLink>
-                                                    {activeTab === 'cleaning-care' ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
-                                                </li>
+                                                {
+
+                                                    categories?.data?.data?.length > 0 &&
+                                                    categories?.data?.data?.map((category, index) => (
+                                                        <li onClick={() => { handleTabClick(category.name), setCategoryId(category?._id) }} key={index}>
+                                                            <NavLink className={activeTab === category.name ? 'activeTab' : ''}>
+                                                                {category.name}
+                                                            </NavLink>
+                                                            {activeTab === category.name ? <IoIosArrowForward className="activeTab" /> : <IoIosArrowDown />}
+                                                        </li>
+                                                    ))
+                                                }
                                             </ul>
                                         </div>
 
@@ -669,16 +577,23 @@ const Home = () => {
                                             </button>
                                             <div className={`filter-dropdown ${isFilterActive ? 'active' : ''}`}>
                                                 <ul>
-                                                    <li onClick={() => handleTabClick('automotive-oils')}><NavLink>Automotive Oils</NavLink></li>
-                                                    <li onClick={() => handleTabClick('classic-oils')}><NavLink>Classic Oils</NavLink></li>
-                                                    <li onClick={() => handleTabClick('industrial-lubricants')}><NavLink>Industrial Lubricants</NavLink></li>
-                                                    <li onClick={() => handleTabClick('high-tech-additives')}><NavLink>High-tech Additives</NavLink></li>
-                                                    <li onClick={() => handleTabClick('aviation')}><NavLink>Aviation</NavLink></li>
-                                                    <li onClick={() => handleTabClick('tank-restoration')}><NavLink>Tank Restoration</NavLink></li>
-                                                    <li onClick={() => handleTabClick('technical-sprays')}><NavLink>Technical Sprays</NavLink></li>
-                                                    <li onClick={() => handleTabClick('greases-pastes')}><NavLink>Greases & Pastes</NavLink></li>
-                                                    <li onClick={() => handleTabClick('specialty-products')}><NavLink>Specialty Products</NavLink></li>
-                                                    <li onClick={() => handleTabClick('cleaning-care')}><NavLink>Cleaning & Care</NavLink></li>
+                                                    {/* {
+                                                        <li onClick={() => handleTabClick('automotive-oils')}>  <NavLink className={activeTab === category.name ? 'activeTab' : ''}>
+                                                            {category.name}
+                                                        </NavLink></li>
+                                                    } */}
+                                                    {
+
+                                                        categories?.data?.data?.length > 0 &&
+                                                        categories?.data?.data?.map((category, index) => (
+                                                            <li onClick={() => { handleTabClick(category.name), setCategoryId(category?._id) }} key={index}>
+                                                                <NavLink className={activeTab === category.name ? 'activeTab' : ''}>
+                                                                    {category.name}
+                                                                </NavLink>
+                                                            </li>
+                                                        ))
+                                                    }
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -701,11 +616,56 @@ const Home = () => {
                                         </div>
 
                                     </div>
-                                    <div className="row">{productShowcases[activeTab]}</div>
+                                    <div className="row">
+                                        <div className="row product-section products">
+                                            {
+
+                                                currentItems?.length > 0 ?
+                                                    currentItems?.map((item, index) => (
+                                                        <div className="col-lg-3" key={index}>
+                                                            <div className="box" data-aos="fade-up">
+                                                                <div className="product-image">
+                                                                    <img src={Product3} alt="WAGNER EVOMAX SAE 5W-30 SN C3" />
+                                                                </div>
+                                                                <div className="product-detail">
+                                                                    <h5>{item?.name}</h5>
+                                                                    <p>{item?.description?.slice(0, 100)}</p>
+                                                                </div>
+                                                                <div className="product-btns">
+                                                                    <div className="common-border-btn">
+                                                                        <button onClick={() => navigate(`/product-detail/${item?._id}`)}>View Details</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    ))
+                                                    : "No products found"
+                                            }
+
+
+                                        </div>
+                                        <div className="pagination">
+                                            <button
+                                                disabled={currentPage === 1}
+                                                onClick={() => handlePageChange(currentPage - 1)}
+                                            >
+                                                Previous
+                                            </button>
+                                            <span>Page {currentPage} of {totalPages}</span>
+                                            <button
+                                                disabled={totalPages === 0 || currentPage === totalPages}
+                                                onClick={() => handlePageChange(currentPage + 1)}
+                                            >
+                                                Next
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 

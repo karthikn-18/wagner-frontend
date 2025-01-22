@@ -2,10 +2,23 @@ import { REACT_APP_BACKEND_URL } from "../env/env";
 import senderRequest from "../services/Http"
 
 
-export const getProductApi = async () => {
-    const response = await senderRequest("GET", `${REACT_APP_BACKEND_URL}/product`);
-    return response
+export const getProductApi = async (page, search, categoryId, industriesIds, applicationsIds) => {
+
+    const params = new URLSearchParams();
+
+    if (page) params.append("page", page);
+    if (search) params.append("search", search);
+    if (categoryId) params.append("categoryId", categoryId);
+    if (industriesIds) params.append("industriesIds", industriesIds);
+    if (applicationsIds) params.append("applicationsIds", applicationsIds);
+    params.append("limit", 8);
+
+    const url = `${REACT_APP_BACKEND_URL}/product?${params.toString()}`;
+    const response = await senderRequest("GET", url);
+    return response;
 }
+
+
 export const getSingleProductApi = async (id) => {
     const response = await senderRequest("GET", `${REACT_APP_BACKEND_URL}/product/${id}`);
     return response

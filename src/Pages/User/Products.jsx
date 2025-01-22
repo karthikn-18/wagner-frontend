@@ -7,13 +7,29 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import ProductImage from '../../assets/Resources/oil-product-1.png'
 import { IoSearchOutline } from "react-icons/io5";
 import { useApplicationGetQuery, useCategoryGetQuery, useIndustriesGetQuery, useProductGetQuery } from '../../query/useQuery';
+import debounce from 'lodash/debounce';
 
 const Products = () => {
 
     const { data: categories } = useCategoryGetQuery()
     const { data: applications } = useApplicationGetQuery()
     const { data: industries } = useIndustriesGetQuery()
-    const { data: products } = useProductGetQuery()
+
+    const [page, setPage] = useState(1);
+    const [categoryId, setCategoryId] = useState('');
+    const [search, setSearch] = useState('');
+    const [industriesIds, setIndustriesIds] = useState([]);
+    const [applicationsIds, setApplicationsIds] = useState([]);
+    console.log(applicationsIds, "applicationsIds")
+
+    const debouncedSearch = debounce((value) => {
+        setSearch(value);
+        // Perform any additional search actions here (like API calls)
+    }, 500);
+    const handleChange = (e) => {
+        debouncedSearch(e.target.value);
+    };
+    const { data: products } = useProductGetQuery({ page: page, search: search, categoryId: categoryId, industriesIds: industriesIds, applicationsIds: applicationsIds })
 
     console.log(products, "categories, applications, industries")
 
@@ -55,17 +71,54 @@ const Products = () => {
         });
     };
 
-    // Handle individual checkbox state change
-    const handleChange = (event, name) => {
-        const { checked } = event.target;
 
-        setCheckedState((prevState) => ({
-            ...prevState,
-            [name]: checked,
-        }));
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(8);
+
+    console.log(products, "products")
+
+    const totalPages = Math.ceil(products?.data?.totalPages / itemsPerPage);
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
     };
 
+    const handleCheckboxChange = (e, item, setter) => {
+        const { checked } = e.target;
+        setCheckedState((prevState) => ({
+            ...prevState,
+            [item.name]: checked,
+        }));
 
+        setter((prevState) => {
+            const updatedApplicationsIds = [...prevState];
+
+            if (checked) {
+                updatedApplicationsIds.push(item._id);
+
+            } else {
+                const index = updatedApplicationsIds.indexOf(item._id);
+                if (index > -1) {
+                    updatedApplicationsIds.splice(index, 1);
+                }
+            }
+
+            return updatedApplicationsIds;
+        });
+
+        setPage(1);
+    };
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+    const currentItems = products?.data?.data?.slice(indexOfFirstItem, indexOfLastItem);
+
+    const handleTabClick = (tab) => {
+        setActiveTab(tab);
+        // setCategoryId(tab)
+        setPage(1)
+    };
 
     return (
         <>
@@ -81,14 +134,14 @@ const Products = () => {
             <div className="product-page space">
                 <div className="container">
                     <div className="product-cat-slider">
-                        <div data-aos="fade-down">
+                        <div data-aos="fade-down" onClick={() => { setCategoryId(''), setPage(1) }}>
                             <div className="item all-item">
                                 <h6>All</h6>
                             </div>
                         </div>
                         {
                             categories?.data?.data?.map((item, index) => (
-                                <div data-aos="fade-down">
+                                <div data-aos="fade-down" key={index} onClick={() => { setCategoryId(item._id), setPage(1) }}>
                                     <div className="item">
                                         <div className="image">
                                             <img src={ProductSlider1} alt="" />
@@ -127,7 +180,7 @@ const Products = () => {
                                                                             id={`checkbox-${index}`}
                                                                             name={item.name}
                                                                             checked={checkedState[item.name] || false}
-                                                                            onChange={(e) => handleChange(e, item.name)}
+                                                                            onChange={(e) => handleCheckboxChange(e, item, setApplicationsIds)}
                                                                         />
                                                                         <label htmlFor={`checkbox-${index}`}>{item.name}</label>
                                                                     </div>
@@ -157,7 +210,7 @@ const Products = () => {
                                                                             id={`industry-${index}`}
                                                                             name={item.name}
                                                                             checked={checkedState[item.name] || false}
-                                                                            onChange={(e) => handleChange(e, item.name)}
+                                                                            onChange={(e) => handleCheckboxChange(e, item, setIndustriesIds)}
                                                                         />
                                                                         <label htmlFor={`industry-${index}`}>{item.name}</label>
                                                                     </div>
@@ -174,10 +227,10 @@ const Products = () => {
                                         <div className="products">
                                             <div className="header" data-aos="fade-left">
                                                 <div className="result">
-                                                    <h6>Showing <span>320</span> Results</h6>
+                                                    <h6>Showing <span>{products?.data?.data?.length}</span> Results</h6>
                                                 </div>
                                                 <div className="search">
-                                                    <input type="text" placeholder='Search....' />
+                                                    <input type="text" onChange={handleChange} placeholder='Search....' />
                                                     <IoSearchOutline className='icon' />
                                                 </div>
                                             </div>
@@ -212,6 +265,22 @@ const Products = () => {
                                                         </div>
                                                     ))
                                                 }
+
+                                                <div className="pagination">
+                                                    <button
+                                                        disabled={currentPage === 1}
+                                                        onClick={() => handlePageChange(currentPage - 1)}
+                                                    >
+                                                        Previous
+                                                    </button>
+                                                    <span>Page {currentPage} of {totalPages}</span>
+                                                    <button
+                                                        disabled={totalPages === 0 || currentPage === totalPages}
+                                                        onClick={() => handlePageChange(currentPage + 1)}
+                                                    >
+                                                        Next
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

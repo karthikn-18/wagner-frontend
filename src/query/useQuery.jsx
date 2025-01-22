@@ -85,11 +85,12 @@ export const useCategoryGetQuery = () => {
     })
 }
 
-export const useProductGetQuery = () => {
+export const useProductGetQuery = ({ page, search, categoryId, industriesIds, applicationsIds }) => {
     return useQuery({
-        queryKey: ['get-Product', token],
+        queryKey: ['get-Product', token, page, search, categoryId, industriesIds, applicationsIds],
         queryFn: async () => {
-            return getProductApi(token);
+
+            return getProductApi( page, search, categoryId, industriesIds, applicationsIds);
         },
         // staleTime: 60 * 1000,
     })

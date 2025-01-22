@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.bg-gray-900{
-background-color: #11182763;
+.bg-gray-900 {
+  background-color: #11182763;
 }
 
 /* #google_translate_element {
@@ -12,8 +12,44 @@ background-color: #11182763;
     right: 10px;
   } */
 
-  /* .applications  .css-19bb58m:after {
+/* .applications  .css-19bb58m:after {
     border: 0px !important;
 
   } */
-  
+
+/* Basic Pagination Styling */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 15px;
+  margin: 0 5px;
+  background-color: #007bff;
+  color: white;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.pagination button:disabled {
+  background-color: #e0e0e0;
+  border-color: #e0e0e0;
+  cursor: not-allowed;
+  color: #9e9e9e;
+}
+
+.pagination span {
+  font-size: 16px;
+  margin: 0 10px;
+}
