@@ -2,7 +2,7 @@ import { REACT_APP_BACKEND_URL } from "../env/env";
 import senderRequest from "../services/Http"
 
 
-export const getProductApi = async (page, search, categoryId, industriesIds, applicationsIds) => {
+export const getProductApi = async (page, search, categoryId, industriesIds, applicationsIds, admin) => {
 
     const params = new URLSearchParams();
 
@@ -11,6 +11,7 @@ export const getProductApi = async (page, search, categoryId, industriesIds, app
     if (categoryId) params.append("categoryId", categoryId);
     if (industriesIds) params.append("industriesIds", industriesIds);
     if (applicationsIds) params.append("applicationsIds", applicationsIds);
+    if (admin) params.append("admin", admin)
     params.append("limit", 8);
 
     const url = `${REACT_APP_BACKEND_URL}/product?${params.toString()}`;
