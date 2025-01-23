@@ -2,9 +2,6 @@ import React from 'react'
 import { MdKeyboardBackspace } from "react-icons/md";
 import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery from "react-image-gallery";
-import ProductImg1 from '../../assets/Resources/product-1.png'
-import ProductImg2 from '../../assets/Resources/product-overview.png'
-import ProductImg3 from '../../assets/Resources/product-image.png'
 import { GoArrowUpRight } from "react-icons/go";
 import ProductImage from '../../assets/Resources/oil-product-1.png'
 import Product1 from '../../assets/Resources/5w-30.png'
@@ -13,8 +10,13 @@ import Product1Cover from '../../assets/Resources/product-1-cover.png'
 import { VscDebugBreakpointLog } from "react-icons/vsc";
 import { useProductGetSingleIdQuery } from '../../query/useQuery';
 import { useParams } from 'react-router-dom';
+import { IoArrowDown } from "react-icons/io5";
+import Flipkart from '../../assets/Resources/flipkart.png'
+import Amazon from '../../assets/Resources/amazon.png'
+import Noon from '../../assets/Resources/noon.png'
 
 const ProductDetails = () => {
+
 
     const params = useParams()
 
@@ -37,6 +39,20 @@ const ProductDetails = () => {
             },
         ],
     }
+
+    const scrollToSection = () => {
+        const targetSection = document.getElementById('product-overview-content');
+        if (targetSection) {
+            const headerOffset = 200; // Adjust this value based on your fixed header's height
+            const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = elementPosition - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth',
+            });
+        }
+    };
 
     return (
         <>
@@ -122,7 +138,14 @@ const ProductDetails = () => {
                                         </a>
                                     </div>
                                     <div className="common-border-btn">
-                                        <button>Shop on External site<GoArrowUpRight className='icon' /></button>
+                                        <button
+                                            type="button"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#shopModal"
+                                        >Shop on External site<GoArrowUpRight className='icon' /></button>
+                                    </div>
+                                    <div className="down-arrow-btn">
+                                        <button onClick={scrollToSection}><IoArrowDown className='icon' /></button>
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +156,7 @@ const ProductDetails = () => {
 
 
 
-            <div className="product-overview-contents">
+            <div className="product-overview-contents" id='product-overview-content'>
                 <div className="container">
                     <div className="row">
                         <div className="title">
@@ -448,6 +471,63 @@ const ProductDetails = () => {
                                         <div className="common-btn">
                                             <button>Buy Now</button>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Modal Structure */}
+            <div
+                className="modal fade shopping-popup"
+                id="shopModal"
+                tabIndex="-1"
+                aria-labelledby="shopModalLabel"
+                aria-hidden="true"
+            >
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="shopModalLabel">Shop on External Site</h5>
+                            <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div className="modal-body">
+                            <div className="row">
+                                <div className="col-lg-4">
+                                    <div className="item">
+                                        <button>
+                                            <div className="image">
+                                                <img src={Flipkart} alt="" />
+                                            </div>
+                                            <h6>Flipkart</h6>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4">
+                                    <div className="item">
+                                        <button>
+                                            <div className="image">
+                                                <img src={Amazon} alt="" />
+                                            </div>
+                                            <h6>Amazon</h6>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="col-lg-4">
+                                    <div className="item">
+                                        <button>
+                                            <div className="image">
+                                                <img src={Noon} alt="" />
+                                            </div>
+                                            <h6>Noon</h6>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

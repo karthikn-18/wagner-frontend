@@ -67,7 +67,7 @@ const Contact = () => {
                 <div className="container">
                     <div className="breadcrumb-content ">
                         <h1>Contact <span>Us</span></h1>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+                        <p>Have questions about ordering, invoices, shipping, or product advice? We're here to help! For lubricant guidance, our consultants are available—visit the form to connect.</p>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import { LuSearch } from "react-icons/lu";
 import { HiMenu } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom"; // Import useLocation
 import Logo from '../assets/Resources/wagner-logo.svg';
+import Product1 from '../assets/Resources/5w-30.png';
 
 const Header = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -77,13 +78,19 @@ const Header = () => {
                         <div className="col-lg-4">
                             <div className="right">
                                 <div data-aos="fade-down">
-                                    <div className="item mobiletopheader">
+                                    {/* <div className="item mobiletopheader">
                                         <p className="fontSize14 fontWeight300"><Link to="/blog" className={isActive("/blog")}>Blog</Link></p>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div data-aos="fade-down">
                                     <div className="item">
-                                        <LuSearch className="icon" />
+                                        <button
+                                            type="button"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#globalsearch"
+                                        >
+                                            <LuSearch className="icon" />Seach Products
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -240,6 +247,54 @@ const Header = () => {
                     </div>
                 </div>
             </div >
+
+
+
+            {/* Modal Structure */}
+            <div
+                className="modal fade global-search-popup"
+                id="globalsearch"
+                tabIndex="-1"
+                aria-labelledby="shopModalLabel"
+                aria-hidden="true"
+            >
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Search Products here..."
+                            />
+                        </div>
+                        <div className="modal-body">
+                            <div className="row item">
+                                <div className="col-lg-4">
+                                    <div className="image">
+                                        <img src={Product1} alt="" />
+                                    </div>
+                                </div>
+                                <div className="col-lg-8">
+                                    <div className="content">
+                                        <div className="title">
+                                            <h5>Wagner VG 150 Industrial Oil</h5>
+                                        </div>
+                                        <p>WAGNER EVOMAX SAE 0W-16 API is formulated with synthetic base oils and highly advanced additives </p>
+                                        <div className="product-btns">
+                                            <div className="common-border-btn">
+                                                <button>View Details</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
         </>
     );
 };
