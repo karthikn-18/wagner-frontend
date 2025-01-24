@@ -382,7 +382,7 @@ const ProductDetails = () => {
                         <div className="main-title">
                             <div className="title-content title-content-all left-title">
                                 <div className="title" data-aos="fade-right">
-                                    <h1>Related Products</h1>
+                                    <h1>Best Selling Products</h1>
                                 </div>
                             </div>
                             <div className="title-btn" data-aos="fade-left">
