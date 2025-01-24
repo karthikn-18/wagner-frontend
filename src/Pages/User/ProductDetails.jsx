@@ -9,7 +9,7 @@ import Product1Des from '../../assets/Resources/product-1-des.png'
 import Product1Cover from '../../assets/Resources/product-1-cover.png'
 import { VscDebugBreakpointLog } from "react-icons/vsc";
 import { useProductGetSingleIdQuery } from '../../query/useQuery';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { IoArrowDown } from "react-icons/io5";
 import Flipkart from '../../assets/Resources/flipkart.png'
 import Amazon from '../../assets/Resources/amazon.png'
@@ -21,23 +21,22 @@ const ProductDetails = () => {
     const params = useParams()
 
     const { data } = useProductGetSingleIdQuery(params.id);
-    console.log(data, "data");
+    console.log(data, "data", data?.data?.data?.images?.map((image) => (
+        {
+            original: image,
+            thumbnail: image
+        }
+    ) || []),);
+
+
 
     const productDetailItem = {
-        images: [
+        images: data?.data?.data?.images?.map((image) => (
             {
-                original: Product1,
-                thumbnail: Product1,
-            },
-            {
-                original: Product1Des,
-                thumbnail: Product1Des,
-            },
-            {
-                original: Product1Cover,
-                thumbnail: Product1Cover,
-            },
-        ],
+                original: image,
+                thumbnail: image
+            }
+        ) || []),
     }
 
     const scrollToSection = () => {
@@ -64,17 +63,20 @@ const ProductDetails = () => {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-lg-5">
-                            <div data-aos="zoom-in">
-                                <ImageGallery className="ImageSlider"
-                                    showBullets={false}
-                                    showFullscreenButton={false}
-                                    showPlayButton={false}
-                                    items={productDetailItem.images}
-                                    showNav={false}
-                                />
-                            </div>
-                        </div>
+                        {
+                            data?.data?.data?.images?.length > 0 ?
+                                <div className="col-lg-5">
+                                    <div data-aos="zoom-in">
+                                        <ImageGallery className="ImageSlider"
+                                            showBullets={false}
+                                            showFullscreenButton={false}
+                                            showPlayButton={false}
+                                            items={productDetailItem?.images}
+                                            showNav={false}
+                                        />
+                                    </div>
+                                </div> : ""
+                        }
                         <div className="col-lg-7">
                             <div className="right-content" data-aos="fade-left">
                                 <h1>{data?.data?.data?.name}</h1>
@@ -502,32 +504,38 @@ const ProductDetails = () => {
                             <div className="row">
                                 <div className="col-lg-4">
                                     <div className="item">
-                                        <button>
-                                            <div className="image">
-                                                <img src={Flipkart} alt="" />
-                                            </div>
-                                            <h6>Flipkart</h6>
-                                        </button>
+                                        <Link to={data?.data?.data?.buyExternalLinks?.flipkart}>
+                                            <button>
+                                                <div className="image">
+                                                    <img src={Flipkart} alt="" />
+                                                </div>
+                                                <h6>Flipkart</h6>
+                                            </button>
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className="col-lg-4">
                                     <div className="item">
-                                        <button>
-                                            <div className="image">
-                                                <img src={Amazon} alt="" />
-                                            </div>
-                                            <h6>Amazon</h6>
-                                        </button>
+                                        <Link to={data?.data?.data?.buyExternalLinks?.amazon}>
+                                            <button>
+                                                <div className="image">
+                                                    <img src={Amazon} alt="" />
+                                                </div>
+                                                <h6>Amazon</h6>
+                                            </button>
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className="col-lg-4">
                                     <div className="item">
-                                        <button>
-                                            <div className="image">
-                                                <img src={Noon} alt="" />
-                                            </div>
-                                            <h6>Noon</h6>
-                                        </button>
+                                        <Link to={data?.data?.data?.buyExternalLinks?.noon}>
+                                            <button>
+                                                <div className="image">
+                                                    <img src={Noon} alt="" />
+                                                </div>
+                                                <h6>Noon</h6>
+                                            </button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

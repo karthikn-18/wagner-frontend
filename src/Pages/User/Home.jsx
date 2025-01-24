@@ -18,7 +18,7 @@ import Ellipse2 from '../../assets/Resources/ellipse-2.png'
 import { IoIosArrowForward } from "react-icons/io";
 import { TbFileDownload } from "react-icons/tb";
 import { IoIosArrowDown } from "react-icons/io";
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import ProductImage from '../../assets/Resources/oil-product-1.png'
 import Product1 from '../../assets/Resources/5w-30.png'
 import Product2 from '../../assets/Resources/product2.png'
@@ -625,7 +625,7 @@ const Home = () => {
                                                         <div className="col-lg-3" key={index}>
                                                             <div className="box" data-aos="fade-up">
                                                                 <div className="product-image">
-                                                                    <img src={Product3} alt="WAGNER EVOMAX SAE 5W-30 SN C3" />
+                                                                    <img src={item?.images[0]} alt="WAGNER EVOMAX SAE 5W-30 SN C3" />
                                                                 </div>
                                                                 <div className="product-detail">
                                                                     <h5>{item?.name}</h5>
@@ -633,7 +633,9 @@ const Home = () => {
                                                                 </div>
                                                                 <div className="product-btns">
                                                                     <div className="common-border-btn">
-                                                                        <button onClick={() => navigate(`/product-detail/${item?._id}`)}>View Details</button>
+                                                                        <Link to={`/product-detail/${item?._id}`}>
+                                                                            <button onClick={() => navigate(`/product-detail/${item?._id}`)}>View Details</button>
+                                                                        </Link>
                                                                     </div>
                                                                 </div>
                                                             </div>

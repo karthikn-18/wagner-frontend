@@ -10,6 +10,8 @@ import { useDeleteTestimonials } from '../../../query/useMutation';
 const GetTestimonials = () => {
     const { data, refetch } = useTestimonialsGetQuery();
 
+    console.log(data, "data")
+
     const { mutate } = useDeleteTestimonials()
 
 
@@ -59,7 +61,16 @@ const GetTestimonials = () => {
             sortable: true,
             filter: true
         },
-        // { field: 'date', headerName: 'Date', sortable: true, filter: true },
+        {
+            field: 'createdAt',
+            headerName: 'Date',
+            sortable: true,
+            filter: true,
+            valueFormatter: (params) => {
+                const date = new Date(params.value);
+                return date.toISOString().split('T')[0];
+            }
+        },          
         {
             headerName: 'Update',
             cellRenderer: (params) => (
@@ -91,7 +102,7 @@ const GetTestimonials = () => {
         <div className="p-4 max-w-[1280px] md:m-auto">
             <TableComponent tableTitle="Testimonials" data={data} dateFiterOption={true} exportOption={false} CreateOption={'create Testimonial'} handleCreateClick={() => setOpenModal(true)} columns={columns} />
 
-            <ModalComponent modalName="Testimonial" openModal={deleteModal} setOpenModal={setDeleteModal} refetch={refetch} selectedValue={selectedTestimonial} mutate={mutate}  setSelectedValue={setSelectedTestimonial} />
+            <ModalComponent modalName="Testimonial" openModal={deleteModal} setOpenModal={setDeleteModal} refetch={refetch} selectedValue={selectedTestimonial} mutate={mutate} setSelectedValue={setSelectedTestimonial} />
 
             <TestimonialModal openModal={openModal} setOpenModal={setOpenModal} onSave={handleModalClose} selectedTestimonial={selectedTestimonial} refetch={refetch} setSelectedTestimonial={setSelectedTestimonial} />
             {/* <TestimonialDelete openModal={deleteModal} setOpenModal={setDeleteModal} selectedTestimonial={selectedTestimonial} refetch={refetch} /> */}

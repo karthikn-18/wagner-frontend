@@ -28,7 +28,16 @@ const AdminProducts = () => {
     const columns = [
         { field: 'name', headerName: 'Title', sortable: true, filter: true },
         { field: 'description', headerName: 'Description', sortable: true, filter: true },
-        { field: 'createdAt', headerName: 'Date', sortable: true, filter: true },
+        {
+            field: 'createdAt',
+            headerName: 'Date',
+            sortable: true,
+            filter: true,
+            valueFormatter: (params) => {
+                const date = new Date(params.value);
+                return date.toISOString().split('T')[0];
+            }
+        },
         {
             headerName: 'Update',
             cellRenderer: (params) => (

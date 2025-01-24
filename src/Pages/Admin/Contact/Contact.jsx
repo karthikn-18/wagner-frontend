@@ -77,19 +77,20 @@ const GetContact = () => {
         },
         {
             field: 'createdAt',
-            headerName: 'Created At',
+            headerName: 'Date',
             sortable: true,
             filter: true,
             valueFormatter: (params) => {
-                return new Date(params.value).toLocaleString();
+                const date = new Date(params.value);
+                return date.toISOString().split('T')[0];
             }
-        }
+        },
     ];
 
 
     return (
         <div className="p-4 max-w-[1280px] md:m-auto">
-            <TableComponent tableTitle="Contact Information" data={data} dateFiterOption={true} exportOption={true}  columns={columns} />
+            <TableComponent tableTitle="Contact Information" data={data} dateFiterOption={true} exportOption={true} columns={columns} />
         </div>
     )
 }

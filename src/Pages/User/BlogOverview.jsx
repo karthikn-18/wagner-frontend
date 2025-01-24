@@ -32,7 +32,7 @@ const BlogOverview = () => {
                             <div className="row">
                                 <div data-aos="zoom-in">
                                     <div className="image">
-                                        <img src={BlogOverviewImage} alt="" />
+                                        <img src={blog?.data?.data?.image} alt="" />
                                     </div>
                                 </div>
                                 <div className="main-contents">
@@ -75,7 +75,7 @@ const BlogOverview = () => {
                                                     <div data-aos="fade-up">
                                                         <div className="item">
                                                             <div className="image">
-                                                                <img src={BlogImage} alt="" />
+                                                                <img src={item?.image} alt="" />
                                                             </div>
                                                             <div className="blog-content">
                                                                 <div className="date-share">
