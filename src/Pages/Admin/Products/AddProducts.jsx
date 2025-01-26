@@ -41,6 +41,7 @@ const AddProductForm = () => {
                 availableSize: SingleProduct.availableSizes || '',
                 status: SingleProduct.status || 'active',
                 bestSeller: SingleProduct.bestSeller || false,
+                approvals: SingleProduct.approvals || '',
             });
 
             setSelectedIndustries(SingleProduct.industries?.map(industry => ({ label: industry.name, value: industry._id })) || []);
@@ -67,7 +68,8 @@ const AddProductForm = () => {
         category: '',
         availableSize: "",
         status: 'active',
-        bestSeller: false
+        bestSeller: false,
+        approvals: ''
     });
     const [images, setImages] = useState([]);
     const [packageInfo, setPackageInfo] = useState([{ packing: '', itemNo: '' }]);
@@ -148,7 +150,7 @@ const AddProductForm = () => {
         e.preventDefault();
         console.log("hello", images);
         try {
-            const productNameRegex = /^[a-zA-Z0-9\s]+$/;
+            const productNameRegex = /^[a-zA-Z0-9\s\-.,]+$/;
             const priceRegex = /^\d+(\.\d{1,2})?$/;
             const descriptionRegex = /^[a-zA-Z0-9\s.,;:'"!?()-_&]*$/;
             const availableSizeRegex = /^[a-zA-Z0-9\s, ]+$/;
@@ -177,6 +179,11 @@ const AddProductForm = () => {
 
             if (images?.length === 0) {
                 toast.error("Please add at least one image!");
+                return;
+            }
+
+            if(formData.approvals && !availableSizeRegex.test(formData.approvals)){
+                toast.error("Approvals Name must only contain letters, numbers, and spaces.");
                 return;
             }
 
@@ -388,6 +395,19 @@ const AddProductForm = () => {
                 />
             </div>
 
+            <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Approvals & Recommendation
+                    *</label>
+                <input
+                    type="text"
+                    name="approvals"
+                    required
+                    value={formData.approvals}
+                    onChange={handleChange}
+                    className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Main Link</label>
@@ -453,6 +473,8 @@ const AddProductForm = () => {
                     </label>
                 </div>
             </div>
+
+
 
             <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Application Info*</label>

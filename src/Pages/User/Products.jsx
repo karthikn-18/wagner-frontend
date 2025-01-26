@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ProductSlider1 from '../../assets/Resources/product-page-1.png'
 import { IoIosArrowForward } from "react-icons/io";
 import { TbFileDownload } from "react-icons/tb";
 import { IoIosArrowDown } from "react-icons/io";
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 import ProductImage from '../../assets/Resources/oil-product-1.png'
 import { IoSearchOutline } from "react-icons/io5";
 import { useApplicationGetQuery, useCategoryGetQuery, useIndustriesGetQuery, useProductGetQuery } from '../../query/useQuery';
@@ -15,27 +15,47 @@ const Products = () => {
     const { data: applications } = useApplicationGetQuery()
     const { data: industries } = useIndustriesGetQuery()
 
+    const location = useLocation();
+
+    const queryParams = new URLSearchParams(location.search);
+
+    const application = queryParams.get('application')
+
     const [page, setPage] = useState(1);
     const [categoryId, setCategoryId] = useState('');
     const [search, setSearch] = useState('');
     const [industriesIds, setIndustriesIds] = useState([]);
-    const [applicationsIds, setApplicationsIds] = useState([]);
-    console.log(applicationsIds, "applicationsIds")
+    // const [applicationsIds, setApplicationsIds] = useState([application]);
+    // console.log(applicationsIds, "applicationsIds")
 
+    const [applicationsIds, setApplicationsIds] = useState(application ? [application] : []); 
+    const [checkedState, setCheckedState] = useState({});
+
+    useEffect(() => {
+        if (applications?.data?.data?.length > 0 && application) {
+            const initialState = {};
+            applications.data.data.forEach((item) => {
+                if (item._id === application) {
+                    initialState[item.name] = true; 
+                }
+            });
+            setCheckedState(initialState);
+        }
+    }, [applications, application]);
     const debouncedSearch = debounce((value) => {
         setSearch(value);
-        // Perform any additional search actions here (like API calls)
+
     }, 500);
     const handleChange = (e) => {
         debouncedSearch(e.target.value);
     };
-    const { data: products } = useProductGetQuery({ page: page, search: search, categoryId: categoryId, industriesIds: industriesIds, applicationsIds: applicationsIds })
+    const { data: products } = useProductGetQuery({ page: page, search: search, categoryId: categoryId, industriesIds: industriesIds, applicationsIds: applicationsIds?.length > 0 ? applicationsIds : application })
 
     console.log(products, "categories, applications, industries")
 
     // Initialize state to have both 'applications' and 'industries' open by default
     const [activeSection, setActiveSection] = useState(['applications', 'industries']);
-    const [checkedState, setCheckedState] = useState({});
+    // const [checkedState, setCheckedState] = useState({});
 
     const navigate = useNavigate();
 

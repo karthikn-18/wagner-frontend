@@ -12,7 +12,7 @@ export const getApplicationApi = async () => {
 
 export const editApplicationApi = async (data, id, token) => {
     console.log(data, id);
-    const response = await senderRequest("PUT", `${REACT_APP_BACKEND_URL}/application/${id}`, token, data);
+    const response = await senderRequest("post-photo", `${REACT_APP_BACKEND_URL}/application/${id}`, token, data);
     return response;
 };
 
@@ -22,6 +22,6 @@ export const deleteApplicationApi = async (id, token) => {
 }
 
 export const addApplicationApi = async (data, token) => {
-    const response = await senderRequest("POST", `${REACT_APP_BACKEND_URL}/create-application`, token, data);
+    const response = await senderRequest("post-photo", `${REACT_APP_BACKEND_URL}/create-application`, token, data);
     return response
 }

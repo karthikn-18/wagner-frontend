@@ -41,7 +41,7 @@ import { gsap } from "gsap";
 import { TextPlugin } from 'gsap/TextPlugin';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Testimonials from '../../Components/Testimonials';
-import { useCategoryGetQuery, useProductGetQuery } from '../../query/useQuery';
+import { useApplicationGetQuery, useCategoryGetQuery, useProductGetQuery } from '../../query/useQuery';
 // Register the TextPlugin
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
@@ -245,6 +245,9 @@ const Home = () => {
 
     const currentItems = products?.data?.data?.slice(indexOfFirstItem, indexOfLastItem);
 
+    const { data: ApplicationValue } = useApplicationGetQuery()
+
+    console.log(ApplicationValue, "ApplicationValue")
 
     return (
         <>
@@ -322,106 +325,20 @@ const Home = () => {
                             <button>SELECT YOUR VEHICLE</button>
                         </div>
                         <div className="vehicle-category">
-                            <div data-aos="fade-up" data-aos-delay="1600" data-aos-offset="0">
-                                <div className="item" >
-                                    <a href="/application-cars">
-                                        <div className="icon first">
-                                            <img src={VehicleIcon1} alt="" />
-                                            <p>Cars</p>
+                            {
+                                ApplicationValue?.data?.data.map((item) => (
+                                    <div data-aos="fade-up" data-aos-delay="1600" data-aos-offset="0">
+                                        <div className="item" >
+                                            <Link to={`/products?application=${item?._id}`}>
+                                                <div className="icon first">
+                                                    <img src={VehicleIcon1} alt="" />
+                                                    <p>{item?.name}</p>
+                                                </div>
+                                            </Link>
                                         </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div data-aos="fade-up" data-aos-delay="1700" data-aos-offset="0">
-                                <div className="item" >
-                                    <a href="/application-motorcycle">
-                                        <div className="icon">
-                                            <img src={VehicleIcon2} alt="" />
-                                            <p>Motorcycle</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div data-aos="fade-up" data-aos-delay="1800" data-aos-offset="0">
-                                <div className="item">
-                                    <a href="/application-classic">
-                                        <div className="icon">
-                                            <img src={VehicleIcon3} alt="" />
-                                            <p>Classic</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div data-aos="fade-up" data-aos-delay="1900" data-aos-offset="0">
-                                <div className="item">
-                                    <a href="/application-offroad">
-                                        <div className="icon">
-                                            <img src={VehicleIcon4} alt="" />
-                                            <p>Off-road</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div data-aos="fade-up" data-aos-delay="2000" data-aos-offset="0">
-                                <div className="item">
-                                    <a href="/application-tuning">
-                                        <div className="icon">
-                                            <img src={VehicleIcon5} alt="" />
-                                            <p>Tuning</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div data-aos="fade-up" data-aos-delay="2100" data-aos-offset="0">
-                                <div className="item">
-                                    <a href="/application-motorcycle">
-                                        <div className="icon">
-                                            <img src={VehicleIcon6} alt="" />
-                                            <p>Motorsport</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div data-aos="fade-up" data-aos-delay="2200" data-aos-offset="0">
-                                <div className="item">
-                                    <a href="/application-truck">
-                                        <div className="icon">
-                                            <img src={VehicleIcon7} alt="" />
-                                            <p>Truck</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div data-aos="fade-up" data-aos-delay="2300" data-aos-offset="0">
-                                <div className="item">
-                                    <a href="/application-boat">
-                                        <div className="icon">
-                                            <img src={VehicleIcon8} alt="" />
-                                            <p>Boat</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div data-aos="fade-up" data-aos-delay="2400" data-aos-offset="0">
-                                <div className="item">
-                                    <a href="/application-ship">
-                                        <div className="icon">
-                                            <img src={VehicleIcon9} alt="" />
-                                            <p>Ship</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div data-aos="fade-up" data-aos-delay="2500" data-aos-offset="0">
-                                <div className="item">
-                                    <a href="/application-aviation">
-                                        <div className="icon">
-                                            <img src={VehicleIcon10} alt="" />
-                                            <p>Aviation</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
+                                    </div>
+                                ))
+                            }
                         </div>
                     </div>
                 </div>

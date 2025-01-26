@@ -209,7 +209,10 @@ const ProductDetails = () => {
                             </h2>
                         </div>
                         <h5>API SN</h5>
-                        <p>Mazda, Nissan, Honda, Toyota</p>
+                        {/* <p>Mazda, Nissan, Honda, Toyota</p> */}
+                        {
+                            data?.data?.data?.approvals
+                        }
                     </div>
                     <div className="row">
                         <div className="title">

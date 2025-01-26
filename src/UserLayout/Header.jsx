@@ -3,18 +3,32 @@ import { PiStarFill } from "react-icons/pi";
 import { CiGlobe } from "react-icons/ci";
 import { LuSearch } from "react-icons/lu";
 import { HiMenu } from "react-icons/hi";
-import { Link, useLocation } from "react-router-dom"; // Import useLocation
+import { Link, useLocation, useNavigate } from "react-router-dom"; // Import useLocation
 import Logo from '../assets/Resources/wagner-logo.svg';
 import Product1 from '../assets/Resources/5w-30.png';
+import { debounce } from 'lodash';
+import { useProductGetQuery } from '../query/useQuery';
 
 const Header = () => {
     const [scrolled, setScrolled] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
     const location = useLocation(); // Get current location
+    const [search, setSearch] = useState('');
 
     const toggleDropdown = (dropdown) => {
         setActiveDropdown((prevDropdown) => (prevDropdown === dropdown ? null : dropdown));
     };
+
+    const debouncedSearch = debounce((value) => {
+        setSearch(value);
+        // Perform any additional search actions here (like API calls)
+    }, 500);
+
+    const handleChange = (e) => {
+        debouncedSearch(e.target.value);
+    };
+    const { data: products } = useProductGetQuery({ page: 1, search: search, categoryId: '', industriesIds: '', applicationsIds: '' })
+
 
     const isActive = (path) => {
         const currentPath = location.pathname;
@@ -46,6 +60,8 @@ const Header = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    const navigate = useNavigate();
 
     return (
         <>
@@ -263,30 +279,50 @@ const Header = () => {
                         <div className="modal-header">
                             <input
                                 type="text"
+                                // value={search}
+                                onChange={handleChange}
                                 className="form-control"
                                 placeholder="Search Products here..."
                             />
                         </div>
                         <div className="modal-body">
                             <div className="row item">
-                                <div className="col-lg-4">
-                                    <div className="image">
-                                        <img src={Product1} alt="" />
-                                    </div>
-                                </div>
-                                <div className="col-lg-8">
-                                    <div className="content">
-                                        <div className="title">
-                                            <h5>Wagner VG 150 Industrial Oil</h5>
-                                        </div>
-                                        <p>WAGNER EVOMAX SAE 0W-16 API is formulated with synthetic base oils and highly advanced additives </p>
-                                        <div className="product-btns">
-                                            <div className="common-border-btn">
-                                                <button>View Details</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {
+                                    products?.data?.data?.length > 0 ? (
+                                        products?.data?.data?.map((product, index) => (
+                                            <>
+                                                <div className="col-lg-4" key={index}>
+                                                    <div className="image">
+                                                        <img src={product?.images[0]} alt="" />
+                                                    </div>
+                                                </div>
+                                                <div className="col-lg-8">
+                                                    <div className="content">
+                                                        <div className="title">
+                                                            <h5>{product?.name}</h5>
+                                                        </div>
+                                                        <p>{product?.description?.slice(0, 100)}</p>
+                                                        <div className="product-btns">
+                                                            <div className="common-border-btn">
+                                                                <button onClick={() => {
+                                                                    navigate(`/product-detail/${product?._id}`), document
+                                                                    document.getElementById('closeModalButton').click();
+                                                                }}>View Details</button>
+                                                            </div>
+                                                            <button
+                                                                type="button"
+                                                                className="btn-close d-none"
+                                                                data-bs-dismiss="modal"
+                                                                aria-label="Close"
+                                                                id="closeModalButton" // Add an ID to the button
+                                                            ></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </>
+                                        ))
+                                    ) : "No Products Found"
+                                }
                             </div>
                         </div>
                     </div>
