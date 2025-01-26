@@ -79,6 +79,13 @@ const Contact = () => {
                         <form onSubmit={handleSubmit}>
                             <div className="row">
                                 <div className="col-lg-6">
+                                    <select name="" id="">
+                                        <option value="">Salution </option>
+                                        <option value="mr">Mr </option>
+                                        <option value="mrs">Mrs </option>
+                                    </select>
+                                </div>
+                                <div className="col-lg-6">
                                     <input
                                         type="text"
                                         name="firstName"
@@ -139,7 +146,7 @@ const Contact = () => {
                                         required
                                     />
                                 </div>
-                                <div className="col-lg-12">
+                                <div className="col-lg-6">
                                     <input
                                         type="text"
                                         name="typeOfConsultant"
