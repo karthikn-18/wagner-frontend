@@ -71,7 +71,7 @@ const Header = () => {
                     <div className="row">
                         <div className="col-lg-8">
                             <div className="star-items">
-                                <div data-aos="fade-down" >
+                                <div data-aos="fade-down " >
                                     <div className="item">
                                         <PiStarFill className="icon" />
                                         <p className="fontSize14 fontWeight300">New Micro-Ceramic Technology</p>
@@ -94,23 +94,33 @@ const Header = () => {
                         <div className="col-lg-4">
                             <div className="right">
                                 <div data-aos="fade-down">
-                                    {/* <div className="item mobiletopheader">
-                                        <p className="fontSize14 fontWeight300"><Link to="/blog" className={isActive("/blog")}>Blog</Link></p>
-                                    </div> */}
-                                </div>
-                                <div data-aos="fade-down">
                                     <div className="item">
                                         <button
                                             type="button"
                                             data-bs-toggle="modal"
                                             data-bs-target="#globalsearch"
                                         >
-                                            <LuSearch className="icon" />Seach Products
+                                            <LuSearch className="icon" /> Search Products
                                         </button>
+                                    </div>
+                                </div>
+                                <div data-aos="fade-down">
+                                    <div className="item">
+                                        <CiGlobe className='icon' />
+                                        <div className="language-selector">
+                                            <select className="select-language">
+                                                <option value="en">ENG</option>
+                                                <option value="fr">Français</option>
+                                                <option value="de">Deutsch</option>
+                                                <option value="it">Italiano</option>
+                                                <option value="es">Español</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
