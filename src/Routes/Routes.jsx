@@ -36,6 +36,10 @@ import Category from "../Pages/Admin/Category/Category";
 import Application from "../Pages/Admin/Application/Application";
 import AddProductForm from "../Pages/Admin/Products/AddProducts";
 import AdminProducts from "../Pages/Admin/Products/Products";
+import Imprint from "../Pages/User/Imprint";
+import DataProtection from "../Pages/User/DataProtection";
+import RightsofWithdraswl from "../Pages/User/RightsofWithdraswl";
+import ShippingPaymentConditions from "../Pages/User/ShippingPaymentConditions";
 
 const Routes = () => {
   const routes = useRoutes([
@@ -47,7 +51,6 @@ const Routes = () => {
         { path: "/about", element: <About /> },
         { path: "/products", element: <Products /> },
         { path: "/product-detail/:id", element: <ProductDetails /> },
-        { path: "/privacy-policy", element: <PrivacyPolcy /> },
         { path: "/blog", element: <Blog /> },
         { path: "/blog-overview/:id", element: <BlogOverview /> },
         { path: "/application-cars", element: <Cars /> },
@@ -66,6 +69,11 @@ const Routes = () => {
         { path: "/industry-shipping", element: <Shipping /> },
         { path: "/industry-cable-cars-&-lifts", element: <CableCars /> },
         { path: "/industry-combines-heat-&-power-plants", element: <CombineHeat /> },
+        { path: "/imprint", element: <Imprint /> },
+        { path: "/data-protection-declaration", element: <DataProtection /> },
+        { path: "/terms-and-conditions", element: <PrivacyPolcy /> },
+        { path: "/rights-of-withdrawl", element: <RightsofWithdraswl /> },
+        { path: "/shipping-and-payment-conditions", element: <ShippingPaymentConditions /> }
       ],
     },
     {

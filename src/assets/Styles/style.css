@@ -367,6 +367,7 @@ p{
 .top-header{
     padding: 10px 0px;
     background-color: var(--primary);
+    transition: top 0.3s ease-in-out; 
 }
 .top-header .star-items{
     display: flex;
@@ -481,7 +482,6 @@ color: #fff;
   color: #000;
 }
 /* header styles *//* Sticky header when scrolled */
-
 .main-header.sticky-header.scrolled {
   position: fixed;
   top: 0;
@@ -490,6 +490,7 @@ color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow to make it stand out */
   background-color: white; /* Ensure the background is opaque */
   z-index: 9999; /* Make sure the header is above other content */
+  transition: top 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Optional: Add a style for when the header is scrolled */
@@ -502,7 +503,7 @@ color: #fff;
   top: 0;
   z-index: 999;
   width: 100%;
-  transition: all 0.3s ease-in-out; /* Smooth transition when scrolling */
+  transition: all 0.3s ease, box-shadow 0.3s ease;
   background-color: #fff;
   padding: 20px 0px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
@@ -2415,6 +2416,12 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
 }
 /* privacy-policy style */
 
+.privacy-policy-content .content a{
+  text-decoration: none
+}
+.privacy-policy-content .content a .colouredtext{
+  color: var(--primary);
+}
 .policy-btn button{
   width: 120px;
   padding: 10px;
@@ -2424,6 +2431,7 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
   font-weight: 500;
   color: var(--primary);
   margin-bottom: 0px;
+  margin-top: 20px;
 }
 .privacy-policy-content .content h6{
   font-size: 16px;
@@ -3525,3 +3533,29 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
   padding: 15px 15px;
 }
 }
+
+
+
+
+/* .goog-te-gadget img{
+display: none;
+}
+#google_translate_element{
+  position: absolute !important;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  z-index: 9;
+}
+.top-header{
+  position: relative;
+}
+.goog-te-gadget-simple{
+  display: flex !important;
+  gap: 10px !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+.goog-te-gadget-simple .VIpgJd-ZVi9od-xl07Ob-lTBxed span {
+  color: #fff;
+} */

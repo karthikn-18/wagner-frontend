@@ -30,6 +30,19 @@ const Header = () => {
     const { data: products } = useProductGetQuery({ page: 1, search: search, categoryId: '', industriesIds: '', applicationsIds: '' })
 
 
+    const handleLanguageChange = (e) => {
+        const selectedLanguage = e.target.value;
+        const googleTranslateElement = window.google && window.google.translate;
+
+        if (googleTranslateElement) {
+            const translateInstance = googleTranslateElement.TranslateElement;
+            const translate = translateInstance && translateInstance.translate;
+            if (translate) {
+                translate(selectedLanguage);
+            }
+        }
+    };
+
     const isActive = (path) => {
         const currentPath = location.pathname;
 
@@ -108,12 +121,9 @@ const Header = () => {
                                     <div className="item">
                                         <CiGlobe className='icon' />
                                         <div className="language-selector">
-                                            <select className="select-language">
+                                            <select className="select-language" >
                                                 <option value="en">ENG</option>
-                                                <option value="fr">Français</option>
-                                                <option value="de">Deutsch</option>
-                                                <option value="it">Italiano</option>
-                                                <option value="es">Español</option>
+                                                <option value="de">German</option>
                                             </select>
                                         </div>
                                     </div>

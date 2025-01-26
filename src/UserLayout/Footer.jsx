@@ -5,7 +5,6 @@ import { AiOutlineYoutube } from "react-icons/ai";
 import { SlSocialFacebook } from "react-icons/sl";
 import FooterMap from '../assets/Resources/footer-map.png'
 import { IoCall } from "react-icons/io5";
-import { FaLocationDot } from "react-icons/fa6";
 
 const Footer = () => {
     return (
@@ -46,9 +45,9 @@ const Footer = () => {
                                 <h2>Quick Links</h2>
                                 <ul>
                                     <li><a href="/about">About us</a></li>
-                                    <li>Contact</li>
-                                    <li>Blog</li>
-                                    <li>Shop</li>
+                                    <li><a href="/contact">Contact</a></li>
+                                    <li><a href="/blog">Blog</a></li>
+                                    <li><a href="/products">Shop</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -86,16 +85,15 @@ const Footer = () => {
                     <div className="content">
                         <div className="left">
                             <ul>
-                                <li>Data Protection Declaration</li>
-                                <li>General Business Terms</li>
-                                <li><a href="/privacy-policy">Privacy Policy</a></li>
-                                <li>Legal notice</li>
-                                <li>Imprint</li>
-                                <li>Revocation right for Consumers</li>
+                                <li><a href="/data-protection-declaration">Data Protection Declaration</a></li>
+                                <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+                                <li><a href="/imprint">Imprint</a></li>
+                                <li><a href="/rights-of-withdrawl">Rights of Withdrawl</a></li>
+                                <li><a href="/shipping-and-payment-conditions">Shipping & Payment Conditions</a></li>
                             </ul>
                         </div>
                         <div className="right">
-                            <h6>©2024 Wagner German Oil</h6>
+                            <h6>©2025 Wagner German Oil</h6>
                         </div>
                     </div>
                 </div>

@@ -4,34 +4,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GoArrowUpRight } from "react-icons/go";
 import VehicleIcon1 from '../../assets/Resources/vehicle1.svg'
-import VehicleIcon2 from '../../assets/Resources/vehicle2.svg'
-import VehicleIcon3 from '../../assets/Resources/vehicle3.svg'
-import VehicleIcon4 from '../../assets/Resources/vehicle4.svg'
-import VehicleIcon5 from '../../assets/Resources/vehicle5.svg'
-import VehicleIcon6 from '../../assets/Resources/vehicle6.svg'
-import VehicleIcon7 from '../../assets/Resources/vehicle7.svg'
-import VehicleIcon8 from '../../assets/Resources/vehicle8.svg'
-import VehicleIcon9 from '../../assets/Resources/vehicle9.svg'
-import VehicleIcon10 from '../../assets/Resources/vehicle10.svg'
 import Ellipse1 from '../../assets/Resources/ellipse-1.png'
 import Ellipse2 from '../../assets/Resources/ellipse-2.png'
 import { IoIosArrowForward } from "react-icons/io";
 import { TbFileDownload } from "react-icons/tb";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link, NavLink } from 'react-router-dom';
-import ProductImage from '../../assets/Resources/oil-product-1.png'
-import Product1 from '../../assets/Resources/5w-30.png'
-import Product2 from '../../assets/Resources/product2.png'
-import Product3 from '../../assets/Resources/product3.png'
-import Product4 from '../../assets/Resources/product4.png'
-import whyUsImg from '../../assets/Resources/counter-image.jpg'
-import TestiImg1 from '../../assets/Resources/test-img-1.jpg'
-import TestiImg2 from '../../assets/Resources/test-img-2.jpg'
-import TestiProfile from '../../assets/Resources/test-profile.jpg'
 import Brand1 from '../../assets/Resources/brand1.png'
 import Brand2 from '../../assets/Resources/brand2.png'
 import Brand3 from '../../assets/Resources/brand3.png'
-import CtaRight from '../../assets/Resources/cta-right.png'
 import MadeInGermany from '../../assets/Resources/made-in-germany.webp'
 import TechDriven from '../../assets/Resources/tech-driven.jpg'
 import TechSupport from '../../assets/Resources/tech-support.jpg'
