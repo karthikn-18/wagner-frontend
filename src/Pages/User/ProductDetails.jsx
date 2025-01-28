@@ -8,8 +8,8 @@ import Product1 from '../../assets/Resources/5w-30.png'
 import Product1Des from '../../assets/Resources/product-1-des.png'
 import Product1Cover from '../../assets/Resources/product-1-cover.png'
 import { VscDebugBreakpointLog } from "react-icons/vsc";
-import { useProductGetSingleIdQuery } from '../../query/useQuery';
-import { Link, useParams } from 'react-router-dom';
+import { useBestSellersGetQuery, useProductGetSingleIdQuery } from '../../query/useQuery';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { IoArrowDown } from "react-icons/io5";
 import Flipkart from '../../assets/Resources/flipkart.png'
 import Amazon from '../../assets/Resources/amazon.png'
@@ -21,14 +21,8 @@ const ProductDetails = () => {
     const params = useParams()
 
     const { data } = useProductGetSingleIdQuery(params.id);
-    console.log(data, "data", data?.data?.data?.images?.map((image) => (
-        {
-            original: image,
-            thumbnail: image
-        }
-    ) || []),);
 
-
+    const { data: bestSeller } = useBestSellersGetQuery();
 
     const productDetailItem = {
         images: data?.data?.data?.images?.map((image) => (
@@ -52,6 +46,8 @@ const ProductDetails = () => {
             });
         }
     };
+
+    const navigate = useNavigate();
 
     return (
         <>
@@ -396,7 +392,51 @@ const ProductDetails = () => {
                         </div>
                     </div>
                     <div className="row products">
-                        <div className="col-lg-3">
+                        {
+                            bestSeller?.data?.data?.map((item) => (
+                                <div className="col-lg-3">
+                                    <div data-aos="fade-up">
+                                        <div className="box">
+                                            <div className="product-image">
+                                                <img src={item?.images[0]} alt="" />
+                                            </div>
+                                            <div className="product-detail">
+                                                <h5>{item?.title}</h5>
+                                                <p>{item?.description?.slice(0, 150)}</p>
+                                            </div>
+                                            <div className="product-btns">
+                                                <div className="common-border-btn">
+                                                    <button
+                                                        onClick={() => {
+                                                            navigate(`/product-detail/${item?._id}`);
+                                                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                                                        }}
+                                                    >
+                                                        View Details
+                                                    </button>
+
+                                                </div>
+                                                <div className="common-btn">
+
+                                                    <button
+                                                        onClick={() => {
+                                                            if (item?.buyExternalLinks?.main) {
+                                                                window.open(item.buyExternalLinks.main, "_blank");
+                                                            }
+                                                        }}
+                                                        disabled={!item?.buyExternalLinks?.main}
+                                                    >
+                                                        Buy Now
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                        {/* <div className="col-lg-3">
                             <div data-aos="fade-up">
                                 <div className="box">
                                     <div className="product-image">
@@ -416,70 +456,7 @@ const ProductDetails = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-lg-3">
-                            <div data-aos="fade-up" data-aos-delay="200">
-                                <div className="box">
-                                    <div className="product-image">
-                                        <img src={ProductImage} alt="" />
-                                    </div>
-                                    <div className="product-detail">
-                                        <h5>Wagner VG 150 Industrial Oil</h5>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                    </div>
-                                    <div className="product-btns">
-                                        <div className="common-border-btn">
-                                            <button>View Details</button>
-                                        </div>
-                                        <div className="common-btn">
-                                            <button>Buy Now</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-3">
-                            <div data-aos="fade-up" data-aos-delay="400">
-                                <div className="box">
-                                    <div className="product-image">
-                                        <img src={ProductImage} alt="" />
-                                    </div>
-                                    <div className="product-detail">
-                                        <h5>Wagner VG 150 Industrial Oil</h5>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                    </div>
-                                    <div className="product-btns">
-                                        <div className="common-border-btn">
-                                            <button>View Details</button>
-                                        </div>
-                                        <div className="common-btn">
-                                            <button>Buy Now</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-3">
-                            <div data-aos="fade-up" data-aos-delay="600">
-                                <div className="box">
-                                    <div className="product-image">
-                                        <img src={ProductImage} alt="" />
-                                    </div>
-                                    <div className="product-detail">
-                                        <h5>Wagner VG 150 Industrial Oil</h5>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-                                    </div>
-                                    <div className="product-btns">
-                                        <div className="common-border-btn">
-                                            <button>View Details</button>
-                                        </div>
-                                        <div className="common-btn">
-                                            <button>Buy Now</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

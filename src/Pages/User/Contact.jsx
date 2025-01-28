@@ -8,6 +8,7 @@ import { Loader2 } from 'lucide-react';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
+        salutation: "",
         firstName: "",
         lastName: "",
         email: "",
@@ -23,6 +24,7 @@ const Contact = () => {
 
     const handleCloseFunction = () => {
         setFormData({
+            salutation: "",
             firstName: "",
             lastName: "",
             email: "",
@@ -54,12 +56,18 @@ const Contact = () => {
             return;
         }
         try {
-            mutate({ data: formData, handleCloseFunction });
+            const payload = {
+                ...formData,
+                firstName: formData?.salutation + " " + formData.firstName,
+            }
+            mutate({ data: payload, handleCloseFunction });
             console.log('Form submitted:', formData);
         } catch (error) {
             console.error('Error submitting form:', error);
         }
     };
+
+    // console.log(formData?.salutation + " " + formData.firstName);
 
     return (
         <>
@@ -79,8 +87,8 @@ const Contact = () => {
                         <form onSubmit={handleSubmit}>
                             <div className="row">
                                 <div className="col-lg-6">
-                                    <select name="" id="">
-                                        <option value="">Salution </option>
+                                    <select name="salutation" id="" value={formData.salutation} onChange={handleChange}>
+                                        <option value="" disabled selected>Salution </option>
                                         <option value="mr">Mr </option>
                                         <option value="mrs">Mrs </option>
                                     </select>
@@ -178,7 +186,9 @@ const Contact = () => {
                                 <button type="submit" disabled={isPending}> {
                                     isPending ?
                                         <>
-                                            <Loader2 className="w-5 h-5" />  'Sending...'
+                                            <div className='flex items-center gap-2'>
+                                                <Loader2 className="w-5 h-5" />  'Sending...'
+                                            </div>
                                         </> : "Submit"
                                 } </button>
                             </div>

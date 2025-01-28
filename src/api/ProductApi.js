@@ -40,3 +40,9 @@ export const addProductApi = async (data, token) => {
     const response = await senderRequest("post-photo", `${REACT_APP_BACKEND_URL}/create-product`, token, data);
     return response
 }
+
+
+export const getBestSellersApi = async (data, token) => {
+    const response = await senderRequest("get", `${REACT_APP_BACKEND_URL}/product-bestSellers`, token, data);
+    return response
+}
