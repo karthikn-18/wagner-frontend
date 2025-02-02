@@ -11,6 +11,27 @@ import debounce from 'lodash/debounce';
 
 const Products = () => {
 
+    const [activeSection, setActiveSection] = useState(() => {
+        return window.innerWidth <= 768 ? [] : ['applications', 'industries'];
+    });
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth <= 768) {
+                setActiveSection([]); // Close menu on mobile
+            } else {
+                setActiveSection(['applications', 'industries']); // Keep open on desktop
+            }
+        };
+
+        handleResize(); // Run initially
+        window.addEventListener('resize', handleResize); // Listen for resize
+
+        return () => window.removeEventListener('resize', handleResize); // Cleanup
+    }, []);
+
+
+
     const { data: categories } = useCategoryGetQuery()
     const { data: applications } = useApplicationGetQuery()
     const { data: industries } = useIndustriesGetQuery()
@@ -28,7 +49,7 @@ const Products = () => {
     // const [applicationsIds, setApplicationsIds] = useState([application]);
     // console.log(applicationsIds, "applicationsIds")
 
-    const [applicationsIds, setApplicationsIds] = useState(application ? [application] : []); 
+    const [applicationsIds, setApplicationsIds] = useState(application ? [application] : []);
     const [checkedState, setCheckedState] = useState({});
 
     useEffect(() => {
@@ -36,7 +57,7 @@ const Products = () => {
             const initialState = {};
             applications.data.data.forEach((item) => {
                 if (item._id === application) {
-                    initialState[item.name] = true; 
+                    initialState[item.name] = true;
                 }
             });
             setCheckedState(initialState);
@@ -54,7 +75,7 @@ const Products = () => {
     console.log(products, "categories, applications, industries")
 
     // Initialize state to have both 'applications' and 'industries' open by default
-    const [activeSection, setActiveSection] = useState(['applications', 'industries']);
+    // const [activeSection, setActiveSection] = useState(['applications', 'industries']);
     // const [checkedState, setCheckedState] = useState({});
 
     const navigate = useNavigate();
@@ -140,6 +161,7 @@ const Products = () => {
         setPage(1)
     };
 
+
     return (
         <>
             <div className="breadcrumb product-breadcrumb">
@@ -155,7 +177,7 @@ const Products = () => {
                 <div className="container">
                     <div className="product-cat-slider">
                         <div data-aos="fade-down" onClick={() => { setCategoryId(''), setPage(1) }}>
-                            <div className="item all-item">
+                            <div className="item all-item all-cat">
                                 <h6>All</h6>
                             </div>
                         </div>
@@ -178,7 +200,7 @@ const Products = () => {
                         <div className="container">
                             <div className="product-showcase">
                                 <div className="row">
-                                    <div className="col-lg-3">
+                                    <div className="col-lg-3 ">
                                         <div className="product-menu" data-aos="fade-right">
                                             <ul>
                                                 {/* Applications Section */}
@@ -257,7 +279,7 @@ const Products = () => {
                                             <div className="row">
                                                 {
                                                     products?.data?.data?.map((item, index) => (
-                                                        <div className="col-lg-3">
+                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                                                             <div data-aos="fade-up">
                                                                 <div className="box">
                                                                     <div className="product-image">

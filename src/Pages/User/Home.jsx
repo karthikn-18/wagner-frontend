@@ -230,100 +230,79 @@ const Home = () => {
 
     console.log(ApplicationValue, "ApplicationValue")
 
+    const backgroundImages = [
+        "src/assets/Resources/banner-3.jpg",
+        "src/assets/Resources/banner-4.jpg",
+        "src/assets/Resources/banner-6.png",
+        "src/assets/Resources/banner-7.png",
+        "src/assets/Resources/banner-5.jpg",
+
+    ];
+
+    const [currentBackground, setCurrentBackground] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentBackground((prev) => (prev + 1) % backgroundImages.length);
+        }, 2000); // Change background every 5 seconds
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <>
             {/* banner section */}
-            <div className="banner-section">
-                <Slider {...settings} className='slider'>
-                    <div className='banner-4'>
-                        <div className="container">
-                            <div className="banner-contents">
-                                <h5 data-aos="fade-right">UNLOCKING THE WORLD OF</h5>
-                                <h1 data-aos="fade-right" data-aos-delay="500">Lubricants & <span className='ban-outline'>Additives</span></h1>
-                                <p data-aos="fade-right" data-aos-delay="1000">Wagner, a comprehensive range of high-quality
-                                    lubricants designed to meet the needs of various
-                                    vehicles and machinery. Our product line includes:</p>
-                                <div className="banner-btn common-border-btn" data-aos="fade-right" data-aos-delay="1500">
-                                    <a href="/products">
-                                        <button className='fontSize16 fontWeight300'>Explore Products<GoArrowUpRight className='icon' /></button>
-                                    </a>
-                                </div>
-                            </div>
+            <div
+                className="banner-section"
+                style={{
+                    backgroundImage: `url(${backgroundImages[currentBackground]})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    transition: "background-image 1s ease-in-out",
+                }}
+            >
+                <div className="container">
+                    <div className="banner-contents">
+                        <h5 data-aos="fade-right">UNLOCKING THE WORLD OF</h5>
+                        <h1 data-aos="fade-right" data-aos-delay="500">
+                            Lubricants & <span className="ban-outline">Additives</span>
+                        </h1>
+                        <p data-aos="fade-right" data-aos-delay="1000">
+                            Wagner, a comprehensive range of high-quality lubricants designed to meet the needs of various vehicles and machinery.
+                        </p>
+                        <div className="banner-btn common-border-btn" data-aos="fade-right" data-aos-delay="1500">
+                            <a href="/products">
+                                <button className="fontSize16 fontWeight300">
+                                    Explore Products <GoArrowUpRight className="icon" />
+                                </button>
+                            </a>
                         </div>
                     </div>
-                    <div className='banner-3'>
-                        <div className="container">
-                            <div className="banner-contents">
-                                <h5 data-aos="fade-right">UNLOCKING THE WORLD OF</h5>
-                                <h1 data-aos="fade-right" data-aos-delay="500">Lubricants & <span className='ban-outline'>Additives</span></h1>
-                                <p data-aos="fade-right" data-aos-delay="1000">Wagner, a comprehensive range of high-quality
-                                    lubricants designed to meet the needs of various
-                                    vehicles and machinery. Our product line includes:</p>
-                                <div className="banner-btn common-border-btn" data-aos="fade-right" data-aos-delay="1500">
-                                    <a href="/products">
-                                        <button className='fontSize16 fontWeight300'>Explore Products<GoArrowUpRight className='icon' /></button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='banner-1'>
-                        <div className="container">
-                            <div className="banner-contents">
-                                <h5 data-aos="fade-right">UNLOCKING THE WORLD OF</h5>
-                                <h1 data-aos="fade-right" data-aos-delay="500">Lubricants & <span className='ban-outline'>Additives</span></h1>
-                                <p data-aos="fade-right" data-aos-delay="1000">Wagner, a comprehensive range of high-quality
-                                    lubricants designed to meet the needs of various
-                                    vehicles and machinery. Our product line includes:</p>
-                                <div className="banner-btn common-border-btn" data-aos="fade-right" data-aos-delay="1500">
-                                    <a href="/products">
-                                        <button className='fontSize16 fontWeight300'>Explore Products<GoArrowUpRight className='icon' /></button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='banner-2'>
-                        <div className="container">
-                            <div className="banner-contents">
-                                <h5 data-aos="fade-right">UNLOCKING THE WORLD OF</h5>
-                                <h1 data-aos="fade-right" data-aos-delay="500">Lubricants & <span className='ban-outline'>Additives</span></h1>
-                                <p data-aos="fade-right" data-aos-delay="1000">Wagner, a comprehensive range of high-quality
-                                    lubricants designed to meet the needs of various
-                                    vehicles and machinery. Our product line includes:</p>
-                                <div className="banner-btn common-border-btn" data-aos="fade-right" data-aos-delay="1500">
-                                    <a href="/products">
-                                        <button className='fontSize16 fontWeight300'>Explore Products<GoArrowUpRight className='icon' /></button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Slider>
+                </div>
+
+                {/* Vehicle Selection Section */}
                 <div className="container select-vehicle-container" data-aos="fade-up" data-aos-delay="1500">
                     <div className="select-vehicle">
                         <div className="sub-heading-dark">
                             <button>SELECT YOUR VEHICLE</button>
                         </div>
                         <div className="vehicle-category">
-                            {
-                                ApplicationValue?.data?.data.map((item) => (
-                                    <div data-aos="fade-up" data-aos-delay="1600" data-aos-offset="0">
-                                        <div className="item" >
-                                            <Link to={`/products?application=${item?._id}`}>
-                                                <div className="icon first">
-                                                    <img src={VehicleIcon1} alt="" />
-                                                    <p>{item?.name}</p>
-                                                </div>
-                                            </Link>
-                                        </div>
+                            {ApplicationValue?.data?.data.map((item) => (
+                                <div key={item?._id} data-aos="fade-up" data-aos-delay="1600" data-aos-offset="0">
+                                    <div className="item">
+                                        <Link to={`/products?application=${item?._id}`}>
+                                            <div className="icon first">
+                                                <img src={VehicleIcon1} alt="" />
+                                                <p>{item?.name}</p>
+                                            </div>
+                                        </Link>
                                     </div>
-                                ))
-                            }
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
-            </div >
+            </div>
 
             {/* about section */}
             <div className="about-section space">
@@ -367,7 +346,7 @@ const Home = () => {
 
                     <div ref={sectionRef} className="counter-section">
                         <div className="row">
-                            <div className="col-lg-3">
+                            <div className="col-lg-3 col-md-6 col-sm-12">
                                 <div data-aos="fade-up">
                                     <div className="box box-1">
                                         <div className="years-in-industry">
@@ -380,7 +359,7 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-3">
+                            <div className="col-lg-3 col-md-6 col-sm-12">
                                 <div data-aos="fade-up" data-aos-delay="500">
                                     <div className="box box-2">
                                         <h1 className='typewriter-text'>#1</h1>
@@ -393,7 +372,7 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-3">
+                            <div className="col-lg-3 col-md-6 col-sm-12">
                                 <div data-aos="fade-up" data-aos-delay="1000">
                                     <div className="box box-3">
                                         <h6>Active across</h6>
@@ -406,7 +385,7 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-3">
+                            <div className="col-lg-3 col-md-6 col-sm-12">
                                 <div data-aos="fade-up" data-aos-delay="1500">
                                     <div className="box box-4">
                                         <div className="icon">
@@ -520,7 +499,7 @@ const Home = () => {
 
                                                 currentItems?.length > 0 ?
                                                     currentItems?.map((item, index) => (
-                                                        <div className="col-lg-3" key={index}>
+                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12" key={index}>
                                                             <div className="box" data-aos="fade-up">
                                                                 <div className="product-image">
                                                                     <img src={item?.images[0]} alt="WAGNER EVOMAX SAE 5W-30 SN C3" />
@@ -763,12 +742,12 @@ const Home = () => {
             <div div className="cta-section mini-space" data-aos="fade-down">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-3" >
+                        <div className="col-lg-3 col-sm-12" >
                             <div className="image wagner-image" data-aos="fade-right" data-aos-delay="200" data-aos-offset="0">
                                 <img src={CtaWagner} alt="" />
                             </div>
                         </div>
-                        <div className="col-lg-9">
+                        <div className="col-lg-9 col-sm-12">
                             <div data-aos="fade-left" data-aos-delay="200">
                                 <div className="content">
                                     <h1>A Word from Our Leadership</h1>

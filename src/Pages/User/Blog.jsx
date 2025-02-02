@@ -69,7 +69,7 @@ const Blog = () => {
                             <div className="row">
                                 {
                                     data?.data?.data?.map((item, index) => (
-                                        <div className="col-lg-3" key={index}>
+                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12" key={index}>
                                             <Link to={`/blog-overview/${item?._id}`} className='text-decoration-none text-black'>
                                                 <div data-aos="fade-up">
                                                     <div className="item">

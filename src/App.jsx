@@ -41,7 +41,11 @@ function App() {
 
   return (
     <>
-     
+      {
+        !pathname.includes('admin') && (
+          <GoogleTranslate />
+        )
+      }
       <Routes />
     </>
   )

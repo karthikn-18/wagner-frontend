@@ -5,6 +5,7 @@ import { AiOutlineYoutube } from "react-icons/ai";
 import { SlSocialFacebook } from "react-icons/sl";
 import FooterMap from '../assets/Resources/footer-map.png'
 import { IoCall } from "react-icons/io5";
+import { FaWhatsapp } from "react-icons/fa";
 
 const Footer = () => {
     return (
@@ -62,6 +63,18 @@ const Footer = () => {
                                 </ul>
                             </div>
                         </div>
+                        <div className="col-lg-2 mobile-footer-menu">
+                            <div className="footer-menu">
+                                <h2>Best Seller</h2>
+                                <ul>
+                                    <li><a href="/data-protection-declaration">Data Protection Declaration</a></li>
+                                    <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+                                    <li><a href="/imprint">Imprint</a></li>
+                                    <li><a href="/rights-of-withdrawl">Rights of Withdrawl</a></li>
+                                    <li><a href="/shipping-and-payment-conditions">Shipping & Payment Conditions</a></li>
+                                </ul>
+                            </div>
+                        </div>
                         <div className="col-lg-3">
                             <div className="location">
                                 <img src={FooterMap} alt="" />
@@ -96,6 +109,13 @@ const Footer = () => {
                             <h6>©2025 Wagner German Oil</h6>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div className="floating-whatsapp">
+                <div className="float">
+                    <a href="https://wa.me/+491603653650" target='_blank'>
+                        <FaWhatsapp className='icon' />
+                    </a>
                 </div>
             </div>
         </div>

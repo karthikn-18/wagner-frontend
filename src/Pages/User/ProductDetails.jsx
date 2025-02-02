@@ -206,9 +206,11 @@ const ProductDetails = () => {
                         </div>
                         <h5>API SN</h5>
                         {/* <p>Mazda, Nissan, Honda, Toyota</p> */}
-                        {
-                            data?.data?.data?.approvals
-                        }
+                        <p>
+                            {
+                                data?.data?.data?.approvals
+                            }
+                        </p>
                     </div>
                     <div className="row">
                         <div className="title">

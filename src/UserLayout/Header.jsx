@@ -187,7 +187,7 @@ const Header = () => {
                                     <ul className="menu-list">
                                         <li><Link to="/" className={isActive("/")}>Home</Link></li>
                                         <li><Link to="/about" className={isActive("/about")}>About</Link></li>
-                                        <li className="dropdown">
+                                        {/* <li className="dropdown">
                                             <button
                                                 className={`dropdown-toggle ${isActive("/application-cars")}`}
                                                 onClick={() => toggleDropdown('applications')}
@@ -207,8 +207,8 @@ const Header = () => {
                                                     <li><Link to="/application-aviation" className={isActive("/application-aviation")} onClick={closeDropdown}>Aviation</Link></li>
                                                 </ul>
                                             )}
-                                        </li>
-                                        <li className="dropdown">
+                                        </li> */}
+                                        {/* <li className="dropdown">
                                             <button
                                                 className={`dropdown-toggle ${isActive("/industry-agriculture-&-forestry")}`}
                                                 onClick={() => toggleDropdown('industries')}
@@ -225,7 +225,7 @@ const Header = () => {
                                                     <li><Link to="/industry-combines-heat-&-power-plants" className={isActive("/industry-combines-heat-&-power-plants")} onClick={closeDropdown}>Combined Heat & Power Plants</Link></li>
                                                 </ul>
                                             )}
-                                        </li>
+                                        </li> */}
                                         <li><Link to="/blog" className={isActive("/blog")}>Blog</Link></li>
                                         <li><Link to="/products" className={isActive("/products")}>Products</Link></li>
                                     </ul>
@@ -239,7 +239,7 @@ const Header = () => {
                                 <ul className="menu-list">
                                     <li><Link to="/" className={isActive("/")}>Home</Link></li>
                                     <li><Link to="/about" className={isActive("/about")}>About</Link></li>
-                                    <li className="dropdown">
+                                    {/* <li className="dropdown">
                                         <button
                                             className={`dropdown-toggle ${isActive("/application-cars")}`}
                                             onClick={() => toggleDropdown('applications')}
@@ -259,8 +259,8 @@ const Header = () => {
                                                 <li><Link to="/application-aviation" className={isActive("/application-aviation")} onClick={closeDropdown}>Aviation</Link></li>
                                             </ul>
                                         )}
-                                    </li>
-                                    <li className="dropdown">
+                                    </li> */}
+                                    {/* <li className="dropdown">
                                         <button
                                             className={`dropdown-toggle ${isActive("/industry-agriculture-&-forestry")}`}
                                             onClick={() => toggleDropdown('industries')}
@@ -277,7 +277,7 @@ const Header = () => {
                                                 <li><Link to="/industry-combines-heat-&-power-plants" className={isActive("/industry-combines-heat-&-power-plants")} onClick={closeDropdown}>Combined Heat & Power Plants</Link></li>
                                             </ul>
                                         )}
-                                    </li>
+                                    </li> */}
                                     <li><Link to="/blog" className={isActive("/blog")}>Blog</Link></li>
                                     <li><Link to="/products" className={isActive("/products")}>Products</Link></li>
                                 </ul>

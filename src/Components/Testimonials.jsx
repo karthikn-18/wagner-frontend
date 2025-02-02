@@ -19,6 +19,48 @@ const Testimonials = () => {
         autoplay: true,       // Enables auto-slide
         autoplaySpeed: 3000,  // Slide change interval (3 seconds)
         cssEase: "ease-in-out", // Smooth animation curve
+        responsive: [
+            {
+                // For screens below 1200px
+                breakpoint: 1200,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    centerMode: true,
+                    centerPadding: "0px", // Ensure no padding for proper alignment
+                },
+            },
+            {
+                // For screens below 992px
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    centerMode: true,
+                    centerPadding: "0px",
+                },
+            },
+            {
+                // For screens below 768px
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    centerMode: true,
+                    centerPadding: "0px",
+                },
+            },
+            {
+                // For screens below 576px
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    centerMode: true,
+                    centerPadding: "0px",
+                },
+            },
+        ],
     };
 
     return (

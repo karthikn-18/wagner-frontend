@@ -70,7 +70,7 @@ const BlogOverview = () => {
                                 <div className="row">
                                     {
                                         recentBlogs?.map((item, index) => (
-                                            <div className="col-lg-3" key={index}>
+                                            <div className="col-lg-3 col-md-6 col-sm-12" key={index}>
                                                 <Link to={`/blog-overview/${item?._id}`} scrollToTop className='text-decoration-none text-black'>
                                                     <div data-aos="fade-up">
                                                         <div className="item">

@@ -583,7 +583,7 @@ color: #fff;
 .banner-section .slider{
   overflow-x: hidden;
 }
-.banner-section .banner-1{
+/* .banner-section .banner-1{
   background-image: url(../Resources/banner4.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -617,10 +617,10 @@ color: #fff;
   background-repeat: no-repeat;
   background-position:center;
   height: 650px;
-}
+} */
 .banner-section .banner-contents{
   max-width: 45%;
-  padding: 30px 0px;
+  padding: 40px 0px 300px 0px;
 
 }
 .banner-section .banner-contents h5{
@@ -714,7 +714,7 @@ color: #fff;
 
 /* about section */
 .about-section{
-  padding-top: 250px;
+  padding-top: 180px;
   position: relative;
 }
 /* .about-section .title-content{
@@ -1811,6 +1811,7 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
   background-color: #c0c0c0;
   position: relative;
   z-index: 2;
+  
 }
 .milestone-content .item .icon.active {
   background-color: var(--primary); /* Active color */
@@ -3261,15 +3262,48 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
 .top-header .language-selector .select-language{
   padding: 5px;
 }
+.mobile-footer-menu{
+  display: none;
+}
 
+
+/* whatsapp style */
+/* .floating-whatsapp{
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+  z-index: 99999;
+} */
+.floating-whatsapp .float{
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        right: 15px;
+        bottom: 20px;
+        /* right: 31px; */
+        background-color: #25d366;
+        color: #FFF;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 23px;
+        box-shadow: 2px 2px 3px #999;
+        z-index: 100;
+        display: flex;
+        margin: auto;
+        align-items: center;
+        justify-content: center;
+}
+.floating-whatsapp .float a{
+  color: #fff;
+}
 /* Responsive Media Query */
 @media (max-width: 576px) {
   .space{
     padding: 50px 0px;
   }
   .title h1{
-    font-size: 20px;
-    line-height: 30px;
+    font-size: 18px;
+    line-height: 28px;
   }
   .title-content .sub-heading-dark{
     margin-bottom: 20px;
@@ -3323,6 +3357,9 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
   .offcanvas .offcanvas-body .menu-list li a{
     color: #fff;
     text-decoration: none;
+  }
+  .main-header.sticky-header.scrolled .brand-logo img{
+    width: 120px;
   }
   .banner-section .banner-contents {
     max-width: 100%;
@@ -3432,11 +3469,6 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
 .product-section .d-none {
   display: none;
 }
-
-.product-section .product-menu {
-  display: none; /* Hide the original product menu in mobile */
-}
-
 /* For the Categories dropdown to work */
 .product-section .mobile-filter.active .filter-dropdown {
   display: block;
@@ -3447,7 +3479,9 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
 .product-section .products .header{
   flex-direction: column;
 }
-
+.product-section .products .box {
+  height: auto;
+}
 
 /* why choose section */
 .why-us-content{
@@ -3476,6 +3510,7 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
   margin-top: 20px;
 }
 
+
 /* brand section */
 .brands-slider{
   overflow-x: hidden;
@@ -3503,6 +3538,7 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
 .cta-section .content h1{
   font-size: 30px;
   line-height: 40px;
+  text-align: center;
 }
 .cta-section .mini-content{
   flex-direction: column;
@@ -3515,7 +3551,15 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
   justify-content: center;
   margin: auto;
 }
-
+.cta-section .mini-content p{
+  font-size: 14px;
+}
+.cta-section .wagner-image{
+  display: none;
+}
+.mobile-footer-menu{
+  display: block;
+}
 /* footer styles */
 .footer-secction .top-footer{
   flex-direction: column;
@@ -3540,8 +3584,1049 @@ background: linear-gradient(90deg, rgba(129, 10, 23, 1) 0%, rgba(27, 2, 5, 1) 10
 .cta-btn button{
   padding: 15px 15px;
 }
+.bottom-footer .content{
+  justify-content: center;
+}
+.bottom-footer .content .left{
+  display: none;
 }
 
+
+/* about page  */
+
+.breadcrumb .breadcrumb-content{
+  flex-wrap: wrap;
+  padding: 50px 0px;
+}
+.breadcrumb .breadcrumb-content h1{
+  font-size: 45px;
+  line-height: 55px;
+}
+.breadcrumb .breadcrumb-content p{
+  font-size: 14px;
+  max-width: 100%;
+  text-align: left;
+}
+.our-company .our-company-content{
+  margin-top: 50px;
+  padding: 10px;
+}
+.our-company .right-content {
+  padding: 0px;
+  margin-top: 20px;
+}
+.our-company .right-content .item{
+  flex-direction: column;
+  padding: 10px 0px;
+}
+.our-company .right-content .item p{
+  max-width: 100%;
+  font-size: 14px;
+}
+.our-company .right-content .item h2{
+  font-size: 18px;
+}
+.our-company .cta{
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: start;
+}
+.our-company .cta .left{
+  max-width: 100%;
+}
+.mission .item {
+  margin: 0px;
+  padding: 20px;
+  height: auto;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+.mission .item .head{
+  margin-bottom: 20px;
+}
+.mission .item .head .icon{
+  height: 70px;
+  width: 70px;
+  font-size: 35px;
+  flex-shrink: 0;
+}
+.mission .item .head h2{
+  font-size: 22px;
+}
+.leftandrighttitle {
+  align-items: start;
+  flex-direction: column;
+}
+.leftandrighttitle .title h5{
+  margin-bottom: 20px;
+}
+
+.our-milestone .milestone-content .item .content p{
+  font-size: 14px;
+}
+.our-milestone .milestone-content .item .content h2 {
+  font-size: 20px;
+}
+.our-milestone .milestone-content .item {
+  padding: 30px 0px;
+  flex: 0 0 25px;
+}
+.our-milestone .milestone-content .item .icon{
+  height: 15px;
+  width: 45px;
+}
+.milestone-content .shapes .line{
+  left: 37px;
+  top: 100px;
+}
+.milestone-content .shapes .car {
+  left: 15px;
+}
+.milestone-content {
+  padding: 0px 30px;
+}
+.our-milestone .milestone-content .final .icon::before{
+  height: 35px;
+  width: 35px;
+}
+.countries-worldwide .title h1 span{
+  font-size: 30px;
+}
+.countries-worldwide .title h1 {
+  margin-bottom: 20px;
+  font-size: 25px;
+}
+.countries-worldwide .content p {
+  font-size: 14px;
+}
+.branch-content .branch-items{
+  margin-top: 30px;
+}
+.countries-worldwide .branch-items .item p{
+  font-size: 14px;
+}
+.leadership-team .image {
+  padding: 10px;
+  height: 400px;
+  margin-top: 30px;
+}
+.leadership-team .right-content h1{
+  font-size: 25px;
+}
+.leadership-team .right-content h6{
+  font-size: 18px;
+}
+.leadership-team .right-content p{
+  font-size: 14px;
+  line-height: 25px;
+  padding-top: 10px;
+}
+.leadership-team .right-content {
+  padding: 10px ;
+}
+.leadership-team .right-content h5{
+  margin-top: 20px;
+  font-size: 14px;
+}
+.our-brands .title-content-all h1 {
+  max-width: 100%;
+}
+.our-brands .title h1{
+  margin-bottom: 20px;
+}
+.our-brands .brands-slider {
+  margin-top: 30px;
+}
+.our-brands .brands-slider .item {
+  margin: 0px 5px;
+}
+.our-brands .brands-slider .item .logo img {
+  max-width: 70%;
+}
+
+
+/* services page */
+.automation-page .overview .left {
+  padding: 0px 20px;
+}
+.automation-page .title-content-all h1{
+  margin-bottom: 20px;
+}
+.automation-page .overview .title-content{
+  padding-bottom: 30px;
+}
+.automation-page .overview .content h1{
+  font-size: 20px;
+}
+.automation-page .overview .content{
+  padding: 25px 10px 0px 10px;
+}
+.automation-page .overview .content p{
+  font-size: 14px;
+}
+.automation-page .overview .content ul {
+  padding-left: 15px;
+}
+.automation-page .overview .content ul li{
+  font-size: 14px;
+}
+.productsandbenefits .custom-tabs {
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+}
+.productsandbenefits .custom-tabs .nav-link{
+  flex: none;
+}
+.productsandbenefits .highlights-box .item .icon{
+  font-size: 20px;
+}
+.productsandbenefits .link h6 {
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+}
+.blog-section .latest-blog .image{
+  padding: 0px;
+}
+.blog-section .latest-blog .right-side {
+  padding: 20px 10px;
+}
+.blog-section .latest-blog .blog-content h1 {
+  font-size: 18px;
+  line-height: 30px;
+  padding: 20px 0px 10px 0px;
+}
+.blog-section .latest-blog .blog-content p {
+  font-size: 14px
+}
+.blog-section .latest-blog .blog-content .common-btn {
+  margin-top: 20px;
+}
+.related-blog .sec-title h1 {
+  padding: 15px 10px;
+  font-size: 30px;
+}
+.blog-section .latest-blog .date-share{
+  padding: 0px 10px;
+}
+
+/* product page  */
+.product-page .product-cat-slider .item{
+  width: 140px;
+  height: 140px;
+}
+.product-page .product-cat-slider .item h6 {
+  margin-top: 15px;
+}
+.product-page .product-cat-slider .item h6 {
+  margin-top: 0px;
+  font-size: 14px;
+  margin-bottom: 0px;
+}
+.product-page .product-page-section .products .header .search {
+  justify-content: space-between;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+.product-overview .right-content {
+  padding: 10px;
+}
+.product-overview .right-content h1 {
+  font-size: 20px;
+  margin-top: 10px;
+}
+.product-overview .image-gallery-thumbnails-container {
+  gap: 10px;
+}
+.product-overview .right-content .overview {
+  border: 1px solid #dddddd;
+  width: auto;
+  border-radius: 20px;
+  margin: 30px 0px 0px 0px;
+  padding: 0px 20px;
+}
+.product-overview .right-content .overview .row {
+  width: auto;
+  border-bottom: 1px solid #dddddd;
+}
+.product-overview .right-content .button {
+  flex-wrap: wrap;
+}
+.product-overview-contents {
+  margin-top: 10px;
+}
+.product-overview-contents .title h2 {
+  font-size: 20px;
+}
+.product-overview-contents ul {
+}
+
+.product-overview-contents ul li {
+  padding: 10px; /* Adjust spacing */
+  display: flex;
+}
+.product-page .all-cat h6{
+  font-size: 22px !important;
+}
+
+
+/* terms and confitions  */
+.privacy-policy-content .title h1{
+  padding: 20px 0px;
+  font-size: 20px;
+}
+.privacy-policy-content .content p{
+  font-size: 14px;
+}
+.privacy-policy-content .content h6{
+  margin-top: 20px;
+}
+
+}
+
+@media (min-width:577px) and (max-width:768px){
+  .space{
+    padding: 60px 0px;
+  }
+  .title h1{
+    font-size: 20px;
+    line-height: 30px;
+  }
+  .title-content .sub-heading-dark{
+    margin-bottom: 20px;
+  }
+  .title-content-all h1{
+    max-width: 100%;
+  }
+  p{
+    line-height: 20px;
+  }
+  
+  .top-header .star-items{
+    display: none;
+  }
+  .top-header .mobiletopheader{
+    display: none !important;
+  }
+  .top-header .right{
+    display: flex;
+    justify-content: space-between;
+  }
+  .header-items .brand-logo img{
+    width: 160px;
+  }
+  .offcanvas-toggler{
+    font-size: 30px;
+  }
+  .offcanvas{
+    z-index: 999999;
+    background-color: var(--primary);
+  }
+  .offcanvas .brand-logo img{
+    width: 160px;
+    filter: brightness(0) invert(1);
+  }
+  .offcanvas .offcanvas-header{
+    padding: 20px;
+  }
+  .offcanvas .offcanvas-header .btn-close{
+    filter: brightness(0) invert(1);
+  }
+  .offcanvas .offcanvas-body .menu-list{
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+  }
+  .offcanvas .offcanvas-body .menu-list li {
+    padding: 12px 0px;
+    border-bottom: 1px solid #d9d9d94e;
+  }
+  .offcanvas .offcanvas-body .menu-list li a{
+    color: #fff;
+    text-decoration: none;
+  }
+  .main-header.sticky-header.scrolled .brand-logo img{
+    width: 120px;
+  }
+  .banner-section .banner-contents {
+    max-width: 100%;
+  }
+  .banner-section .banner-contents h5{
+    font-size: 20px;
+  }
+  .banner-section .banner-contents h1{
+    font-size: 50px;
+    line-height: 60px;
+  }
+  .banner-section .banner-contents p {
+    font-size: 12px;
+  }
+  .banner-section .vehicle-category{
+    overflow-x: scroll;
+    flex:1 1 50%;
+    display:flex;
+    padding-bottom: 10px;
+  }
+  .banner-section .vehicle-category .item{
+    height: 80px;
+    width: 80px;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 3px;
+  }
+  .banner-section .vehicle-category .icon img{
+    height: 33px;
+    width: 33px;
+  }
+  .banner-section .vehicle-category .icon p {
+    font-size: 10px;
+  }
+  .banner-section .vehicle-category::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  .banner-section .banner-1{
+    height: 500px;
+  }
+  .banner-section .banner-2{
+    height: 500px;
+  }
+  .banner-section .banner-3{
+    height: 500px;
+  }
+  .banner-section .banner-4{
+    height: 500px;
+  }
+  .select-vehicle{
+    margin-top: -215px;
+  }
+  /* Track */
+  .banner-section .vehicle-category::-webkit-scrollbar-track {
+    background-color: #d4d4d4;
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  .banner-section .vehicle-category::-webkit-scrollbar-thumb {
+    background: var(--primary); 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  .banner-section .vehicle-category::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-bright); 
+  }
+  /* about section */
+  .about-section{
+    padding-top: 100px;
+  }
+  .about-section .title-content .right{
+    margin-top: 30px;
+  }
+  .about-section .title-content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .about-section .shapes .shape1 img {
+    height: 400px;
+    width: 400px;
+    border-radius: 50%;
+}
+.about-section .shapes .shape2 img {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+.counter-section .box .years-in-industry{
+  padding: 20px 30px;
+}
+.counter-section .box-1 {
+  height: auto;
+}
+.counter-section .box-1 h6 {
+  padding: 15px 0px;
+}
+.counter-section .box{
+  height: auto;
+  margin-bottom: 30px;
+}
+.counter-section .box-2{
+  margin: 0px 0px 30px 0px;
+  padding: 30px;
+}
+.counter-section .box-3{
+  margin: 0px 0px 30px 0px;
+}
+.counter-section .box-3 h6{
+  margin-bottom: 0px;
+  padding: 15px 0px;
+}
+.counter-section .box-4{
+  padding: 80px 0px;
+}
+
+
+/* product  */
+
+.product-section .d-none {
+  display: none;
+}
+/* For the Categories dropdown to work */
+.product-section .mobile-filter.active .filter-dropdown {
+  display: block;
+}
+.product-section .d-none {
+  display: none;
+}
+.product-section .products .header{
+  flex-direction: column;
+  margin:30px 0px 20px 10px;
+}
+.blog-section .latest-blog .image img{
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+.product-section .products .box {
+  height: auto;
+}
+.product-page .product-section .product-showcase .product-menu ul li a{
+  margin: 10px 0px;
+}
+.product-section .product-showcase .product-menu{
+  padding: 
+  20px;
+}
+/* .product-section .products .box{
+  width: 50%;
+} */
+.testimonial-section .item{
+  padding: 20px;
+}
+.footer-secction .location img{
+  width: 55%;
+}
+.our-company .image{
+  width: 60%;
+  margin: auto;
+}
+/* why choose section */
+.why-us-content{
+  flex-wrap: wrap;
+}
+.why-us-content .box{
+  height: auto;
+  padding: 15px;
+}
+
+/* testimonial section */
+.testimonial-section .main-title {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.testimonial-section .item .image{
+  height: 200px;
+  width: 100%;
+}
+.testimonial-section .item .image img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.testimonial-section .item .content{
+  margin-top: 20px;
+}
+
+
+/* brand section */
+.brands-slider{
+  overflow-x: hidden;
+}
+.our-brands .slick-slide {
+  margin: 0; /* Adjust gap as needed */
+}
+.our-brands  .slick-list {
+  margin: 0; /* Adjust to counter the margin on both sides */
+}
+.our-brands .shapes .shape1 img{
+  height: 400px;
+  width: 400px;
+}
+.our-brands .shapes .shape2 img{
+  height: 300px;
+  width: 300px;
+}
+
+
+/* cta section */
+.cta-section .image-left{
+  display: none;
+}
+.cta-section .content h1{
+  font-size: 30px;
+  line-height: 40px;
+  text-align: center;
+}
+.cta-section .mini-content{
+  flex-direction: column;
+  text-align: center;
+}
+.cta-section .image img{
+  margin-top: 30px !important;
+  max-width: 50%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+.cta-section .mini-content p{
+  font-size: 14px;
+}
+.cta-section .wagner-image{
+  display: none;
+}
+.mobile-footer-menu{
+  display: block;
+}
+/* footer styles */
+.footer-secction .top-footer{
+  flex-direction: column;
+}
+.footer-secction .top-footer .left {
+  flex-direction: column;
+  width: 100%;
+  text-align: left;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.footer-secction .main-footer .mail{
+  margin-bottom: 30px;
+}
+.footer-secction .main-footer .logo{
+  padding: 20px 0px;
+}
+.test-btn button {
+  padding: 15px 15px;
+}
+.cta-btn button{
+  padding: 15px 15px;
+}
+.bottom-footer .content{
+  justify-content: center;
+}
+.bottom-footer .content .left{
+  display: none;
+}
+
+
+/* about page  */
+
+.breadcrumb .breadcrumb-content{
+  flex-wrap: wrap;
+  padding: 50px 0px;
+}
+.breadcrumb .breadcrumb-content h1{
+  font-size: 45px;
+  line-height: 55px;
+}
+.breadcrumb .breadcrumb-content p{
+  font-size: 14px;
+  max-width: 100%;
+  text-align: left;
+}
+.our-company .our-company-content{
+  margin-top: 50px;
+  padding: 10px;
+}
+.our-company .right-content {
+  padding: 0px;
+  margin-top: 20px;
+}
+.our-company .right-content .item{
+  flex-direction: column;
+  padding: 20px 0px;
+}
+.our-company .right-content .item p{
+  max-width: 100%;
+  font-size: 14px;
+}
+.our-company .right-content .item h2{
+  font-size: 18px;
+}
+.our-company .cta{
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: start;
+}
+.our-company .cta .left{
+  max-width: 100%;
+}
+.mission .item {
+  margin: 0px;
+  padding: 20px;
+  height: auto;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+.mission .item .head{
+  margin-bottom: 20px;
+}
+.mission .item .head .icon{
+  height: 70px;
+  width: 70px;
+  font-size: 35px;
+  flex-shrink: 0;
+}
+.mission .item .head h2{
+  font-size: 22px;
+}
+.leftandrighttitle {
+  align-items: start;
+  flex-direction: column;
+}
+.leftandrighttitle .title h5{
+  margin-bottom: 20px;
+}
+
+.our-milestone .milestone-content .item .content p{
+  font-size: 14px;
+}
+.our-milestone .milestone-content .item .content h2 {
+  font-size: 20px;
+}
+.our-milestone .milestone-content .item {
+  padding: 30px 0px;
+  flex: 0 0 25px;
+}
+.our-milestone .milestone-content .item .icon{
+  height: 15px;
+  width: 20px;
+}
+.milestone-content .shapes .line{
+  left: 37px;
+  top: 90px;
+}
+.leadership-team .image img{
+  width: 60%;
+}
+.milestone-content .shapes .car {
+  left: 15px;
+}
+.milestone-content {
+  padding: 0px 30px;
+}
+.our-milestone .milestone-content .final .icon::before{
+  height: 35px;
+  width: 35px;
+}
+.countries-worldwide .title h1 span{
+  font-size: 30px;
+}
+.countries-worldwide .title h1 {
+  margin-bottom: 20px;
+  font-size: 25px;
+}
+.countries-worldwide .content p {
+  font-size: 14px;
+}
+.branch-content .branch-items{
+  margin-top: 30px;
+}
+.countries-worldwide .branch-items .item p{
+  font-size: 14px;
+}
+.leadership-team .image {
+  padding: 10px;
+  height: 400px;
+  margin-top: 30px;
+}
+.leadership-team .right-content h1{
+  font-size: 25px;
+}
+.leadership-team .right-content h6{
+  font-size: 18px;
+}
+.leadership-team .right-content p{
+  font-size: 14px;
+  line-height: 25px;
+  padding-top: 10px;
+}
+.leadership-team .right-content {
+  padding: 10px ;
+}
+.leadership-team .right-content h5{
+  margin-top: 20px;
+  font-size: 14px;
+}
+.our-brands .title-content-all h1 {
+  max-width: 100%;
+}
+.our-brands .title h1{
+  margin-bottom: 20px;
+}
+.our-brands .brands-slider {
+  margin-top: 30px;
+}
+.our-brands .brands-slider .item {
+  margin: 0px 5px;
+}
+.our-brands .brands-slider .item .logo img {
+  max-width: 70%;
+}
+
+
+/* services page */
+.automation-page .overview .left {
+  padding: 0px 20px;
+}
+.automation-page .title-content-all h1{
+  margin-bottom: 20px;
+}
+.automation-page .overview .title-content{
+  padding-bottom: 30px;
+}
+.automation-page .overview .content h1{
+  font-size: 20px;
+}
+.automation-page .overview .content{
+  padding: 25px 10px 0px 10px;
+}
+.automation-page .overview .content p{
+  font-size: 14px;
+}
+.automation-page .overview .content ul {
+  padding-left: 15px;
+}
+.automation-page .overview .content ul li{
+  font-size: 14px;
+}
+.productsandbenefits .custom-tabs {
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+}
+.productsandbenefits .custom-tabs .nav-link{
+  flex: none;
+}
+.productsandbenefits .highlights-box .item .icon{
+  font-size: 20px;
+}
+.productsandbenefits .link h6 {
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+}
+.blog-section .latest-blog .image{
+  padding: 0px;
+  height: 300px;
+}
+.blog-section .latest-blog .right-side {
+  padding: 20px 10px;
+}
+.blog-section .latest-blog .blog-content h1 {
+  font-size: 18px;
+  line-height: 30px;
+  padding: 20px 0px 10px 0px;
+}
+.blog-section .latest-blog .blog-content p {
+  font-size: 14px
+}
+.blog-section .latest-blog .blog-content .common-btn {
+  margin-top: 20px;
+}
+.related-blog .sec-title h1 {
+  padding: 15px 10px;
+  font-size: 30px;
+}
+.blog-section .latest-blog .date-share{
+  padding: 0px 10px;
+}
+.blog-overview .back button{
+  margin-bottom: 30px;
+}
+.blog-overview .overview .image{
+  height: 400px;
+}
+.blog-overview .main-contents{
+  padding: 30px 20px;
+}
+/* product page  */
+.product-page .product-cat-slider .item{
+  width: 140px;
+  height: 140px;
+}
+.product-page .product-cat-slider .item h6 {
+  margin-top: 15px;
+}
+.product-page .product-cat-slider .item h6 {
+  margin-top: 0px;
+  font-size: 14px;
+  margin-bottom: 0px;
+}
+.product-page .product-page-section .products .header .search {
+  justify-content: space-between;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+.product-overview .right-content {
+  padding: 10px;
+}
+.product-overview .right-content h1 {
+  font-size: 20px;
+  margin-top: 10px;
+}
+.product-overview .image-gallery-thumbnails-container {
+  gap: 10px;
+}
+.product-overview .right-content .overview {
+  border: 1px solid #dddddd;
+  width: auto;
+  border-radius: 20px;
+  margin: 30px 0px 0px 0px;
+  padding: 0px 20px;
+}
+.product-overview .right-content .overview .row {
+  width: auto;
+  border-bottom: 1px solid #dddddd;
+}
+.product-overview .right-content .button {
+  flex-wrap: wrap;
+}
+.product-overview-contents {
+  margin-top: 10px;
+  padding: 50px 0px;
+}
+.product-overview-contents .title h2 {
+  font-size: 20px;
+}
+.product-overview-contents ul {
+}
+
+.product-overview-contents ul li {
+  padding: 10px; /* Adjust spacing */
+  display: flex;
+}
+.product-overview-contents ul li .icon {
+  flex-shrink: 0;
+  margin-right: 8px; /* Adjust spacing between icon and text */
+  font-size: 1.2em; /* Adjust icon size if needed */
+}
+.product-page .all-cat h6{
+  font-size: 22px !important;
+}
+.product-overview .right-content .sizes-itemno {
+  margin: 30px 10px;
+}
+.product-overview-contents .table{
+  margin-left: 15px;
+}
+
+/* terms and confitions  */
+.privacy-policy-content .title h1{
+  padding: 20px 0px;
+  font-size: 20px;
+}
+.privacy-policy-content .content p{
+  font-size: 14px;
+}
+.privacy-policy-content .content h6{
+  margin-top: 20px;
+}
+/* contact page */
+.contact-form h1::before, .contact-form h1::after {
+  display: none;
+}
+.contact-form .common-btn{
+  margin-top: 30px;
+}
+}
+
+
+@media (min-width:769px) and (max-width:1200px){
+  .banner-section .banner-contents h1 {
+    font-size: 60px;
+}
+.select-vehicle {
+  margin-top: -230px;
+}
+.banner-section .banner-1 {
+  height: 700px;
+}
+.banner-section .banner-2 {
+  height: 700px;
+}
+.banner-section .banner-3 {
+  height: 700px;
+}
+.banner-section .banner-4 {
+  height: 700px;
+}
+.about-section{
+  padding-top: 100px;
+}
+.title h1 {
+  font-size: 30px;
+  line-height: 40px;
+}
+p{
+  font-size: 16px;
+}
+.counter-section .box{
+  margin-bottom: 20px;
+}
+.counter-section .box-1 h1{
+  font-size: 70px;
+}
+.counter-section .box-1 h1 span{
+  font-size: 70px;
+}
+.counter-section .box-3 h1 span{
+  font-size: 70px;
+}
+.counter-section .box-3 h1{
+  font-size: 70px;
+}
+.counter-section .box-3 h6{
+  margin-bottom: 0px;
+}
+.counter-section .box .years-in-industry{
+  padding: 40px 25px;
+}
+.counter-section .box-2{
+  height: auto;
+  padding: 30px 20px;
+}
+.counter-section .box-4 {
+  height: 270px;
+}
+.why-us-content .box{
+  height: auto;
+}
+.cta-section .wagner-image img {
+  width: 280px;
+}
+.our-company .cta .left {
+  max-width: 100%;
+}
+.mission .item{
+  height: auto;
+}
+.breadcrumb .breadcrumb-content{
+  padding: 50px 0px;
+}
+/* terms and confitions  */
+.privacy-policy-content .title h1{
+  padding: 20px 0px;
+  font-size: 30px;
+}
+.privacy-policy-content .content p{
+  font-size: 14px;
+}
+.privacy-policy-content .content h6{
+  margin-top: 20px;
+  font-size: 20px;
+}
+}
 
 
 
