@@ -53,3 +53,67 @@
   font-size: 16px;
   margin: 0 10px;
 }
+
+/* Style the container for the Google Translate widget */
+#google_translate_element {
+  display: inline-block;
+  margin-top: 10px;
+  /* background-color: #f4f4f4; */
+  /* padding: 10px; */
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Style the select dropdown (Google Translate selects this dropdown by default) */
+.goog-te-combo {
+  width: 150px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  /* background-color: #fff; */
+  font-size: 14px;
+}
+
+/* Add custom hover effect for the dropdown */
+.goog-te-combo:hover {
+  /* background-color: #f0f0f0; */
+}
+
+
+.goog-te-gadget-simple {
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  display: flex !important;
+  background-color: #0073e6;
+  color: white;
+  border: none;
+  padding: 10px 10px !important;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.goog-te-gadget-icon{
+  display: none !important;
+}
+
+.VIpgJd-ZVi9od-xl07Ob-lTBxed{
+  display: flex !important;
+}
+
+/* Hover effect for the translate button */
+.goog-te-gadget-simple:hover {
+  /* background-color: #005bb5; */
+}
+
+/* Hide the extra language dropdown and extra Google Translate styling */
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+/* Optional: You can hide the Google branding at the bottom of the widget */
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+

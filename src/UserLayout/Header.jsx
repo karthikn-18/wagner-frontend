@@ -8,6 +8,7 @@ import Logo from '../assets/Resources/wagner-logo.svg';
 import Product1 from '../assets/Resources/5w-30.png';
 import { debounce } from 'lodash';
 import { useProductGetQuery } from '../query/useQuery';
+import GoogleTranslate from '../Pages/User/GoogleTranslate'
 
 const Header = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -76,6 +77,8 @@ const Header = () => {
 
     const navigate = useNavigate();
 
+    const { pathname } = useLocation()
+
     return (
         <>
             {/* Top Header */}
@@ -119,13 +122,18 @@ const Header = () => {
                                 </div>
                                 <div data-aos="fade-down">
                                     <div className="item">
-                                        <CiGlobe className='icon' />
+                                        {/* <CiGlobe className='icon' />
                                         <div className="language-selector">
                                             <select className="select-language" >
                                                 <option value="en">ENG</option>
                                                 <option value="de">German</option>
                                             </select>
-                                        </div>
+                                        </div> */}
+                                        {
+                                            !pathname.includes('admin') && (
+                                                <GoogleTranslate />
+                                            )
+                                        }
                                     </div>
                                 </div>
                             </div>
